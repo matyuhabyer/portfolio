@@ -1,35 +1,7 @@
-// Theme switching functionality
+// Initialize theme and navigation
 document.addEventListener('DOMContentLoaded', function() {
-    const lightThemeBtn = document.getElementById('light-theme');
-    const darkThemeBtn = document.getElementById('dark-theme');
     const body = document.body;
-
-    // Check for saved theme preference or default to dark
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    setTheme(savedTheme);
-
-    // Theme button event listeners
-    lightThemeBtn.addEventListener('click', () => {
-        setTheme('light');
-        localStorage.setItem('theme', 'light');
-    });
-
-    darkThemeBtn.addEventListener('click', () => {
-        setTheme('dark');
-        localStorage.setItem('theme', 'dark');
-    });
-
-    function setTheme(theme) {
-        if (theme === 'light') {
-            body.setAttribute('data-theme', 'light');
-            lightThemeBtn.classList.add('active');
-            darkThemeBtn.classList.remove('active');
-        } else {
-            body.removeAttribute('data-theme');
-            darkThemeBtn.classList.add('active');
-            lightThemeBtn.classList.remove('active');
-        }
-    }
+    body.setAttribute('data-theme', 'light');
 
     // Navigation functionality
     const navLinks = document.querySelectorAll('.nav-link');
@@ -77,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
 // Add hover effect for contact items
 document.addEventListener('DOMContentLoaded', function() {
     const contactItems = document.querySelectorAll('.contact-item');
+    const profileCard = document.querySelector('.profile-card');
     
     contactItems.forEach(item => {
         item.addEventListener('mouseenter', function() {
@@ -86,5 +59,13 @@ document.addEventListener('DOMContentLoaded', function() {
         item.addEventListener('mouseleave', function() {
             this.style.transform = 'translateY(0)';
         });
+    });
+    
+    profileCard.addEventListener('mouseenter', function() {
+        this.style.transform = 'translateY(-2px)';
+    });
+    
+    profileCard.addEventListener('mouseleave', function() {
+        this.style.transform = 'translateY(0)';
     });
 });
