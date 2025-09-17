@@ -1,0 +1,42 @@
+<div class="portfolio-container">
+    <aside class="sidebar">
+        <div class="profile-card">
+            <div class="profile-image-wrapper">
+                <img src="/assets/images/profile-photo.png" alt="{{data.profile.name}}">
+            </div>
+            <h1 class="profile-name">{{data.profile.name}}</h1>
+            <p class="profile-title">{{data.profile.title}}</p>
+        </div>
+        <div class="contact-list">
+            <a href="mailto:{{data.profile.email}}" class="contact-item">
+                <img src="/assets/icons/ic_baseline-email.svg" alt="Email icon">
+                <span class="email">{{data.profile.email}}</span>
+            </a>
+            <a href="{{data.profile.linkedin}}" class="contact-item">
+                <img src="/assets/icons/mdi_linkedin.svg" alt="LinkedIn icon">
+                <span class="linkedin-name">{{data.profile.name}}</span>
+            </a>
+            <a href="{{data.profile.instagram}}" class="contact-item">
+                <img src="/assets/icons/mdi_instagram.svg" alt="Instagram icon">
+                <span class="ig-username">@matyuhabyer</span>
+            </a>
+            <a href="{{data.profile.github}}" class="contact-item">
+                <img src="/assets/icons/mdi_github.svg" alt="GitHub icon">
+                <span class="github-username">@matyuhabyer</span>
+            </a>
+            <a href="{{data.profile.resume}}" class="contact-item" download>
+                <img src="/assets/icons/mdi_resume.svg" alt="Resume icon">
+                <span class="resume-name">Resume</span>
+            </a>
+        </div>
+        <div class="theme-switcher">
+            <button id="themeToggle" aria-label="Toggle theme">Switch Theme</button>
+        </div>
+    </aside>
+    <main class="main-content">
+        <div class="navigation-bar">
+            <a href="/about" class="nav-link {{#if (eq currentPage 'about')}}active{{/if}}">About</a>
+            <a href="/experience" class="nav-link {{#if (eq currentPage 'experience')}}active{{/if}}">Experience</a>
+            <a href="/projects" class="nav-link {{#if (eq currentPage 'projects')}}active{{/if}}">Projects</a>
+        </div>
+

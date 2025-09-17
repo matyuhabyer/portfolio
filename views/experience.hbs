@@ -1,0 +1,51 @@
+<div class="education-content">
+    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+        <img src="/assets/icons/twemoji_books.svg" alt="Books Icon">
+        <h2 class="education-title">Education</h2>
+    </div>
+    <div class="education-item">
+        <div class="education-header">
+            <h3 class="education-name">{{data.education.university}}</h3>
+            <span class="education-dates">{{data.education.dates}}</span>
+        </div>
+        <p class="education-course">{{data.education.course}}</p>
+        <p class="education-cgpa">CGPA: {{data.education.cgpa}}</p>
+        <ul class="education-highlights">
+            {{#each data.education.highlights}}
+                <li>{{this}}</li>
+            {{/each}}
+        </ul>
+    </div>
+</div>
+
+<div class="education-content">
+    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+        <img src="/assets/icons/flat-color-icons_organization.svg" alt="Organizations Icon">
+        <h2 class="education-title">Organizations</h2>
+    </div>
+    <div class="education-item">
+        <div class="education-header">
+            <h3 class="education-name">La Salle Computer Society</h3>
+            <span class="education-dates">2022 – Present</span>
+        </div>
+        <p class="education-course">Member & Creative Contributor</p>
+        <ul class="education-highlights">
+            <li>Led publicity and creative initiatives</li>
+            <li>Boosted university engagement through design projects</li>
+            <li>Strengthened leadership and communication skills</li>
+        </ul>
+    </div>
+    <div class="education-item">
+        <div class="education-header">
+            <h3 class="education-name">Computer Studies Government</h3>
+            <span class="education-dates">2022 – Present</span>
+        </div>
+        <p class="education-course">Active Member</p>
+        <ul class="education-highlights">
+            <li>Contributed to student government initiatives</li>
+            <li>Participated in project management activities</li>
+            <li>Enhanced organizational and leadership abilities</li>
+        </ul>
+    </div>
+</div>
+

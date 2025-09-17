@@ -1,0 +1,25 @@
+{
+  "name": "matthew-javier-portfolio",
+  "version": "1.0.0",
+  "description": "Matthew Benison Javier's Portfolio - Node.js Application",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["portfolio", "nodejs", "express", "ejs"],
+  "author": "Matthew Benison Javier",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "express-handlebars": "^7.1.2",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

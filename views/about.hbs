@@ -1,0 +1,84 @@
+<div class="about-content">
+    <div style="display: flex; align-items: center; gap: 10px;">
+        <img src="/assets/icons/fluent-emoji-flat_call-me-hand.svg" alt="About Icon">
+        <h2 class="about-title">About Me</h2>
+    </div>
+    <br>
+    <h3 class="about-subtitle">{{data.about.subtitle}}</h3>
+    {{#each data.about.paragraphs}}
+        <p class="about-text">{{this}}</p>
+    {{/each}}
+</div>
+
+<div class="panels-row">
+    <div class="tech-stack">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="/assets/icons/twemoji_technologist.svg" alt="Tech Stack Icon">
+            <h2 class="about-title">Tech Stack</h2>
+        </div>
+        <div class="tech-groups">
+            <div class="tech-group">
+                <h3 class="tech-group-title">Frontend</h3>
+                <div class="tech-group-list">
+                    {{#each data.techStack.frontend}}
+                        <div class="tech-item">
+                            <img src="{{this.image}}" alt="{{this.name}}">
+                            <span class="tooltip">{{this.name}}</span>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="tech-group">
+                <h3 class="tech-group-title">Backend</h3>
+                <div class="tech-group-list">
+                    {{#each data.techStack.backend}}
+                        <div class="tech-item">
+                            <img src="{{this.image}}" alt="{{this.name}}">
+                            <span class="tooltip">{{this.name}}</span>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="tech-group">
+                <h3 class="tech-group-title">Cloud & Databases</h3>
+                <div class="tech-group-list">
+                    {{#each data.techStack.cloud}}
+                        <div class="tech-item">
+                            <img src="{{this.image}}" alt="{{this.name}}">
+                            <span class="tooltip">{{this.name}}</span>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+            <div class="tech-group">
+                <h3 class="tech-group-title">Developer Tools</h3>
+                <div class="tech-group-list">
+                    {{#each data.techStack.tools}}
+                        <div class="tech-item">
+                            <img src="{{this.image}}" alt="{{this.name}}">
+                            <span class="tooltip">{{this.name}}</span>
+                        </div>
+                    {{/each}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="certifications">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="/assets/icons/fluent-color_certificate-32.svg" alt="Certifications Icon">
+            <h2 class="about-title">Certifications</h2>
+        </div>
+        <div class="certifications-list">
+            {{#each data.certifications}}
+                <a class="certification-item" href="{{this.link}}" target="_blank" rel="noopener">
+                    <div class="cert-text">
+                        <p class="cert-title">{{this.title}}</p>
+                        <p class="cert-issuer">{{this.issuer}}</p>
+                        <p class="cert-date">{{this.date}}</p>
+                    </div>
+                </a>
+            {{/each}}
+        </div>
+    </div>
+</div>
+
