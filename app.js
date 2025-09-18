@@ -168,7 +168,10 @@ const portfolioData = {
 
 // Routes
 app.get('/', (req, res) => {
-  res.redirect('/about');
+  res.render('about', { 
+    data: portfolioData,
+    currentPage: 'about'
+  });
 });
 
 app.get('/about', (req, res) => {
