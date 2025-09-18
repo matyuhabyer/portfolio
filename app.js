@@ -71,7 +71,8 @@ const portfolioData = {
       { name: "VSCode", image: "/assets/tech/vscode.png" },
       { name: "JetBrains IntelliJ", image: "/assets/tech/intellij.png" },
       { name: "Cursor", image: "/assets/tech/cursor.png" },
-      { name: "Discord", image: "/assets/tech/discord.png" }
+      { name: "Discord", image: "/assets/tech/discord.png" },
+      { name: "Vercel", image: "/assets/tech/vercel.png" }
     ]
   },
   certifications: [
@@ -163,7 +164,56 @@ const portfolioData = {
       "Honorable Mention Standing (CGPA of 3.2 and above)",
       "DOST-SEI Merit Scholar"
     ]
-  }
+  },
+  organizations: [
+    {
+      name: "La Salle Computer Society",
+      dates: "September 2024 - August 2025",
+      role: "Associate Vice President for Publicity and Creatives",
+      highlights: [
+        "Led a committee of 10 members for one of the organization’s flagship events, achieving: +2,100% views, +1,100% reach, +2,100% visits, and +4,900% follows on publicity campaigns.",
+        "Designed publicity materials and handled social media management for various projects and events under the organization that boosted university engagement.",
+        "Collaborated with other officers on event branding, creative design, and organizational promotions."
+      ]
+    },
+    {
+      name: "Computer Studies Government",
+      dates: "February 2024 – September 2025",
+      role: "Director for Integrated Marketing Communications - Publicity",
+      highlights: [
+        "Managed publicity for the college student government’s social media platforms, engaging an audience of over 1,000 students and reaching a broader network of 5,000+ people.",
+        "Coordinated and fulfilled publicity requests from various project leaders and committees to ensure cohesive communication.",
+        "Collaborated with the Student Services Committee to effectively disseminate information, addressing student concerns related to both academic and non-academic services, including enlistment processes."
+      ]
+    },
+    {
+      name: "College of Computer Studies Creatives",
+      dates: "November 2023 - May 2025",
+      role: "Executive for Social Media Graphics",
+      highlights: [
+        "Designed publicity materials about the college and CCS-related events under the Assistant Dean for External Affairs and Lasallian Mission."
+      ]
+    },
+    {
+      name: "Animo Film Lab",
+      dates: "November 2023 - August 2024",
+      role: "Assistant Vice President for Documentations and Logistics",
+      highlights: [
+        "Oversaw the document processing of the organization such as passing of letters, entry permits, reservation of venues, and equipment entry.",
+        "Oversaw the deadlines for the pre-activity and post-activity requirements of the projects implemented.",
+        "Took charge in the compilation of the organization’s documents, making sure that papers are complete and have met all the requirements."
+      ]
+    },
+    {
+      name: "LEAP 2024 Central Committee",
+      dates: "April 2024 - July 2024",
+      role: "Assistant Team Head for Documentations",
+      highlights: [
+        "Worked on managing the post-activity documents of the LEAP projects.",
+        "Reviewed and compiled documents completed by the other LEAP committees for approval."
+      ]
+    }
+  ]
 };
 
 // Routes

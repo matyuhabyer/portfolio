@@ -18,34 +18,24 @@
     </div>
 </div>
 
-<div class="education-content">
+<div class="organization-content">
     <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
         <img src="/assets/icons/flat-color-icons_organization.svg" alt="Organizations Icon">
-        <h2 class="education-title">Organizations</h2>
+        <h2 class="organization-title">Organizations</h2>
     </div>
-    <div class="education-item">
-        <div class="education-header">
-            <h3 class="education-name">La Salle Computer Society</h3>
-            <span class="education-dates">2022 – Present</span>
+    {{#each data.organizations}}
+    <div class="organization-item">
+        <div class="organization-header">
+            <h3 class="organization-name">{{this.name}}</h3>
+            <span class="organization-dates">{{this.dates}}</span>
         </div>
-        <p class="education-course">Member & Creative Contributor</p>
-        <ul class="education-highlights">
-            <li>Led publicity and creative initiatives</li>
-            <li>Boosted university engagement through design projects</li>
-            <li>Strengthened leadership and communication skills</li>
+        <p class="organization-role">{{this.role}}</p>
+        <ul class="organization-highlights">
+            {{#each this.highlights}}
+                <li>{{this}}</li>
+            {{/each}}
         </ul>
     </div>
-    <div class="education-item">
-        <div class="education-header">
-            <h3 class="education-name">Computer Studies Government</h3>
-            <span class="education-dates">2022 – Present</span>
-        </div>
-        <p class="education-course">Active Member</p>
-        <ul class="education-highlights">
-            <li>Contributed to student government initiatives</li>
-            <li>Participated in project management activities</li>
-            <li>Enhanced organizational and leadership abilities</li>
-        </ul>
-    </div>
+    {{/each}}
 </div>
 

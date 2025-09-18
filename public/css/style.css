@@ -522,7 +522,7 @@ footer p {
     transform: translateX(-50%) translateY(-2px);
 }
 
-.education-content {
+.education-content, .organization-content {
     background-color: var(--bg-primary);
     border-radius: 20px;
     box-shadow: var(--shadow);
@@ -536,7 +536,7 @@ footer p {
     text-align: justify;
 }
 
-.education-content::before {
+.education-content::before, .organization-content::before {
     content: '';
     position: absolute;
     inset: -2px;
@@ -546,7 +546,7 @@ footer p {
     pointer-events: none;
 }
 
-.education-content::after {
+.education-content::after, .organization-content::after {
     content: '';
     position: absolute;
     inset: -1px;
@@ -556,82 +556,100 @@ footer p {
     pointer-events: none;
 }
 
-.education-title { 
+.education-title, .organization-title { 
     margin: 0;
 }
 
-.education-text {
+.education-text, .organization-text {
     margin: 0 0 12px 0;
     line-height: 1.6;
 }
 
-.education-item {
+.education-item, .organization-item {
     background-color: var(--bg-secondary);
     border-radius: 14px;
     padding: 10px 20px;
     box-shadow: var(--shadow);
 }
 
-.education-item-title {
+.education-item-title, .organization-item-title {
     margin: 0 0 8px 0;
     font-size: 20px;
     color: var(--accent-yellow);
 }
 
-.education-item-text {
+.education-item-text, .organization-item-text {
     margin: 0 0 12px 0;
     line-height: 1.6;
     font-size: 12px;
 }
 
-/* Education layout */
-.education-item {
+/* Education/Organization layout */
+.education-item, .organization-item {
     background-color: var(--bg-primary);
     border-radius: 20px;
     box-shadow: var(--shadow);
     padding: 16px;
+    margin-bottom: 14px; /* spacing between items */
+}
+.organization-item:last-child { margin-bottom: 0; }
+
+.education-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 8px 0px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
 }
 
-.education-header {
+.organization-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 6px 8px 0px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.education-header, .organization-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
     gap: 12px;
+    flex-wrap: wrap; /* prevent overlap when narrow */
 }
 
-.education-name {
+.education-item:last-child { margin-bottom: 0; }
+
+.education-name, .organization-name {
     margin: 0;
     font-size: 18px;
     color: var(--accent-yellow);
 }
 
-.education-dates {
+.education-dates, .organization-dates {
     font-size: 14px;
     opacity: 0.85;
 }
 
-.education-course {
+.education-course, .organization-role {
     margin: 8px 0 4px 0;
     font-size: 15px;
+    font-weight: 500;
 }
 
-.education-cgpa {
+.education-cgpa, .organization-cgpa {
     margin: 0 0 10px 0;
     font-size: 14px;
     opacity: 0.9;
 }
 
-.education-highlights {
+.education-highlights, .organization-highlights {
     margin: 0 0 0 18px;
     padding: 0;
 }
 
-.education-highlights li {
-    margin: 4px 0;
+.education-highlights li, .organization-highlights li {
+    margin: 5px 0;
 }
 
 /* Yellow bullets for education highlights */
-.education-highlights li::marker {
+.education-highlights li::marker, .organization-highlights li::marker {
     color: var(--accent-yellow);
 }
 
@@ -659,6 +677,7 @@ body::after {
     transition: filter 0.2s ease;
 }
 
+/* Tablet and smaller desktop */
 @media (max-width: 1300px) {
     .portfolio-container {
       flex-direction: column;
@@ -670,16 +689,255 @@ body::after {
       max-width: 717px;
       width: 100%;
     }
-  }
-  
-@media (max-width: 600px) {
+}
+
+/* Mobile landscape and small tablets */
+@media (max-width: 768px) {
     body {
-        padding: 17px 8px;
-        zoom: 1; /* Keep mobile at normal size for readability */
-    }
-    .content-wrapper {
-        padding: 0 17px 17px 17px;
+        padding: 20px 15px;
+        zoom: 1;
     }
     
-    /* Mobile responsive for experience and projects */
+    .portfolio-container {
+        gap: 20px;
+    }
+    
+    .sidebar {
+        max-width: 100%;
+        padding: 15px;
+    }
+    
+    .main-content {
+        max-width: 100%;
+    }
+    
+    .navigation-bar {
+        padding: 15px;
+        gap: 10px;
+    }
+    
+    .nav-link {
+        margin: 0 12px;
+        font-size: 18px;
+    }
+    
+    .about-content,
+    .education-content {
+        padding: 15px;
+    }
+    
+    .tech-groups {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .certifications-list {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 12px;
+    }
+}
+
+/* Mobile portrait (iPhone, Android) */
+@media (max-width: 480px) {
+    body {
+        padding: 10px 8px;
+        zoom: 1;
+    }
+    
+    .portfolio-container {
+        gap: 15px;
+    }
+    
+    .sidebar {
+        padding: 12px;
+    }
+    
+    .profile-image-wrapper {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto 15px auto;
+    }
+    
+    .profile-name {
+        font-size: 18px;
+    }
+    
+    .profile-title {
+        font-size: 15px;
+    }
+    
+    .contact-item {
+        padding: 8px 12px;
+        gap: 10px;
+    }
+    
+    .contact-item img {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .contact-item span {
+        font-size: 14px;
+    }
+    
+    .email {
+        font-size: 10px;
+    }
+    
+    .navigation-bar {
+        padding: 12px;
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .nav-link {
+        margin: 0 8px;
+        font-size: 16px;
+    }
+    
+    .about-content,
+    .education-content {
+        padding: 12px;
+    }
+    
+    .about-title,
+    .education-title {
+        font-size: 18px;
+    }
+    
+    .about-subtitle {
+        font-size: 16px;
+    }
+    
+    .about-text {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+    
+    .tech-stack,
+    .certifications {
+        padding: 12px;
+    }
+    
+    .tech-groups {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .tech-group {
+        padding: 10px;
+    }
+    
+    .tech-group-title {
+        font-size: 14px;
+    }
+    
+    .tech-item {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .certifications-list {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .certification-item {
+        padding: 8px;
+    }
+    
+    .cert-title {
+        font-size: 13px;
+    }
+    
+    .cert-issuer,
+    .cert-date {
+        font-size: 11px;
+    }
+    
+    .education-item {
+        padding: 12px;
+    }
+    
+    .education-name {
+        font-size: 16px;
+    }
+    
+    .education-course {
+        font-size: 14px;
+    }
+    
+    .education-cgpa {
+        font-size: 13px;
+    }
+    
+    .education-highlights {
+        margin-left: 15px;
+    }
+    
+    .education-highlights li {
+        font-size: 13px;
+    }
+    
+    .divider {
+        width: 100%;
+        margin-top: 15px;
+    }
+    
+    footer p {
+        font-size: 13px;
+        margin-top: 15px;
+    }
+}
+
+/* Extra small devices (iPhone SE, small Android) */
+@media (max-width: 360px) {
+    body {
+        padding: 8px 5px;
+    }
+    
+    .sidebar {
+        padding: 10px;
+    }
+    
+    .profile-image-wrapper {
+        width: 120px;
+        height: 120px;
+    }
+    
+    .profile-name {
+        font-size: 16px;
+    }
+    
+    .profile-title {
+        font-size: 14px;
+    }
+    
+    .contact-item {
+        padding: 6px 10px;
+    }
+    
+    .contact-item img {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .nav-link {
+        font-size: 14px;
+        margin: 0 6px;
+    }
+    
+    .about-content,
+    .education-content {
+        padding: 10px;
+    }
+    
+    .tech-item {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .certification-item {
+        padding: 6px;
+    }
 }
