@@ -70,6 +70,7 @@ const portfolioData = {
       { name: "Linux", image: "/assets/tech/linux.png" },
       { name: "VSCode", image: "/assets/tech/vscode.png" },
       { name: "JetBrains IntelliJ", image: "/assets/tech/intellij.png" },
+      { name: "Apache NetBeans", image: "/assets/tech/netbeans.png" },
       { name: "Cursor", image: "/assets/tech/cursor.png" },
       { name: "Discord", image: "/assets/tech/discord.png" },
       { name: "Vercel", image: "/assets/tech/vercel.png" }
