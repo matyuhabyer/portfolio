@@ -122,7 +122,9 @@ footer p {
 .profile-image-wrapper img {
     width: 100%;
     height: 100%;
-    object-fit: contain;
+    object-fit: cover; /* Fill the frame while preserving aspect ratio */
+    object-position: center; /* Center the subject */
+    display: block; /* Remove inline-gap artifacts */
 }
 
 .profile-name {
@@ -689,8 +691,8 @@ body::after {
       max-width: 717px;
       width: 100%;
     }
-}
-
+  }
+  
 /* Mobile landscape and small tablets */
 @media (max-width: 768px) {
     body {
