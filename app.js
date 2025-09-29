@@ -25,7 +25,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 const portfolioData = {
   profile: {
     name: "Matthew Benison Javier",
-    title: "Lifelong Learner",
+    title: "UX Engineer & Researcher",
     email: "matthewbenisonjavier@gmail.com",
     linkedin: "https://www.linkedin.com/in/matthewbenisonjavier/",
     instagram: "https://www.instagram.com/matyuhabyer/",
@@ -37,7 +37,7 @@ const portfolioData = {
     paragraphs: [
       "I am Matthew Benison T. Javier, a detail-oriented and adaptable Information Technology student at De La Salle University – Manila with a strong foundation in research, design, and computing. As a DOST-SEI Merit Scholar, I strive for academic excellence while sharpening both technical expertise and leadership skills.",
       "I previously contributed to organizations such as the La Salle Computer Society and the Computer Studies Government, where I've led publicity and creative initiatives that boosted university engagement and strengthened my abilities in leadership, communication, and project management.",
-      "My professional interests span UI/UX design and research, Human–Computer Interaction, Data Analytics, Database Administration, Cloud Computing, Project Management, Quality Assurance, and Web Application Development—fields where I can combine creativity and technical skills to build solutions that bridge people and technology and enhance everyday life."
+      "My professional interests span UI/UX Research & Design, Database Administration, Cloud Computing, Project Management, Data Analytics, Quality Assurance, and Web Application Development—fields where I can combine creativity and technical skills to build solutions that bridge people and technology and enhance everyday life."
     ]
   },
   techStack: {
@@ -68,6 +68,8 @@ const portfolioData = {
       { name: "Figma", image: "/assets/tech/figma.png" },
       { name: "Canva", image: "/assets/tech/canva.png" },
       { name: "Linux", image: "/assets/tech/linux.png" },
+      { name: "MySQL Workbench", image: "/assets/tech/mysqlworkbench.png" },
+      { name: "DBeaver", image: "/assets/tech/dbeaver.png" },
       { name: "VSCode", image: "/assets/tech/vscode.png" },
       { name: "JetBrains IntelliJ", image: "/assets/tech/intellij.png" },
       { name: "Apache NetBeans", image: "/assets/tech/netbeans.png" },

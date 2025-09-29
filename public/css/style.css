@@ -524,7 +524,7 @@ footer p {
     transform: translateX(-50%) translateY(-2px);
 }
 
-.education-content, .organization-content {
+.education-content, .organization-content, .projects-content {
     background-color: var(--bg-primary);
     border-radius: 20px;
     box-shadow: var(--shadow);
@@ -538,7 +538,7 @@ footer p {
     text-align: justify;
 }
 
-.education-content::before, .organization-content::before {
+.education-content::before, .organization-content::before, .projects-content::before {
     content: '';
     position: absolute;
     inset: -2px;
@@ -548,7 +548,7 @@ footer p {
     pointer-events: none;
 }
 
-.education-content::after, .organization-content::after {
+.education-content::after, .organization-content::after, .projects-content::after {
     content: '';
     position: absolute;
     inset: -1px;
@@ -558,11 +558,11 @@ footer p {
     pointer-events: none;
 }
 
-.education-title, .organization-title { 
+.education-title, .organization-title, .projects-title { 
     margin: 0;
 }
 
-.education-text, .organization-text {
+.education-text, .organization-text, .projects-text {
     margin: 0 0 12px 0;
     line-height: 1.6;
 }
@@ -587,16 +587,53 @@ footer p {
 }
 
 /* Education/Organization layout */
-.education-item, .organization-item {
+.education-item, .organization-item, .projects-item {
     background-color: var(--bg-primary);
     border-radius: 20px;
     box-shadow: var(--shadow);
     padding: 16px;
     margin-bottom: 14px; /* spacing between items */
 }
-.organization-item:last-child { margin-bottom: 0; }
+.organization-item:last-child, .projects-item:last-child { margin-bottom: 0; }
 
-.education-item:hover {
+/* Projects specific layout */
+.projects-item {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+}
+
+.projects-name{
+    margin: 0;
+    font-size: 20px;
+    color: var(--accent-yellow);
+}
+
+
+
+.projects-image-container {
+    width: 100%;
+    height: 200px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    background-color: var(--bg-secondary);
+}
+
+.projects-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.projects-content-wrapper {
+    width: 100%;
+    text-align: justify;
+}
+
+.education-item:hover, .projects-item:hover {
     transform: translateY(-2px);
     box-shadow: 0px 6px 8px 0px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
@@ -608,7 +645,7 @@ footer p {
     transition: all 0.3s ease;
 }
 
-.education-header, .organization-header {
+.education-header, .organization-header, .projects-header {
     display: flex;
     justify-content: space-between;
     align-items: baseline;
@@ -618,24 +655,25 @@ footer p {
 
 .education-item:last-child { margin-bottom: 0; }
 
+
 .education-name, .organization-name {
     margin: 0;
     font-size: 18px;
     color: var(--accent-yellow);
 }
 
-.education-dates, .organization-dates {
+.education-dates, .organization-dates, .projects-label {
     font-size: 14px;
     opacity: 0.85;
 }
 
-.education-course, .organization-role {
+.education-course, .organization-role, .projects-tech {
     margin: 8px 0 4px 0;
     font-size: 15px;
     font-weight: 500;
 }
 
-.education-cgpa, .organization-cgpa {
+.education-cgpa, .organization-cgpa, .projects-description {
     margin: 0 0 10px 0;
     font-size: 14px;
     opacity: 0.9;
@@ -724,7 +762,8 @@ body::after {
     }
     
     .about-content,
-    .education-content {
+    .education-content,
+    .projects-content {
         padding: 15px;
     }
     
@@ -736,6 +775,14 @@ body::after {
     .certifications-list {
         grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 12px;
+    }
+    
+    .projects-item {
+        gap: 12px;
+    }
+    
+    .projects-image-container {
+        height: 160px;
     }
 }
 
@@ -798,12 +845,14 @@ body::after {
     }
     
     .about-content,
-    .education-content {
+    .education-content,
+    .projects-content {
         padding: 12px;
     }
     
     .about-title,
-    .education-title {
+    .education-title,
+    .projects-title {
         font-size: 18px;
     }
     
@@ -857,19 +906,31 @@ body::after {
         font-size: 11px;
     }
     
-    .education-item {
+    .education-item,
+    .projects-item {
         padding: 12px;
     }
     
-    .education-name {
+    .projects-item {
+        gap: 12px;
+    }
+    
+    .projects-image-container {
+        height: 180px;
+    }
+    
+    .education-name,
+    .projects-name {
         font-size: 16px;
     }
     
-    .education-course {
+    .education-course,
+    .projects-tech {
         font-size: 14px;
     }
     
-    .education-cgpa {
+    .education-cgpa,
+    .projects-description {
         font-size: 13px;
     }
     
@@ -930,7 +991,8 @@ body::after {
     }
     
     .about-content,
-    .education-content {
+    .education-content,
+    .projects-content {
         padding: 10px;
     }
     
