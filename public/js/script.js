@@ -1,27 +1,28 @@
+const PRELOADER_MIN_MS = 2000; // minimum time to show preloader
+let preloaderShownAt = Date.now();
+const hasVisited = sessionStorage.getItem('visited') === '1';
+
 document.addEventListener('DOMContentLoaded', function() {
-    const root = document.documentElement;
-    const saved = localStorage.getItem('theme');
-    if (saved === 'light' || saved === 'dark') {
-        root.setAttribute('data-theme', saved);
-    }
+    // Smooth page transitions for internal links
+    const isInternal = (link) => link.host === window.location.host;
+    document.body.addEventListener('click', (e) => {
+        const anchor = e.target.closest('a');
+        if (!anchor) return;
+        if (!isInternal(anchor)) return;
+        const href = anchor.getAttribute('href');
+        if (!href || href.startsWith('#') || anchor.target === '_blank') return;
 
-    const toggle = document.getElementById('themeToggle');
-    const setButtonLabel = (theme) => {
-        if (!toggle) return;
-        const label = theme === 'light' ? 'Light Mode' : 'Dark Mode';
-        toggle.textContent = label;
-        toggle.setAttribute('aria-label', label);
-    };
+        e.preventDefault();
+        document.body.classList.add('page-fade-out');
+        setTimeout(() => {
+            window.location.href = href;
+        }, 300); // match CSS opacity transition duration
+    });
 
-    // Initialize label based on current theme (default dark if none)
-    setButtonLabel(root.getAttribute('data-theme') || 'dark');
-    if (toggle) {
-        toggle.addEventListener('click', () => {
-            const current = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-            root.setAttribute('data-theme', current);
-            localStorage.setItem('theme', current);
-            setButtonLabel(current);
-        });
+    // If this is not the first page load in this tab, hide preloader immediately
+    const preloader = document.getElementById('preloader');
+    if (hasVisited && preloader) {
+        preloader.classList.add('hidden');
     }
 
     // Profile image hover swap
@@ -42,5 +43,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 profileImg.setAttribute('src', current === originalSrc ? hoverSrc : originalSrc);
             }, { passive: true });
         }
+    }
+});
+
+// Hide preloader when everything is loaded
+window.addEventListener('load', function() {
+    const preloader = document.getElementById('preloader');
+    if (!preloader) return;
+    // Only enforce minimum display time on first load
+    if (!hasVisited) {
+        const elapsed = Date.now() - preloaderShownAt;
+        const remaining = Math.max(0, PRELOADER_MIN_MS - elapsed);
+        setTimeout(() => {
+            preloader.classList.add('hidden');
+            sessionStorage.setItem('visited', '1');
+        }, remaining);
+    } else {
+        preloader.classList.add('hidden');
     }
 });

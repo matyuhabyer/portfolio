@@ -13,14 +13,7 @@
     --shadow-light: 0px 4px 4px 0px rgba(0, 0, 0, 0.1);
 }
 
-/* Light theme overrides */
-[data-theme="light"] {
-    --bg-main: #f5f7fb;
-    --bg-primary: #ffffff;
-    --bg-secondary: #f0f2f6;
-    --text-light: #1a1a1a;
-    --text-dark: #ffffff;
-}
+/* Light/Dark theme removed: using single theme variables above */
 
 body {
     margin: 0;
@@ -38,8 +31,45 @@ body {
     align-items: center;
     min-height: 100vh;
     box-sizing: border-box;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition: background-color 0.3s ease, color 0.3s ease, opacity 0.3s ease;
     zoom: 0.95;
+}
+
+/* Page transition: fade out on navigation */
+.page-fade-out {
+    opacity: 0;
+}
+
+/* Preloader overlay */
+.preloader {
+    position: fixed;
+    inset: 0;
+    background-color: var(--bg-main);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.preloader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.preloader .spinner {
+    width: 48px;
+    height: 48px;
+    border: 4px solid rgba(255, 255, 255, 0.2);
+    border-top-color: var(--accent-yellow);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 12px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
 
 /* CSS from section:portfolio */
@@ -191,11 +221,7 @@ footer p {
     height: 43px;
 }
 
-/* In light mode, adjust sidebar contact logos for better contrast */
-[data-theme="light"] .contact-item img, [data-theme="light"] .tech-item img[alt="GitHub"] {
-    filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(1.1);
-    transition: filter 0.2s ease;
-}
+/* Theme-specific logo adjustments removed */
 
 .contact-item span {
     font-weight: 500;
@@ -711,11 +737,7 @@ body::after {
     background-attachment: fixed;
 }
 
-/* Light mode adjustment for background image */
-[data-theme="light"] body::after {
-        filter: invert(1) hue-rotate(180deg) brightness(0.9) contrast(1.1);
-    transition: filter 0.2s ease;
-}
+/* Theme-specific background adjustments removed */
 
 /* Tablet and smaller desktop */
 @media (max-width: 1300px) {
