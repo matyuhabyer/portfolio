@@ -12,7 +12,17 @@ app.engine('hbs', engine({
   layoutsDir: path.join(__dirname, 'views', 'layouts'),
   partialsDir: path.join(__dirname, 'views', 'partials'),
   helpers: {
-    eq: (a, b) => a === b
+    eq: (a, b) => a === b,
+    contains: (str, substr) => {
+      if (!str || !substr) return false;
+      return String(str).includes(String(substr));
+    },
+    isUXProject: (project) => {
+      if (!project) return false;
+      const label = project.label || '';
+      const tech = project.tech || '';
+      return label.includes('UX') || tech.includes('UX');
+    }
   }
 }));
 app.set('view engine', 'hbs');
@@ -30,14 +40,12 @@ const portfolioData = {
     linkedin: "https://www.linkedin.com/in/matthewbenisonjavier/",
     instagram: "https://www.instagram.com/matyuhabyer/",
     github: "https://github.com/matyuhabyer",
-    resume: "/assets/JAVIER, M.B. T. - RESUME.pdf"
+    resume: "/assets/Matthew_Javier_Resume_2025.pdf"
   },
   about: {
     subtitle: "Bridging people and technology, one design at a time.",
     paragraphs: [
-      "I am Matthew Benison T. Javier, a detail-oriented and adaptable Information Technology student at De La Salle University – Manila with a strong foundation in research, design, and computing. As a DOST-SEI Merit Scholar, I strive for academic excellence while sharpening both technical expertise and leadership skills.",
-      "I previously contributed to organizations such as the La Salle Computer Society and the Computer Studies Government, where I've led publicity and creative initiatives that boosted university engagement and strengthened my abilities in leadership, communication, and project management.",
-      "My professional interests span UI/UX Research & Design, Database Administration, Cloud Computing, Project Management, Data Analytics, Quality Assurance, and Web Application Development—fields where I can combine creativity and technical skills to build solutions that bridge people and technology and enhance everyday life."
+      "Detail-oriented and adaptable Information Technology student with hands-on experience in UX research & design, database administration, cloud computing, IT support, and full-stack web development. Proficient in SQL, Node.js, MongoDB, JavaScript/TypeScript, HTML/CSS (Tailwind), Figma, and cloud platforms (AWS, Azure). Experienced in leadership roles across student organizations. Seeking opportunities in UX/Product Design & Research, Database Administration, Cloud Computing, Data Analytics, Project Management, Quality Assurance, IT Support, and Web Development roles."
     ]
   },
   techStack: {
@@ -78,6 +86,101 @@ const portfolioData = {
       { name: "Vercel", image: "/assets/tech/vercel.png" }
     ]
   },
+  projects: [
+    {
+      slug: "shein-mobile-app-research",
+      name: "SHEIN Mobile App Redesign & Research",
+      label: "UX Case Study",
+      tech: "Figma · UX Research · UI Design",
+      description: "Redesigned the SHEIN mobile shopping experience through qualitative UX research and prototyping focusing on core tasks and user pain points.",
+      longDescription: "Led a two-month research and redesign of the SHEIN mobile application focused on browsing, adding to cart, and checkout flows. Conducted qualitative interviews to identify user pain points, ideated solutions through user journey maps and wireframes, and validated high-fidelity prototypes with moderated usability testing.",
+      role: "UX Lead · UI/UX Researcher & Designer",
+      timeline: "February - April 2025",
+      highlights: [
+        "Conducted 5 semi-structured user interviews to analyze user behavior, surface pain points, and improve user retention and efficiency when using the app.",
+        "Synthesized findings with thematic analysis, mapped the end-to-end customer journey, and defined opportunity areas to guide ideation.",
+        "Redesign Solution: Streamlined navigation, reducing ads/banners into one scrollable banner, addition of whitespace, AI Search Assistant, consolidated rewards section, checkout confirmation pop-up, interactive size guide",
+        "Applied Interaction Design Patterns and Nielsen's 10 Usability Heuristics to identify and prioritize usability issues.",
+        "Performed moderated usability tests using the think-aloud protocol and recorded task completion times and verbal/non-verbal feedback to inform iterative design changes.",
+        "Delivered comprehensive documentation and design rationale; received top course scores and faculty commendation for research rigor and justification."
+      ],
+      lessonsLearned: [
+        "A logically 'correct' solution can still fail to change behavior. Our solution for impulse buying was a checkout confirmation pop-up, which was ineffective. This taught us that interrupting a habituated action requires more than a simple confirmation, it requires a design that reframes the decision itself.",
+        "Empowering users with different ways or flexibility to accomplish the same goal is a powerful way to build confidence and effiency, aligning directly with Nielsen's 'Flexibility and Efficiency of Use' heuristic.",
+        "Addressing minor visual fatigue is a major UX win. Implementing a simple dark mode and consolidating the promo banner, though not as complex as other features, resolved issues of visual fatigue and cognitive overload. This proved that small, focused design changes that reduce visual noise can have an outsized and immediate impact on user satisfaction.",
+        "User-hostile design patterns can reveal business priorities. Some user frustrations appeared to be deliberate business-centric choices designed to maximize immediate conversions. A key part of UX is identifying when a design pattern intentionally serves the business at the direct expense of the user's satisfaction."
+      ],
+      image: "/assets/images/shein-image.jpg",
+      heroImage: "/assets/images/shein-hero-image.jpg",
+      ctaLabel: "View Presentation & Interactive Prototype",
+      ctaUrl: "https://www.figma.com/deck/oFKoRUJctJmpkMra78mZIe/MCO5_Pookies?node-id=1-42&t=1j6DcZ7VNGDh3Q2h-1"
+    },
+    {
+      slug: "check-yourself-app",
+      name: "CheckYourself Mobile Application",
+      label: "UX Case Study",
+      tech: "Figma · UX Research · UI Design",
+      description: "Conducted end-to-end UX research to design a privacy-first mobile app addressing barriers to STD testing in the Philippines, focused on overcoming user stigma and accessibility issues",
+      longDescription: "Led a healthcare UX case study for a mobile health app concept that provides confidential at-home STD testing kits and consultations to address critical gaps in the Philippines' public health system. Through the design thinking process, it was identified that deep-seated societal stigma and privacy fears, rather than logistical access, were the primary user barriers. The high-fidelity prototype delivers a complete and secure ecosystem that includes confidential ordering, tele-consultations with doctors, educational resources, and lab result tracking.",
+      role: "UX Lead · UI/UX Researcher & Designer",
+      timeline: "Februrary – April 2025",
+      highlights: [
+        "Led user research and ideation for a telehealth app enabling STD consultation and at-home test kit ordering.",
+        "Conducted semi-structured interviews, developed POV statements, and generated HMW questions to frame design opportunities; facilitated ideation (Crazy 8’s) and brainstorming sessions.",
+        "Ran usability sessions and captured insights with feedback capture grids to guide iterations and improve user flows.",
+        "Conducted three cycles of iterative prototype testing, using feedback grids to implement critical UI/UX improvements like security verification and tutorial screens."
+      ],
+      lessonsLearned: [
+        "Empathy interviews revealed the *true* user problem was not logistics but deep-seated fear and societal stigma, fundamentally shifting the project's focus from 'convenience' to 'psychological safety.'",
+        "For a sensitive health issue, the product must be a 'safe space,' not just a tool. Building user trust through privacy-first features (like at-home kits and secure chats) is the primary goal.",
+        "Iterative testing on simple flows is critical. User feedback on the ordering process exposed major confusion, which was resolved by adding simple tutorial screens, a small change that fixed a major usability gap.",
+        "Design thinking is essential for innovation."
+      ],
+      image: "/assets/images/checkyourself-image.jpg",
+      heroImage: "/assets/images/checkyourself-hero-image.jpg",
+      ctaLabel: "View Interactive Prototype (Use iPhone SE as Device)",
+      ctaUrl: "https://www.figma.com/proto/ON7M6aCXSSSUqPIinw8r0Y/ISDESTH?page-id=0%3A1&node-id=19-97&starting-point-node-id=75%3A480&t=jZ39LpHCs7vmP8sg-1"
+    },
+    {
+      slug: "tafteria-web-application",
+      name: "Tafteria: Establishments Review Web Application",
+      label: "Full-Stack Development",
+      tech: "Figma · HTML/Tailwind CSS · JavaScript · Node.js · Express.js · MongoDB",
+      description: "Led full-stack development of a web application that allows users in Taft, Manila to disvover and review local establishments.",
+      longDescription: "Tafteria is a review-based web application designed for the Taft, Manila community to explore, rate, and share feedback about local establishments. As the Full-Stack Developer and Database Engineer, I led the development of both the front-end and back-end systems. I designed and implemented REST API endpoints using Node.js and Express.js, and structured a MongoDB database with flexible document schemas to support user-generated reviews and content. On the client side, I developed features for user registration, CRUD operations for reviews and users, and search functionality with filters for easier discoverability. Through this project, I strengthened my understanding of full-stack architecture, data modeling, and user-centered web design, while building a platform that connects the Taft community through authentic local insights.",
+      role: "Full-Stack Developer, Database Engineer/Administrator",
+      timeline: "June – August 2024",
+      highlights: [
+        "Led full-stack development of a local establishments review platform; implemented user registration, CRUD for reviews and users, and robust search functionality.",
+        "Built REST API endpoints (Node.js) and used MongoDB for flexible review/document schemas to support user-generated content.",
+        "Integrated client-side forms and validation, implemented search filters to improve discoverability of establishments."
+      ],
+      image: "/assets/images/tafteria-image.jpg",
+      heroImage: "/assets/images/tafteria-hero-image.jpg",
+      ctaLabel: "View Source on GitHub",
+      ctaUrl: "https://github.com/matyuhabyer/tafteria-web-application"
+    },
+    {
+      slug: "cinema-database-application",
+      name: "Simple Cinema Database Application",
+      label: "Database Design & Development",
+      tech: "HTML/CSS · JavaScript · JSP · MySQL · Apache NetBeans",
+      description: "Developed a web-based database application to manage key cinema operations, including employee records, movie schedules, showtimes, and concession inventory.",
+      longDescription: "The Cinema Management System is a web-based database application project for the CCINFOM (Information Management) course in the College of Computer Studies at De La Salle University. It is developed to streamline the operations of a cinema, allowing employees to manage employees, available movies, movie screenings, showtimes, and available snacks. It is also developed for processing transactions for tickets and snacks for customers and generates reports on the cinema's overall sales (tickets and snacks) and movie gross sales (sales per movie). The system provides functionalities for both administrators and customers, ensuring smooth and efficient cinema operations.",
+      role: "Full-Stack Developer, Database Engineer/Administrator",
+      timeline: "January – February 2025",
+      highlights: [
+        "Built a web-based cinema management system with CRUD modules for employees, movies, screenings, showtimes, and concessions.",
+        "Implemented transaction handling and automated sales reports for daily reconciliation and management insights.",
+        "Designed normalized relational schema and optimized SQL queries to support scalability and efficient data retrieval.",
+        "Strengthened understanding of full-stack web development, database engineering and administration, and data-driven application design."
+      ],
+      image: "/assets/images/cinemadb-image.jpg",
+      heroImage: "/assets/images/cinemadb-hero-image.jpg",
+      ctaLabel: "View Source on GitHub",
+      ctaUrl: "https://github.com/matyuhabyer/cinema-db-app"
+    }
+  ],
   certifications: [
     {
       title: "HTML Fundamentals",
@@ -248,11 +351,26 @@ app.get('/projects', (req, res) => {
   });
 });
 
+app.get('/projects/:slug', (req, res) => {
+  const project = portfolioData.projects.find(item => item.slug === req.params.slug);
+
+  if (!project) {
+    return res.status(404).render('project-not-found', {
+      data: portfolioData,
+      currentPage: 'projects',
+      title: 'Project Not Found'
+    });
+  }
+
+  res.render('project-detail', {
+    data: portfolioData,
+    currentPage: 'projects',
+    project,
+    title: project.name
+  });
+});
+
 // Start server
 app.listen(PORT, () => {
   console.log(`Portfolio server running on http://localhost:${PORT}`);
-  console.log(`Available routes:`);
-  console.log(`  - http://localhost:${PORT}/about`);
-  console.log(`  - http://localhost:${PORT}/experience`);
-  console.log(`  - http://localhost:${PORT}/projects`);
 });

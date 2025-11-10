@@ -1,13 +1,56 @@
 <div class="about-content">
     <div style="display: flex; align-items: center; gap: 10px;">
         <img src="/assets/icons/fluent-emoji-flat_call-me-hand.svg" alt="About Icon">
-        <h2 class="about-title">About Me</h2>
+        <h2 class="about-title">About</h2>
     </div>
     <br>
     <h3 class="about-subtitle">{{data.about.subtitle}}</h3>
     {{#each data.about.paragraphs}}
         <p class="about-text">{{this}}</p>
     {{/each}}
+</div>
+
+<div class="education-content">
+    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+        <img src="/assets/icons/twemoji_books.svg" alt="Books Icon">
+        <h2 class="education-title">Education</h2>
+    </div>
+    <div class="education-item">
+        <div class="education-header">
+            <h3 class="education-name">{{data.education.university}}</h3>
+            <span class="education-dates">{{data.education.dates}}</span>
+        </div>
+        <p class="education-course">{{data.education.course}}</p>
+        <p class="education-cgpa">CGPA: {{data.education.cgpa}}</p>
+        <ul class="education-highlights">
+            {{#each data.education.highlights}}
+                <li>{{this}}</li>
+            {{/each}}
+        </ul>
+    </div>
+    
+</div>
+
+<div class="organization-content">
+    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+        <img src="/assets/icons/flat-color-icons_organization.svg" alt="Organizations Icon">
+        <h2 class="organization-title">Organizations</h2>
+    </div>
+    {{#each data.organizations}}
+    <div class="organization-item">
+        <div class="organization-header">
+            <h3 class="organization-name">{{this.name}}</h3>
+            <span class="organization-dates">{{this.dates}}</span>
+        </div>
+        <p class="organization-role">{{this.role}}</p>
+        <ul class="organization-highlights">
+            {{#each this.highlights}}
+                <li>{{this}}</li>
+            {{/each}}
+        </ul>
+    </div>
+    {{/each}}
+    
 </div>
 
 <div class="panels-row">

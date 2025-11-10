@@ -7,12 +7,23 @@
     <link rel="stylesheet" href="/css/style.css">
     <link rel="icon" href="/assets/icons/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        (function () {
+            try {
+                if (window.sessionStorage && sessionStorage.getItem('visited') === '1') {
+                    document.documentElement.classList.add('has-visited');
+                }
+            } catch (err) {
+                // Ignore storage errors and keep preloader visible
+            }
+        })();
+    </script>
     <script src="/js/script.js" defer></script>
 </head>
 <body>
     <div id="preloader" class="preloader" aria-hidden="true">
-        <div class="spinner" role="status" aria-label="Loading"></div>
-        <p>Loading...</p>
+        <div class="spinner" role="status" aria-label="Welcome"></div>
+        <p>Welcome to my Portfolio!</p>
     </div>
     {{> header}}
     {{{body}}}

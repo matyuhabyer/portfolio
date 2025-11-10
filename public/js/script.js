@@ -3,22 +3,6 @@ let preloaderShownAt = Date.now();
 const hasVisited = sessionStorage.getItem('visited') === '1';
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Smooth page transitions for internal links
-    const isInternal = (link) => link.host === window.location.host;
-    document.body.addEventListener('click', (e) => {
-        const anchor = e.target.closest('a');
-        if (!anchor) return;
-        if (!isInternal(anchor)) return;
-        const href = anchor.getAttribute('href');
-        if (!href || href.startsWith('#') || anchor.target === '_blank') return;
-
-        e.preventDefault();
-        document.body.classList.add('page-fade-out');
-        setTimeout(() => {
-            window.location.href = href;
-        }, 300); // match CSS opacity transition duration
-    });
-
     // If this is not the first page load in this tab, hide preloader immediately
     const preloader = document.getElementById('preloader');
     if (hasVisited && preloader) {

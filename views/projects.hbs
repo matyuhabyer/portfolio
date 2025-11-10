@@ -3,44 +3,23 @@
         <img src="/assets/icons/fluent-emoji-flat_call-me-hand.svg" alt="Projects Icon">
         <h2 class="projects-title">Projects</h2>
     </div>
-    <div class="projects-item">
-        <div class="projects-image-container">
-            <img src="/assets/images/sample.png" alt="Project Name" class="projects-image">
-        </div>
-        <div class="projects-content-wrapper">
-            <div class="projects-header">
-                <h3 class="projects-name">Project Name</h3>
-                <span class="projects-label">Web Application</span>
-            </div>
-            <p class="projects-tech">Technologies Used</p>
-            <p class="projects-description">Description of the project</p>
-        </div>
-    </div>
-    <div class="projects-item">
-        <div class="projects-image-container">
-            <img src="/assets/images/sample.png" alt="Project Name" class="projects-image">
-        </div>
-        <div class="projects-content-wrapper">
-            <div class="projects-header">
-                <h3 class="projects-name">Project Name</h3>
-                <span class="projects-label">Web Application</span>
-            </div>
-            <p class="projects-tech">Technologies Used</p>
-            <p class="projects-description">Description of the project</p>
-        </div>
-    </div>
-    <div class="projects-item">
-        <div class="projects-image-container">
-            <img src="/assets/images/sample.png" alt="Project Name" class="projects-image">
-        </div>
-        <div class="projects-content-wrapper">
-            <div class="projects-header">
-                <h3 class="projects-name">Project Name</h3>
-                <span class="projects-label">Web Application</span>
-            </div>
-            <p class="projects-tech">Technologies Used</p>
-            <p class="projects-description">Description of the project</p>
-        </div>
-    </div>
+    {{#if data.projects}}
+        {{#each data.projects}}
+            <a href="/projects/{{slug}}" class="projects-item projects-card-link">
+                <div class="projects-image-container">
+                    <img src="{{image}}" alt="{{name}}" class="projects-image">
+                </div>
+                <div class="projects-content-wrapper">
+                    <div class="projects-header">
+                        <h3 class="projects-name">{{name}}</h3>
+                        {{#if label}}<span class="projects-label">{{label}}</span>{{/if}}
+                    </div>
+                    {{#if tech}}<p class="projects-tech">{{tech}}</p>{{/if}}
+                    {{#if description}}<p class="projects-description">{{description}}</p>{{/if}}
+                </div>
+            </a>
+        {{/each}}
+    {{else}}
+        <p class="projects-empty">Projects coming soon. Check back later!</p>
+    {{/if}}
 </div>
-
