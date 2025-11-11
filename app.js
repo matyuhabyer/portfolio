@@ -131,7 +131,7 @@ const portfolioData = {
         "Conducted three cycles of iterative prototype testing, using feedback grids to implement critical UI/UX improvements like security verification and tutorial screens."
       ],
       lessonsLearned: [ 
-        "<b>Empathy Uncovers the Real Problem</b> – User interviews revealed that the main barrier wasn’t logistics but fear and stigma, shifting the design focus toward psychological safety.", 
+        "Empathy Uncovers the Real Problem – User interviews revealed that the main barrier wasn’t logistics but fear and stigma, shifting the design focus toward psychological safety.", 
         "Design for Trust and Safety– For a sensitive health issue, the product must be a 'safe space,' not just a tool. Building user trust through privacy-first features (like at-home kits and secure chats) is the primary goal.", 
         "Iterate to Eliminate Confusion – Iterative testing on simple flows is critical. User feedback on the ordering process exposed major confusion, which was resolved by adding simple tutorial screens, a small change that fixed a major usability gap.", 
         "Design thinking is Essential for Innovation – Applying design thinking ensures that solutions stay human-centered and adaptive throughout development."
