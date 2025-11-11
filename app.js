@@ -105,10 +105,10 @@ const portfolioData = {
         "Delivered comprehensive documentation and design rationale; received top course scores and faculty commendation for research rigor and justification."
       ],
       lessonsLearned: [
-        "Behavioral Design Over Logic – A technically correct solution (like a confirmation pop-up) may not change user behavior; effective design must reframe the decision process itself.",
-        "Flexibility Builds Confidence – Allowing users multiple ways to achieve the same goal increases efficiency and aligns with Nielsen’s Flexibility and Efficiency of Use heuristic.",
-        "Small Visual Tweaks, Big Impact – Simple visual improvements like dark mode or decluttered layouts can significantly reduce fatigue and enhance user satisfaction.",
-        "Recognizing Business-Driven UX Trade-offs – Some frustrating designs are intentional business strategies; good UX requires balancing user satisfaction with business goals."
+        "**Behavioral Design Over Logic** – A technically correct solution (like a confirmation pop-up) may not change user behavior; effective design must reframe the decision process itself.",
+        "**Flexibility Builds Confidence** – Allowing users multiple ways to achieve the same goal increases efficiency and aligns with Nielsen’s Flexibility and Efficiency of Use heuristic.",
+        "**Small Visual Tweaks, Big Impact** – Simple visual improvements like dark mode or decluttered layouts can significantly reduce fatigue and enhance user satisfaction.",
+        "**Recognizing Business-Driven UX Trade-offs** – Some frustrating designs are intentional business strategies; good UX requires balancing user satisfaction with business goals."
       ],
       image: "/assets/images/shein-image.jpg",
       heroImage: "/assets/images/shein-hero-image.jpg",
@@ -131,10 +131,10 @@ const portfolioData = {
         "Conducted three cycles of iterative prototype testing, using feedback grids to implement critical UI/UX improvements like security verification and tutorial screens."
       ],
       lessonsLearned: [ 
-        "Empathy interviews revealed the *true* user problem was not logistics but deep-seated fear and societal stigma, fundamentally shifting the project's focus from 'convenience' to 'psychological safety.'", 
-        "For a sensitive health issue, the product must be a 'safe space,' not just a tool. Building user trust through privacy-first features (like at-home kits and secure chats) is the primary goal.", 
-        "Iterative testing on simple flows is critical. User feedback on the ordering process exposed major confusion, which was resolved by adding simple tutorial screens, a small change that fixed a major usability gap.", 
-        "Design thinking is essential for innovation. Applying design thinking ensures that solutions stay human-centered and adaptive throughout development."
+        "**Empathy Uncovers the Real Problem** – User interviews revealed that the main barrier wasn’t logistics but fear and stigma, shifting the design focus toward psychological safety.", 
+        "**Design for Trust and Safety** – For a sensitive health issue, the product must be a 'safe space,' not just a tool. Building user trust through privacy-first features (like at-home kits and secure chats) is the primary goal.", 
+        "**Iterate to Eliminate Confusion** – Iterative testing on simple flows is critical. User feedback on the ordering process exposed major confusion, which was resolved by adding simple tutorial screens, a small change that fixed a major usability gap.", 
+        "**Design thinking is Essential for Innovation** – Applying design thinking ensures that solutions stay human-centered and adaptive throughout development."
       ],
       image: "/assets/images/checkyourself-image.jpg",
       heroImage: "/assets/images/checkyourself-hero-image.jpg",
