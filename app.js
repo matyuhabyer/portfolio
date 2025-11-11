@@ -105,10 +105,10 @@ const portfolioData = {
         "Delivered comprehensive documentation and design rationale; received top course scores and faculty commendation for research rigor and justification."
       ],
       lessonsLearned: [
-        "A logically 'correct' solution can still fail to change behavior. Our solution for impulse buying was a checkout confirmation pop-up, which was ineffective. This taught us that interrupting a habituated action requires more than a simple confirmation, it requires a design that reframes the decision itself.",
-        "Empowering users with different ways or flexibility to accomplish the same goal is a powerful way to build confidence and effiency, aligning directly with Nielsen's 'Flexibility and Efficiency of Use' heuristic.",
-        "Addressing minor visual fatigue is a major UX win. Implementing a simple dark mode and consolidating the promo banner, though not as complex as other features, resolved issues of visual fatigue and cognitive overload. This proved that small, focused design changes that reduce visual noise can have an outsized and immediate impact on user satisfaction.",
-        "User-hostile design patterns can reveal business priorities. Some user frustrations appeared to be deliberate business-centric choices designed to maximize immediate conversions. A key part of UX is identifying when a design pattern intentionally serves the business at the direct expense of the user's satisfaction."
+        "Behavioral Design Over Logic – A technically correct solution (like a confirmation pop-up) may not change user behavior; effective design must reframe the decision process itself.",
+        "Flexibility Builds Confidence – Allowing users multiple ways to achieve the same goal increases efficiency and aligns with Nielsen’s Flexibility and Efficiency of Use heuristic.",
+        "Small Visual Tweaks, Big Impact – Simple visual improvements like dark mode or decluttered layouts can significantly reduce fatigue and enhance user satisfaction.",
+        "Recognizing Business-Driven UX Trade-offs – Some frustrating designs are intentional business strategies; good UX requires balancing user satisfaction with business goals."
       ],
       image: "/assets/images/shein-image.jpg",
       heroImage: "/assets/images/shein-hero-image.jpg",
@@ -130,11 +130,11 @@ const portfolioData = {
         "Ran usability sessions and captured insights with feedback capture grids to guide iterations and improve user flows.",
         "Conducted three cycles of iterative prototype testing, using feedback grids to implement critical UI/UX improvements like security verification and tutorial screens."
       ],
-      lessonsLearned: [
-        "Empathy interviews revealed the *true* user problem was not logistics but deep-seated fear and societal stigma, fundamentally shifting the project's focus from 'convenience' to 'psychological safety.'",
-        "For a sensitive health issue, the product must be a 'safe space,' not just a tool. Building user trust through privacy-first features (like at-home kits and secure chats) is the primary goal.",
-        "Iterative testing on simple flows is critical. User feedback on the ordering process exposed major confusion, which was resolved by adding simple tutorial screens, a small change that fixed a major usability gap.",
-        "Design thinking is essential for innovation."
+      lessonsLearned: [ 
+        "Empathy interviews revealed the *true* user problem was not logistics but deep-seated fear and societal stigma, fundamentally shifting the project's focus from 'convenience' to 'psychological safety.'", 
+        "For a sensitive health issue, the product must be a 'safe space,' not just a tool. Building user trust through privacy-first features (like at-home kits and secure chats) is the primary goal.", 
+        "Iterative testing on simple flows is critical. User feedback on the ordering process exposed major confusion, which was resolved by adding simple tutorial screens, a small change that fixed a major usability gap.", 
+        "Design thinking is essential for innovation. Applying design thinking ensures that solutions stay human-centered and adaptive throughout development."
       ],
       image: "/assets/images/checkyourself-image.jpg",
       heroImage: "/assets/images/checkyourself-hero-image.jpg",
@@ -179,6 +179,26 @@ const portfolioData = {
       heroImage: "/assets/images/cinemadb-hero-image.jpg",
       ctaLabel: "View Source on GitHub",
       ctaUrl: "https://github.com/matyuhabyer/cinema-db-app"
+    },
+    {
+      slug: "forum-friends-web-application",
+      name: "Forum Friends Web Application",
+      label: "Full-Stack Development",
+      tech: "HTML/CSS · JavaScript · Node.js · Express.js · MongoDB",
+      description: "Developed role-based access control features for a forum web application, enabling secure user authentication, content moderation, and administrative dashboards for managing users and discussions.",
+      longDescription: "Forum Friends is a full-stack forum web application designed to foster community interaction while maintaining security and accountability. As the Backend Developer, I implemented a role-based access control system (User, Manager, Admin) to manage permissions across content and user management modules. The project also included security-focused features such as password change functionality, audit logs, and application logs to improve traceability. Manager and Admin dashboards were built to enable content moderation, user management, and reporting tools, ensuring the platform upholds community standards and operational oversight.",
+      role: "Backend Developer – Security & Access Control",
+      timeline: "June – August 2025",
+      highlights: [
+        "Implemented a role-based access control (RBAC) system with User, Manager, and Admin permissions for secure content and user management.",
+        "Developed security features including password change functionality, audit logs, and application logs to ensure accountability.",
+        "Built Manager and Admin dashboards for moderation, user management, and analytics to support operational oversight.",
+        "Enhanced understanding of system security, backend administration, and scalable full-stack web development."
+      ],
+      image: "/assets/images/forumfriends-image.jpg",
+      heroImage: "/assets/images/forumfriends-hero-image.jpg",
+      ctaLabel: "View Source on GitHub",
+      ctaUrl: "https://github.com/matyuhabyer/ITSECWB-CaseStudy"
     }
   ],
   certifications: [
