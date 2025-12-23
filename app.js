@@ -347,8 +347,8 @@ const portfolioData = {
       role: "Associate Vice President for Publicity and Creatives",
       highlights: [
         "Led a 10-member Publicity & Creatives committee for the organization’s flagship event.",
-        "Designed publicity materials and handled social media management for various projects and events under the organization that boosted university engagement.",
-        "Collaborated with other officers on event branding, creative design, and organizational promotions."
+        "Produced high-volume publicity materials and managed multi-project social media channels.",
+        "Recognized as Top-Performing Officer for consistent delivery and collaboration on event branding and promotions."
       ]
     },
     {
@@ -356,9 +356,9 @@ const portfolioData = {
       dates: "February 2024 – September 2025",
       role: "Director for Integrated Marketing Communications - Publicity",
       highlights: [
-        "Managed publicity for the college student government’s social media platforms, engaging an audience of over 1,000 students and reaching a broader network of 5,000+ people.",
-        "Coordinated and fulfilled publicity requests from various project leaders and committees to ensure cohesive communication.",
-        "Collaborated with the Student Services Committee to effectively disseminate information, addressing student concerns related to both academic and non-academic services, including enlistment processes."
+        "Led a 9-member Publicity committee handling requests from multiple project heads and committees.",
+        "Managed social media platforms with 1,000+ student engagement and 5,000+ total reach.",
+        "Collaborated with the Student Services Committee in disseminating information and addressing student concerns."
       ]
     },
     {
