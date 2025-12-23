@@ -211,7 +211,7 @@ const portfolioData = {
       description: "Developed a database application to manage key cinema operations, including employee records, movie schedules, showtimes, and concession inventory.",
       longDescription: "The Cinema Management System is a web-based database application project for the CCINFOM (Information Management) course in the College of Computer Studies at De La Salle University. It is developed to streamline the operations of a cinema, allowing employees to manage employees, available movies, movie screenings, showtimes, and available snacks. It is also developed for processing transactions for tickets and snacks for customers and generates reports on the cinema's overall sales (tickets and snacks) and movie gross sales (sales per movie). The system provides functionalities for both administrators and customers, ensuring smooth and efficient cinema operations.",
       role: "Full-Stack Developer, Database Administrator",
-      timeline: "January – February 2025",
+      timeline: "January – February 2024",
       highlights: [
         "Built a web-based cinema management system with CRUD modules for employees, movies, screenings, showtimes, and concessions.",
         "Implemented transaction handling and automated sales reports for daily reconciliation and management insights.",
