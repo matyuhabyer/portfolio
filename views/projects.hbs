@@ -1,0 +1,25 @@
+<div class="projects-content">
+    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
+        <img src="/assets/icons/twemoji_desktop.svg" alt="Projects Icon">
+        <h2 class="projects-title">Projects</h2>
+    </div>
+    {{#if data.projects}}
+        {{#each data.projects}}
+            <a href="/projects/{{slug}}" class="projects-item projects-card-link">
+                <div class="projects-image-container">
+                    <img src="{{image}}" alt="{{name}}" class="projects-image">
+                </div>
+                <div class="projects-content-wrapper">
+                    <div class="projects-header">
+                        <h3 class="projects-name">{{name}}</h3>
+                        {{#if label}}<span class="projects-label">{{label}}</span>{{/if}}
+                    </div>
+                    {{#if tech}}<p class="projects-tech">{{tech}}</p>{{/if}}
+                    {{#if description}}<p class="projects-description">{{description}}</p>{{/if}}
+                </div>
+            </a>
+        {{/each}}
+    {{else}}
+        <p class="projects-empty">Projects coming soon. Check back later!</p>
+    {{/if}}
+</div>

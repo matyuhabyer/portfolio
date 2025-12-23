@@ -1,0 +1,18 @@
+    </main>
+</div>
+<footer>
+    <div class="divider">
+        <p>© 2025 Matthew Benison Javier • Updated as of <span id="updated-date"></span></p>
+    </div>
+</footer>
+<script src="/js/script.js"></script>
+<script>
+    // Set updated date
+    const updatedDateElement = document.getElementById('updated-date');
+    if (updatedDateElement) {
+        const now = new Date();
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        updatedDateElement.textContent = now.toLocaleDateString('en-US', options);
+    }
+</script>
+
