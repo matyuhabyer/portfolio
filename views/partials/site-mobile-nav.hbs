@@ -1,0 +1,20 @@
+<nav class="md:hidden fixed bottom-0 w-full z-50 bg-[#181c20]/90 backdrop-blur-2xl border-t border-[#574235]/15 pb-safe shadow-[0_-8px_40px_rgba(255,183,135,0.05)]">
+  <div class="flex justify-around items-center h-16 w-full px-4">
+    <a class="flex flex-col items-center justify-center {{#if (eq currentPage 'projects')}}text-[#ff8000]{{else}}text-[#e0e3e8]/60 hover:text-[#ffb787]{{/if}}" href="/projects">
+      <span class="material-symbols-outlined" data-icon="terminal">terminal</span>
+      <span class="font-['Inter'] text-[10px] font-medium tracking-widest uppercase mt-1">Dev</span>
+    </a>
+    <a class="flex flex-col items-center justify-center {{#if (eq currentPage 'projects')}}text-[#ff8000]{{else}}text-[#e0e3e8]/60 hover:text-[#ffb787]{{/if}}" href="/projects">
+      <span class="material-symbols-outlined" data-icon="grid_view">grid_view</span>
+      <span class="font-['Inter'] text-[10px] font-medium tracking-widest uppercase mt-1">Work</span>
+    </a>
+    <a class="flex flex-col items-center justify-center {{#if (eq currentPage 'home')}}text-[#ff8000] scale-110 transition-transform{{else}}text-[#e0e3e8]/60 hover:text-[#ffb787]{{/if}}" href="/">
+      <span class="material-symbols-outlined" data-icon="flash_on">flash_on</span>
+      <span class="font-['Inter'] text-[10px] font-medium tracking-widest uppercase mt-1">Feed</span>
+    </a>
+    <a class="flex flex-col items-center justify-center {{#if (eq currentPage 'about')}}text-[#ff8000]{{else}}text-[#e0e3e8]/60 hover:text-[#ffb787]{{/if}}" href="/about">
+      <span class="material-symbols-outlined" data-icon="person">person</span>
+      <span class="font-['Inter'] text-[10px] font-medium tracking-widest uppercase mt-1">Profile</span>
+    </a>
+  </div>
+</nav>

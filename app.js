@@ -385,30 +385,26 @@ const portfolioData = {
 
 // Routes
 app.get('/', (req, res) => {
-  res.render('about', { 
+  res.render('home', {
+    layout: false,
     data: portfolioData,
-    currentPage: 'about'
+    currentPage: 'home'
   });
 });
 
 app.get('/about', (req, res) => {
-  res.render('about', { 
+  res.render('about', {
     data: portfolioData,
-    currentPage: 'about'
-  });
-});
-
-app.get('/experience', (req, res) => {
-  res.render('experience', { 
-    data: portfolioData,
-    currentPage: 'experience'
+    currentPage: 'about',
+    title: 'About'
   });
 });
 
 app.get('/projects', (req, res) => {
-  res.render('projects', { 
+  res.render('projects', {
     data: portfolioData,
-    currentPage: 'projects'
+    currentPage: 'projects',
+    title: 'Projects'
   });
 });
 

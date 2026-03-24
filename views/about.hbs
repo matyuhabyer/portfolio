@@ -1,234 +1,237 @@
-<div class="about-content">
-    <div style="display: flex; align-items: center; gap: 10px;">
-        <img src="/assets/icons/fluent-emoji-flat_call-me-hand.svg" alt="About Icon">
-        <h2 class="about-title">About</h2>
+<div class="space-y-12 pb-8">
+  <section class="rounded-xl border border-outline-variant/15 bg-surface-container-low/60 p-6 md:p-8">
+    <div class="flex items-center gap-3 mb-4">
+      <img src="/assets/icons/fluent-emoji-flat_call-me-hand.svg" alt="" class="w-9 h-9" width="36" height="36"/>
+      <h2 class="font-headline font-bold text-2xl text-on-surface">About</h2>
     </div>
-    <br>
-    <h3 class="about-subtitle">{{data.about.subtitle}}</h3>
+    <h3 class="font-headline font-semibold text-lg text-primary mb-3">{{data.about.subtitle}}</h3>
     {{#each data.about.paragraphs}}
-        <p class="about-text">{{this}}</p>
+      <p class="font-body text-sm text-on-surface-variant leading-relaxed mb-3 last:mb-0">{{this}}</p>
     {{/each}}
-</div>
+  </section>
 
-<div class="education-content">
-    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-        <img src="/assets/icons/twemoji_books.svg" alt="Books Icon">
-        <h2 class="education-title">Education</h2>
+  <section class="rounded-xl border border-outline-variant/15 bg-surface-container-low/60 p-6 md:p-8">
+    <div class="flex items-center gap-3 mb-6">
+      <img src="/assets/icons/twemoji_books.svg" alt="" class="w-9 h-9" width="36" height="36"/>
+      <h2 class="font-headline font-bold text-2xl text-on-surface">Education</h2>
     </div>
-    <div class="education-item">
-        <div class="education-header">
-            <h3 class="education-name">{{data.education.university}}</h3>
-            <span class="education-dates">{{data.education.dates}}</span>
-        </div>
-        <p class="education-course">{{data.education.course}}</p>
-        <p class="education-cgpa">CGPA: {{data.education.cgpa}}</p>
-        <ul class="education-highlights">
-            {{#each data.education.highlights}}
-                <li>{{this}}</li>
-            {{/each}}
-        </ul>
+    <div class="rounded-lg border border-outline-variant/20 bg-background/40 p-5">
+      <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
+        <h3 class="font-headline font-bold text-on-surface">{{data.education.university}}</h3>
+        <span class="text-xs font-medium text-on-surface-variant/80 whitespace-nowrap">{{data.education.dates}}</span>
+      </div>
+      <p class="font-body text-sm text-on-surface-variant mb-2">{{data.education.course}}</p>
+      <p class="font-body text-sm text-primary font-medium mb-4">CGPA: {{data.education.cgpa}}</p>
+      <ul class="list-disc list-inside space-y-1 text-sm text-on-surface-variant">
+        {{#each data.education.highlights}}
+          <li>{{this}}</li>
+        {{/each}}
+      </ul>
     </div>
-    
-</div>
+  </section>
 
-<div class="organization-content">
-    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
-        <img src="/assets/icons/flat-color-icons_organization.svg" alt="Organizations Icon">
-        <h2 class="organization-title">Organizations</h2>
+  <section class="rounded-xl border border-outline-variant/15 bg-surface-container-low/60 p-6 md:p-8">
+    <div class="flex items-center gap-3 mb-6">
+      <img src="/assets/icons/flat-color-icons_organization.svg" alt="" class="w-9 h-9" width="36" height="36"/>
+      <h2 class="font-headline font-bold text-2xl text-on-surface">Organizations</h2>
     </div>
-    {{#each data.organizations}}
-    <div class="organization-item">
-        <div class="organization-header">
-            <h3 class="organization-name">{{this.name}}</h3>
-            <span class="organization-dates">{{this.dates}}</span>
-        </div>
-        <p class="organization-role">{{this.role}}</p>
-        <ul class="organization-highlights">
+    <div class="space-y-6">
+      {{#each data.organizations}}
+        <div class="rounded-lg border border-outline-variant/20 bg-background/40 p-5">
+          <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 mb-2">
+            <h3 class="font-headline font-bold text-on-surface">{{this.name}}</h3>
+            <span class="text-xs font-medium text-on-surface-variant/80 whitespace-nowrap">{{this.dates}}</span>
+          </div>
+          <p class="font-body text-sm text-primary font-medium mb-3">{{this.role}}</p>
+          <ul class="list-disc list-inside space-y-1 text-sm text-on-surface-variant">
             {{#each this.highlights}}
-                <li>{{this}}</li>
+              <li>{{this}}</li>
             {{/each}}
-        </ul>
+          </ul>
+        </div>
+      {{/each}}
     </div>
-    {{/each}}
-    
+  </section>
+
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+    <section class="rounded-xl border border-outline-variant/15 bg-surface-container-low/60 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <img src="/assets/icons/twemoji_technologist.svg" alt="" class="w-9 h-9" width="36" height="36"/>
+        <h2 class="font-headline font-bold text-2xl text-on-surface">Technical Skills</h2>
+      </div>
+      <div class="space-y-4">
+        <div class="rounded-xl border border-outline-variant/20 bg-background/40 p-4">
+          <div class="flex items-center justify-between mb-3 gap-2">
+            <h3 class="font-headline font-bold text-sm text-on-surface">Backend</h3>
+            {{#if (gt (length data.techStack.backend) 4)}}
+              <button type="button" class="view-all-btn text-xs text-primary font-bold uppercase tracking-widest flex items-center gap-1 hover:underline" data-category="backend" data-items='{{json data.techStack.backend}}'>
+                <span>View All</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </button>
+            {{/if}}
+          </div>
+          <div class="tech-group-list flex flex-wrap gap-2" data-category="backend">
+            {{#each data.techStack.backend}}
+              <div class="tech-item group relative w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden {{#if (gte @index 4)}}hidden{{/if}}">
+                {{#if this.image}}
+                  <img src="{{this.image}}" alt="{{this.name}}" class="w-8 h-8 object-contain"/>
+                {{else}}
+                  <div class="tech-item-text text-[9px] text-center px-1 leading-tight text-on-surface-variant">{{this.name}}</div>
+                {{/if}}
+                <span class="tooltip">{{this.name}}</span>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-outline-variant/20 bg-background/40 p-4">
+          <div class="flex items-center justify-between mb-3 gap-2">
+            <h3 class="font-headline font-bold text-sm text-on-surface">Frontend</h3>
+            {{#if (gt (length data.techStack.frontend) 4)}}
+              <button type="button" class="view-all-btn text-xs text-primary font-bold uppercase tracking-widest flex items-center gap-1 hover:underline" data-category="frontend" data-items='{{json data.techStack.frontend}}'>
+                <span>View All</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </button>
+            {{/if}}
+          </div>
+          <div class="tech-group-list flex flex-wrap gap-2" data-category="frontend">
+            {{#each data.techStack.frontend}}
+              <div class="tech-item group relative w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden {{#if (gte @index 4)}}hidden{{/if}}">
+                {{#if this.image}}
+                  <img src="{{this.image}}" alt="{{this.name}}" class="w-8 h-8 object-contain"/>
+                {{else}}
+                  <div class="tech-item-text text-[9px] text-center px-1 leading-tight text-on-surface-variant">{{this.name}}</div>
+                {{/if}}
+                <span class="tooltip">{{this.name}}</span>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-outline-variant/20 bg-background/40 p-4">
+          <div class="flex items-center justify-between mb-3 gap-2">
+            <h3 class="font-headline font-bold text-sm text-on-surface">Databases</h3>
+            {{#if (gt (length data.techStack.databases) 4)}}
+              <button type="button" class="view-all-btn text-xs text-primary font-bold uppercase tracking-widest flex items-center gap-1 hover:underline" data-category="databases" data-items='{{json data.techStack.databases}}'>
+                <span>View All</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </button>
+            {{/if}}
+          </div>
+          <div class="tech-group-list flex flex-wrap gap-2" data-category="databases">
+            {{#each data.techStack.databases}}
+              <div class="tech-item group relative w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden {{#if (gte @index 4)}}hidden{{/if}}">
+                {{#if this.image}}
+                  <img src="{{this.image}}" alt="{{this.name}}" class="w-8 h-8 object-contain"/>
+                {{else}}
+                  <div class="tech-item-text text-[9px] text-center px-1 leading-tight text-on-surface-variant">{{this.name}}</div>
+                {{/if}}
+                <span class="tooltip">{{this.name}}</span>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-outline-variant/20 bg-background/40 p-4">
+          <div class="flex items-center justify-between mb-3 gap-2">
+            <h3 class="font-headline font-bold text-sm text-on-surface">Cloud &amp; DevOps</h3>
+            {{#if (gt (length data.techStack.cloudDevops) 4)}}
+              <button type="button" class="view-all-btn text-xs text-primary font-bold uppercase tracking-widest flex items-center gap-1 hover:underline" data-category="cloudDevops" data-items='{{json data.techStack.cloudDevops}}'>
+                <span>View All</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </button>
+            {{/if}}
+          </div>
+          <div class="tech-group-list flex flex-wrap gap-2" data-category="cloudDevops">
+            {{#each data.techStack.cloudDevops}}
+              <div class="tech-item group relative w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden {{#if (gte @index 4)}}hidden{{/if}}">
+                {{#if this.image}}
+                  <img src="{{this.image}}" alt="{{this.name}}" class="w-8 h-8 object-contain"/>
+                {{else}}
+                  <div class="tech-item-text text-[9px] text-center px-1 leading-tight text-on-surface-variant">{{this.name}}</div>
+                {{/if}}
+                <span class="tooltip">{{this.name}}</span>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-outline-variant/20 bg-background/40 p-4">
+          <div class="flex items-center justify-between mb-3 gap-2">
+            <h3 class="font-headline font-bold text-sm text-on-surface">UI/UX</h3>
+            {{#if (gt (length data.techStack.uiux) 4)}}
+              <button type="button" class="view-all-btn text-xs text-primary font-bold uppercase tracking-widest flex items-center gap-1 hover:underline" data-category="uiux" data-items='{{json data.techStack.uiux}}'>
+                <span>View All</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </button>
+            {{/if}}
+          </div>
+          <div class="tech-group-list flex flex-wrap gap-2" data-category="uiux">
+            {{#each data.techStack.uiux}}
+              <div class="tech-item group relative w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden {{#if (gte @index 4)}}hidden{{/if}}">
+                {{#if this.image}}
+                  <img src="{{this.image}}" alt="{{this.name}}" class="w-8 h-8 object-contain"/>
+                {{else}}
+                  <div class="tech-item-text text-[9px] text-center px-1 leading-tight text-on-surface-variant">{{this.name}}</div>
+                {{/if}}
+                <span class="tooltip">{{this.name}}</span>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+
+        <div class="rounded-xl border border-outline-variant/20 bg-background/40 p-4">
+          <div class="flex items-center justify-between mb-3 gap-2">
+            <h3 class="font-headline font-bold text-sm text-on-surface">Tools</h3>
+            {{#if (gt (length data.techStack.tools) 4)}}
+              <button type="button" class="view-all-btn text-xs text-primary font-bold uppercase tracking-widest flex items-center gap-1 hover:underline" data-category="tools" data-items='{{json data.techStack.tools}}'>
+                <span>View All</span>
+                <span class="material-symbols-outlined text-sm">arrow_forward</span>
+              </button>
+            {{/if}}
+          </div>
+          <div class="tech-group-list flex flex-wrap gap-2" data-category="tools">
+            {{#each data.techStack.tools}}
+              <div class="tech-item group relative w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden {{#if (gte @index 4)}}hidden{{/if}}">
+                {{#if this.image}}
+                  <img src="{{this.image}}" alt="{{this.name}}" class="w-8 h-8 object-contain"/>
+                {{else}}
+                  <div class="tech-item-text text-[9px] text-center px-1 leading-tight text-on-surface-variant">{{this.name}}</div>
+                {{/if}}
+                <span class="tooltip">{{this.name}}</span>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="rounded-xl border border-outline-variant/15 bg-surface-container-low/60 p-6 md:p-8">
+      <div class="flex items-center gap-3 mb-6">
+        <img src="/assets/icons/fluent-color_certificate-32.svg" alt="" class="w-9 h-9" width="36" height="36"/>
+        <h2 class="font-headline font-bold text-2xl text-on-surface">Certifications</h2>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {{#each data.certifications}}
+          <a href="{{this.link}}" target="_blank" rel="noopener noreferrer" class="block rounded-lg border border-outline-variant/20 bg-background/40 p-4 hover:border-primary/40 hover:bg-surface-container-high/40 transition-colors">
+            <p class="font-headline font-bold text-sm text-on-surface mb-1">{{this.title}}</p>
+            <p class="font-body text-xs text-on-surface-variant">{{this.issuer}}</p>
+            <p class="font-body text-[10px] text-tertiary-fixed mt-2 uppercase tracking-wider">{{this.date}}</p>
+          </a>
+        {{/each}}
+      </div>
+    </section>
+  </div>
 </div>
 
-<div class="panels-row">
-    <div class="tech-stack">
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <img src="/assets/icons/twemoji_technologist.svg" alt="Tech Stack Icon">
-            <h2 class="about-title">Technical Skills</h2>
-        </div>
-        <div class="tech-groups">
-            <div class="tech-group">
-                <div class="tech-group-header">
-                    <h3 class="tech-group-title">Backend</h3>
-                    {{#if (gt (length data.techStack.backend) 4)}}
-                    <button class="view-all-btn" data-category="backend" data-items='{{json data.techStack.backend}}'>
-                        <span>View All</span>
-                        <span class="view-all-arrow">→</span>
-                    </button>
-                    {{/if}}
-                </div>
-                <div class="tech-group-list" data-category="backend">
-                    {{#each data.techStack.backend}}
-                        <div class="tech-item {{#if (gte @index 4)}}tech-item-hidden{{/if}}">
-                            {{#if this.image}}
-                                <img src="{{this.image}}" alt="{{this.name}}">
-                            {{else}}
-                                <div class="tech-item-text">{{this.name}}</div>
-                            {{/if}}
-                            <span class="tooltip">{{this.name}}</span>
-                        </div>
-                    {{/each}}
-                </div>
-            </div>
-            <div class="tech-group">
-                <div class="tech-group-header">
-                    <h3 class="tech-group-title">Frontend</h3>
-                    {{#if (gt (length data.techStack.frontend) 4)}}
-                    <button class="view-all-btn" data-category="frontend" data-items='{{json data.techStack.frontend}}'>
-                        <span>View All</span>
-                        <span class="view-all-arrow">→</span>
-                    </button>
-                    {{/if}}
-                </div>
-                <div class="tech-group-list" data-category="frontend">
-                    {{#each data.techStack.frontend}}
-                        <div class="tech-item {{#if (gte @index 4)}}tech-item-hidden{{/if}}">
-                            {{#if this.image}}
-                                <img src="{{this.image}}" alt="{{this.name}}">
-                            {{else}}
-                                <div class="tech-item-text">{{this.name}}</div>
-                            {{/if}}
-                            <span class="tooltip">{{this.name}}</span>
-                        </div>
-                    {{/each}}
-                </div>
-            </div>
-            <div class="tech-group">
-                <div class="tech-group-header">
-                    <h3 class="tech-group-title">Databases</h3>
-                    {{#if (gt (length data.techStack.databases) 4)}}
-                    <button class="view-all-btn" data-category="databases" data-items='{{json data.techStack.databases}}'>
-                        <span>View All</span>
-                        <span class="view-all-arrow">→</span>
-                    </button>
-                    {{/if}}
-                </div>
-                <div class="tech-group-list" data-category="databases">
-                    {{#each data.techStack.databases}}
-                        <div class="tech-item {{#if (gte @index 4)}}tech-item-hidden{{/if}}">
-                            {{#if this.image}}
-                                <img src="{{this.image}}" alt="{{this.name}}">
-                            {{else}}
-                                <div class="tech-item-text">{{this.name}}</div>
-                            {{/if}}
-                            <span class="tooltip">{{this.name}}</span>
-                        </div>
-                    {{/each}}
-                </div>
-            </div>
-            <div class="tech-group">
-                <div class="tech-group-header">
-                    <h3 class="tech-group-title">Cloud & DevOps</h3>
-                    {{#if (gt (length data.techStack.cloudDevops) 4)}}
-                    <button class="view-all-btn" data-category="cloudDevops" data-items='{{json data.techStack.cloudDevops}}'>
-                        <span>View All</span>
-                        <span class="view-all-arrow">→</span>
-                    </button>
-                    {{/if}}
-                </div>
-                <div class="tech-group-list" data-category="cloudDevops">
-                    {{#each data.techStack.cloudDevops}}
-                        <div class="tech-item {{#if (gte @index 4)}}tech-item-hidden{{/if}}">
-                            {{#if this.image}}
-                                <img src="{{this.image}}" alt="{{this.name}}">
-                            {{else}}
-                                <div class="tech-item-text">{{this.name}}</div>
-                            {{/if}}
-                            <span class="tooltip">{{this.name}}</span>
-                        </div>
-                    {{/each}}
-                </div>
-            </div>
-            <div class="tech-group">
-                <div class="tech-group-header">
-                    <h3 class="tech-group-title">UI/UX</h3>
-                    {{#if (gt (length data.techStack.uiux) 4)}}
-                    <button class="view-all-btn" data-category="uiux" data-items='{{json data.techStack.uiux}}'>
-                        <span>View All</span>
-                        <span class="view-all-arrow">→</span>
-                    </button>
-                    {{/if}}
-                </div>
-                <div class="tech-group-list" data-category="uiux">
-                    {{#each data.techStack.uiux}}
-                        <div class="tech-item {{#if (gte @index 4)}}tech-item-hidden{{/if}}">
-                            {{#if this.image}}
-                                <img src="{{this.image}}" alt="{{this.name}}">
-                            {{else}}
-                                <div class="tech-item-text">{{this.name}}</div>
-                            {{/if}}
-                            <span class="tooltip">{{this.name}}</span>
-                        </div>
-                    {{/each}}
-                </div>
-            </div>
-            <div class="tech-group">
-                <div class="tech-group-header">
-                    <h3 class="tech-group-title">Tools</h3>
-                    {{#if (gt (length data.techStack.tools) 4)}}
-                    <button class="view-all-btn" data-category="tools" data-items='{{json data.techStack.tools}}'>
-                        <span>View All</span>
-                        <span class="view-all-arrow">→</span>
-                    </button>
-                    {{/if}}
-                </div>
-                <div class="tech-group-list" data-category="tools">
-                    {{#each data.techStack.tools}}
-                        <div class="tech-item {{#if (gte @index 4)}}tech-item-hidden{{/if}}">
-                            {{#if this.image}}
-                                <img src="{{this.image}}" alt="{{this.name}}">
-                            {{else}}
-                                <div class="tech-item-text">{{this.name}}</div>
-                            {{/if}}
-                            <span class="tooltip">{{this.name}}</span>
-                        </div>
-                    {{/each}}
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="certifications">
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <img src="/assets/icons/fluent-color_certificate-32.svg" alt="Certifications Icon">
-            <h2 class="about-title">Certifications</h2>
-        </div>
-        <div class="certifications-list">
-            {{#each data.certifications}}
-                <a class="certification-item" href="{{this.link}}" target="_blank" rel="noopener">
-                    <div class="cert-text">
-                        <p class="cert-title">{{this.title}}</p>
-                        <p class="cert-issuer">{{this.issuer}}</p>
-                        <p class="cert-date">{{this.date}}</p>
-                    </div>
-                </a>
-            {{/each}}
-        </div>
-    </div>
-</div>
-
-<!-- Tech Stack Modal -->
 <div id="tech-modal" class="tech-modal">
-    <div class="tech-modal-content">
-        <div class="tech-modal-header">
-            <h2 id="tech-modal-title" class="tech-modal-title"></h2>
-            <button class="tech-modal-close" id="tech-modal-close">&times;</button>
-        </div>
-        <div class="tech-modal-body">
-            <div class="tech-modal-list" id="tech-modal-list"></div>
-        </div>
+  <div class="bg-surface-container-low rounded-xl max-w-lg w-full max-h-[85vh] overflow-hidden border border-outline-variant/20 shadow-2xl flex flex-col">
+    <div class="flex justify-between items-center gap-4 p-4 border-b border-outline-variant/15 shrink-0">
+      <h2 id="tech-modal-title" class="font-headline font-bold text-lg text-on-surface"></h2>
+      <button type="button" class="text-2xl leading-none text-on-surface-variant hover:text-primary px-2" id="tech-modal-close" aria-label="Close">&times;</button>
     </div>
+    <div class="p-4 overflow-y-auto flex-1 min-h-0">
+      <div id="tech-modal-list" class="tech-modal-list"></div>
+    </div>
+  </div>
 </div>
-

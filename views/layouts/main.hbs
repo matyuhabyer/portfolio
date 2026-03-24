@@ -1,33 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{#if title}}{{title}} - {{/if}}Matthew Benison Javier</title>
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="icon" href="/assets/icons/favicon.ico">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <script>
-        (function () {
-            try {
-                if (window.sessionStorage && sessionStorage.getItem('visited') === '1') {
-                    document.documentElement.classList.add('has-visited');
-                }
-            } catch (err) {
-                // Ignore storage errors and keep preloader visible
-            }
-        })();
-    </script>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{{#if title}}{{title}} — {{/if}}Matthew Benison Javier</title>
+    <link rel="icon" href="/assets/icons/favicon.ico"/>
+    <link rel="stylesheet" href="/css/home.css"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="/js/home-tailwind.config.js"></script>
     <script src="/js/script.js" defer></script>
-</head>
-<body>
-    <div id="preloader" class="preloader" aria-hidden="true">
-        <div class="spinner" role="status" aria-label="Welcome"></div>
-        <p>Welcome to my Portfolio!</p>
-    </div>
-    {{> header}}
-    {{{body}}}
-    {{> footer}}
-</body>
+  </head>
+  <body class="bg-background selection:bg-primary-container selection:text-on-primary">
+    {{> site-nav}}
+    <main class="pt-24 pb-28 md:pb-20 max-w-7xl mx-auto px-6">
+      {{{body}}}
+    </main>
+    {{> site-footer}}
+    {{> site-mobile-nav}}
+  </body>
 </html>
-

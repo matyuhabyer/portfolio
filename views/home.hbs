@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>MATTHEW JAVIER | Designer. Developer. Researcher.</title>
+    <link rel="icon" href="/assets/icons/favicon.ico"/>
+    <link rel="stylesheet" href="/css/home.css"/>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script src="/js/home-tailwind.config.js"></script>
+  </head>
+  <body class="bg-background selection:bg-primary-container selection:text-on-primary">
+    {{> site-nav}}
+    <main class="pt-24 pb-28 md:pb-20 max-w-7xl mx-auto px-6">
+      <!-- Hero Section: Cinematic Personal Introduction -->
+      <section class="relative w-full h-[614px] mb-16 overflow-hidden rounded-xl shadow-2xl group">
+        <div class="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent z-10"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-transparent z-10"></div>
+        <!-- Cinematic background image -->
+        <img alt="Cinematic portrait of Matthew Javier" class="w-full h-full object-cover grayscale-[0.3] group-hover:scale-105 transition-transform duration-[2000ms]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDnkLIwq99CaTNyjURZ6VJgr6HA17FbZrZMuMY0bCHBpXOuTcbrSWCyWURG8VHyQYtwfDAYMzyZ5znnueXbfqDMgvIrv-0Y8XWprrNZelKWIBTny5iqhY_4gXlo7DJIjBYtih1RhSS5cT-QBwvrEuXd-m1SNRC297a2kexSoSiDnXUvsSz7qFMGyUj_pBg7BWzBnnwPOXF1N18QHGPSeCGbxf6u2Ur9-27fnNpPlwIdNP1nBxCw_Lct0zLz5ju35FGzsmt2MeWxIAs"/>
+        <div class="absolute bottom-12 left-12 z-20 max-w-3xl">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="bg-primary text-on-primary text-[10px] font-bold px-2 py-0.5 tracking-widest uppercase rounded-sm">AVAILABLE FOR HIRE</span>
+            <span class="text-tertiary-fixed text-[10px] font-bold tracking-widest uppercase">FULL-STACK • UI/UX • RESEARCH</span>
+          </div>
+          <h1 class="font-headline font-extrabold text-5xl md:text-8xl text-on-surface tracking-tighter mb-4 leading-none">MATTHEW BENISON JAVIER.</h1>
+          <p class="font-headline font-bold text-xl md:text-2xl text-primary mb-8 tracking-tight">Designer. Developer. Researcher.</p>
+          <div class="flex flex-wrap gap-4">
+            <a href="/projects" class="bg-primary-container text-on-primary font-headline font-bold px-8 py-3 rounded-md flex items-center gap-2 hover:bg-primary transition-all active:scale-95 shadow-[0_0_20px_rgba(255,128,0,0.3)]">
+              <span class="material-symbols-outlined" data-icon="grid_view" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+              VIEW PORTFOLIO
+            </a>
+            <a href="mailto:{{data.profile.email}}" class="bg-surface-container-high/60 backdrop-blur-md text-on-surface border border-outline-variant/30 font-headline font-bold px-8 py-3 rounded-md flex items-center gap-2 hover:bg-surface-container-highest transition-all active:scale-95">
+              <span class="material-symbols-outlined" data-icon="mail">mail</span>
+              GET IN TOUCH
+            </a>
+          </div>
+        </div>
+      </section>
+      <!-- Main Content Layout -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <!-- Left Column: Activity Feed -->
+        <div class="lg:col-span-8 space-y-12">
+          <div class="flex items-center justify-between">
+            <h2 class="font-headline font-bold text-2xl text-on-surface flex items-center gap-3">
+              <span class="w-1.5 h-6 bg-secondary"></span>
+              Recent Activity
+            </h2>
+            <div class="flex gap-4">
+              <span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary transition-colors" data-icon="filter_list" aria-hidden="true">filter_list</span>
+              <span class="material-symbols-outlined text-outline cursor-pointer hover:text-primary transition-colors" data-icon="grid_view" aria-hidden="true">grid_view</span>
+            </div>
+          </div>
+          <!-- Activity Item: Luntiang Republika IoT -->
+          <div class="flex gap-6 group">
+            <div class="w-24 h-36 flex-shrink-0 bg-surface-container-high rounded-sm overflow-hidden shadow-lg">
+              <img alt="Luntiang Republika IoT dashboard interface visualization" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB38X6bJghSRQvxKuU6GabxEwU8ne2fhqc236kN6wjOiVoN9kgymb2CGwDO0X9FWYbr4dDNMm0MxwYg4HJ6NYy2cuhPlyKfcKngr9ebw3nlqAhrD5iVHE7_lTHRTOlps23_zO08DLKIEuWT5k-UtGMzuN-Tclp6_amyB_1FAnFLHhagafr8_XqNwYaD-0AqwqE3SbwfC3aO8FxResoNWaoDTfMa8Hzy00wF4XIVPjm0qre6cXYKYhPMayJ1ANxn3MjuhFtpSDI4BT0"/>
+            </div>
+            <div class="flex-grow pt-2">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-secondary text-[10px] font-bold tracking-widest uppercase">LATEST RELEASE</span>
+                <span class="text-on-surface-variant/40 text-[10px]">•</span>
+                <span class="text-on-surface-variant/60 text-[10px] font-medium tracking-widest uppercase">IoT • FULL-STACK</span>
+              </div>
+              <h3 class="font-headline font-bold text-xl text-on-surface group-hover:text-secondary transition-colors">Luntiang Republika IoT Platform</h3>
+              <p class="font-body text-sm text-on-surface-variant mt-2 mb-4 leading-relaxed">A role-based web application for real-time soil NPK, pH, moisture monitoring and Thai basil production advisory, integrating data from IoT soil sensors.</p>
+              <div class="flex items-center gap-6">
+                <a href="/projects" class="text-xs text-primary font-bold uppercase tracking-widest flex items-center gap-1 hover:underline">
+                  Read Case Study <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+                </a>
+                <span class="text-[10px] text-tertiary-fixed font-bold tracking-widest uppercase">#IoT #VUE #FIREBASE</span>
+              </div>
+            </div>
+          </div>
+          <!-- Activity Item 1: Rakso CRM -->
+          <div class="flex gap-6 group">
+            <div class="w-24 h-36 flex-shrink-0 bg-surface-container-high rounded-sm overflow-hidden shadow-lg">
+              <img alt="CRM Dashboard interface preview" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcK4BFO4COUHWgnYHMMrzYEpfMrETMNMolLW1LiZUx3MT8Rw15VOKHLXOXajKAWlGgshe7ZsT6q6On8xuM87FMK4B9FfS8pOQ_jwNxU-L1UlCrpqbEQ44b-8Z1jl7DGB2tYbzchjIvVR0sQRVStDvQsaB4W4BKoMyDL9-_i5rjzly0yIYmw3OcIaF7vTiS76YRLP5T4h4DevnnZwC33SeBbTUk936UeeNSZ4G3LlgUby-H6ew38MbYLu1NnrzO-GzfJ24XjU3A4Gs"/>
+            </div>
+            <div class="flex-grow pt-2">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-primary text-[10px] font-bold tracking-widest uppercase">INTERNSHIP LOG</span>
+                <span class="text-on-surface-variant/40 text-[10px]">•</span>
+                <span class="text-on-surface-variant/60 text-[10px] font-medium tracking-widest uppercase">RECENTLY COMPLETED</span>
+              </div>
+              <h3 class="font-headline font-bold text-xl text-on-surface group-hover:text-primary transition-colors">Rakso CRM Development — Frontend Lead</h3>
+              <p class="font-body text-sm text-on-surface-variant mt-2 mb-4 leading-relaxed">Co-spearheaded the end-to-end development of the Rakso Computer Technology CRM platform. Managed a team of 4 interns and implemented Scrum methodology.</p>
+              <div class="flex items-center gap-6">
+                <div class="flex items-center gap-1">
+                  <span class="material-symbols-outlined text-primary text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-primary text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-primary text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-primary text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+                  <span class="material-symbols-outlined text-primary text-sm" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+                </div>
+                <span class="text-[10px] text-tertiary-fixed font-bold tracking-widest uppercase">#CRM #LEADERSHIP #SCRUM</span>
+              </div>
+            </div>
+          </div>
+          <!-- Activity Item 2: SHEIN Redesign -->
+          <div class="flex gap-6 group">
+            <div class="w-24 h-36 flex-shrink-0 bg-surface-container-high rounded-sm overflow-hidden shadow-lg">
+              <img alt="SHEIN App Redesign UI Screens" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDcH1BeRnXkydW1wSo2JbaBvue2xsfsA2suxYbw66sGM9hW48r8zrA65ZhAOt4FIJPOS56p9sm4UpYY5780XheGHvgVUY0bFxYNZjtxui83fgBNEI5gJNAEol0b9ludn5I4N-gwW1sl1MhvWRrQEeUVUG_LBO1vLHvC2z6LM5Jzu3-tdq3z5uhKNr5SbrX9FlSTbX1iMmJCJy86rCKmxBd_Ru0uZDi_CJgJaHffkUQb4RCNYya5SMawUW1m0d2rf5vDVVZz7xZFOnE"/>
+            </div>
+            <div class="flex-grow pt-2">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-secondary text-[10px] font-bold tracking-widest uppercase">UX RESEARCH</span>
+                <span class="text-on-surface-variant/40 text-[10px]">•</span>
+                <span class="text-on-surface-variant/60 text-[10px] font-medium tracking-widest uppercase">PROJECT COMPLETED</span>
+              </div>
+              <h3 class="font-headline font-bold text-xl text-on-surface group-hover:text-secondary transition-colors">SHEIN App Redesign &amp; Research</h3>
+              <p class="font-body text-sm text-on-surface-variant mt-2 mb-4 leading-relaxed">Led end-to-end UX research and redesign of the SHEIN mobile app. Applied Nielsen’s 10 Usability Heuristics and conducted moderated usability tests.</p>
+              <div class="flex items-center gap-4">
+                <button type="button" class="text-xs text-on-surface flex items-center gap-1 hover:text-secondary transition-colors">
+                  <span class="material-symbols-outlined text-lg" data-icon="favorite">favorite</span> 86
+                </button>
+                <button type="button" class="text-xs text-on-surface flex items-center gap-1 hover:text-secondary transition-colors">
+                  <span class="material-symbols-outlined text-lg" data-icon="chat_bubble">chat_bubble</span> 12
+                </button>
+              </div>
+            </div>
+          </div>
+          <!-- Core Tech Stack Section -->
+          <div id="core-tech-stack" class="pt-8 scroll-mt-28">
+            <h3 class="font-headline font-bold text-lg text-on-surface mb-6 uppercase tracking-widest text-on-surface-variant/60">Core Tech Stack</h3>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div class="bg-surface-container-low p-4 rounded-lg flex flex-col items-center text-center group hover:bg-surface-container-high transition-colors">
+                <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-3 group-hover:scale-110 transition-transform">
+                  <span class="material-symbols-outlined text-3xl" data-icon="code">code</span>
+                </div>
+                <span class="font-headline font-bold text-sm">Node.js</span>
+                <span class="text-[10px] text-on-surface-variant/60 mt-1 uppercase">BACKEND CORE</span>
+              </div>
+              <div class="bg-surface-container-low p-4 rounded-lg flex flex-col items-center text-center group hover:bg-surface-container-high transition-colors">
+                <div class="w-12 h-12 rounded-full bg-secondary/10 flex items-center justify-center text-secondary mb-3 group-hover:scale-110 transition-transform">
+                  <span class="material-symbols-outlined text-3xl" data-icon="web">web</span>
+                </div>
+                <span class="font-headline font-bold text-sm">React</span>
+                <span class="text-[10px] text-on-surface-variant/60 mt-1 uppercase">FRONTEND CORE</span>
+              </div>
+              <div class="bg-surface-container-low p-4 rounded-lg flex flex-col items-center text-center group hover:bg-surface-container-high transition-colors">
+                <div class="w-12 h-12 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary mb-3 group-hover:scale-110 transition-transform">
+                  <span class="material-symbols-outlined text-3xl" data-icon="cloud">cloud</span>
+                </div>
+                <span class="font-headline font-bold text-sm">Firebase</span>
+                <span class="text-[10px] text-on-surface-variant/60 mt-1 uppercase">CLOUD DATA</span>
+              </div>
+              <div class="bg-surface-container-low p-4 rounded-lg flex flex-col items-center text-center group hover:bg-surface-container-high transition-colors">
+                <div class="w-12 h-12 rounded-full bg-primary-container/10 flex items-center justify-center text-primary-container mb-3 group-hover:scale-110 transition-transform">
+                  <span class="material-symbols-outlined text-3xl" data-icon="brush">brush</span>
+                </div>
+                <span class="font-headline font-bold text-sm">Figma</span>
+                <span class="text-[10px] text-on-surface-variant/60 mt-1 uppercase">DESIGN TOOL</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Right Column: Sidebar -->
+        <aside class="lg:col-span-4 space-y-12">
+          <!-- Currently Working On -->
+          <div class="bg-surface-container-low rounded-xl p-8 shadow-inner">
+            <h3 class="font-headline font-bold text-lg text-on-surface flex items-center gap-3 mb-6">
+              <span class="w-1.5 h-6 bg-tertiary"></span>
+              Working On
+            </h3>
+            <div class="space-y-6">
+              <div class="relative pl-4 border-l-2 border-outline-variant">
+                <div class="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-secondary shadow-[0_0_8px_#42fc6c]"></div>
+                <h4 class="font-headline font-bold text-sm text-on-surface">Luntiang Republika IoT</h4>
+                <p class="font-body text-xs text-on-surface-variant mt-1 uppercase tracking-tighter">PHASE: TESTING &amp; DEPLOYMENT</p>
+              </div>
+              <div class="relative pl-4 border-l-2 border-outline-variant">
+                <div class="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-primary-container shadow-[0_0_8px_#ff8000]"></div>
+                <h4 class="font-headline font-bold text-sm text-on-surface">Rakso CRM Frontend</h4>
+                <p class="font-body text-xs text-on-surface-variant mt-1 uppercase tracking-tighter">PHASE: DOCUMENTATION</p>
+              </div>
+              <div class="relative pl-4 border-l-2 border-outline-variant">
+                <div class="absolute -left-[5px] top-0 w-2 h-2 rounded-full bg-tertiary shadow-[0_0_8px_#7ad0ff]"></div>
+                <h4 class="font-headline font-bold text-sm text-on-surface"><a href="/projects/check-yourself-app" class="hover:text-tertiary transition-colors">CheckYourself App</a></h4>
+                <p class="font-body text-xs text-on-surface-variant mt-1 uppercase tracking-tighter">PHASE: UI ITERATIONS</p>
+              </div>
+            </div>
+            <a href="/projects" class="block w-full mt-8 py-3 border border-outline-variant/20 rounded text-xs font-bold uppercase tracking-widest text-on-surface hover:bg-surface-container-high transition-colors text-center">
+              View Project Roadmap
+            </a>
+          </div>
+          <!-- Key Projects List -->
+          <div>
+            <h3 class="font-headline font-bold text-lg text-on-surface flex items-center gap-3 mb-6 uppercase tracking-widest text-on-surface-variant/60">Key Projects</h3>
+            <div class="space-y-4">
+              <a href="/projects" class="flex items-center gap-4 group cursor-pointer">
+                <span class="font-headline font-extrabold text-3xl text-outline-variant group-hover:text-primary transition-colors">01</span>
+                <div class="flex-grow">
+                  <h4 class="font-headline font-bold text-sm text-on-surface">Luntiang Republika</h4>
+                  <div class="flex items-center gap-2">
+                    <span class="text-[10px] text-on-surface-variant/60 uppercase">IoT FULL-STACK</span>
+                    <span class="w-1 h-1 bg-outline-variant rounded-full"></span>
+                    <span class="text-[10px] text-on-surface-variant/60 uppercase">2024</span>
+                  </div>
+                </div>
+                <span class="material-symbols-outlined text-outline-variant opacity-0 group-hover:opacity-100 transition-opacity" data-icon="arrow_outward">arrow_outward</span>
+              </a>
+              <a href="/projects" class="flex items-center gap-4 group cursor-pointer">
+                <span class="font-headline font-extrabold text-3xl text-outline-variant group-hover:text-secondary transition-colors">02</span>
+                <div class="flex-grow">
+                  <h4 class="font-headline font-bold text-sm text-on-surface">Rakso CRM</h4>
+                  <div class="flex items-center gap-2">
+                    <span class="text-[10px] text-on-surface-variant/60 uppercase">SYSTEMS</span>
+                    <span class="w-1 h-1 bg-outline-variant rounded-full"></span>
+                    <span class="text-[10px] text-on-surface-variant/60 uppercase">2024</span>
+                  </div>
+                </div>
+                <span class="material-symbols-outlined text-outline-variant opacity-0 group-hover:opacity-100 transition-opacity" data-icon="arrow_outward">arrow_outward</span>
+              </a>
+              <a href="/projects/shein-mobile-app-research" class="flex items-center gap-4 group cursor-pointer">
+                <span class="font-headline font-extrabold text-3xl text-outline-variant group-hover:text-tertiary transition-colors">03</span>
+                <div class="flex-grow">
+                  <h4 class="font-headline font-bold text-sm text-on-surface">SHEIN Redesign</h4>
+                  <div class="flex items-center gap-2">
+                    <span class="text-[10px] text-on-surface-variant/60 uppercase">UX RESEARCH</span>
+                    <span class="w-1 h-1 bg-outline-variant rounded-full"></span>
+                    <span class="text-[10px] text-on-surface-variant/60 uppercase">2023</span>
+                  </div>
+                </div>
+                <span class="material-symbols-outlined text-outline-variant opacity-0 group-hover:opacity-100 transition-opacity" data-icon="arrow_outward">arrow_outward</span>
+              </a>
+            </div>
+          </div>
+          <!-- Pro Badge / Meta Stats -->
+          <div class="bg-gradient-to-br from-surface-container-high to-surface-container-low p-6 rounded-xl border border-outline-variant/10">
+            <div class="flex items-center gap-4 mb-4">
+              <div class="w-10 h-10 rounded bg-primary-container flex items-center justify-center">
+                <span class="material-symbols-outlined text-on-primary" data-icon="school" style="font-variation-settings: 'FILL' 1;">school</span>
+              </div>
+              <div>
+                <h4 class="font-headline font-bold text-sm">BS IT • DLSU</h4>
+                <h5 class="text-[10px] text-[#ffb787] font-bold uppercase tracking-widest">HONORABLE MENTION</h5>
+              </div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="text-center">
+                <span class="block font-headline font-bold text-xl">3.33</span>
+                <span class="text-[9px] text-on-surface-variant/60 uppercase tracking-widest">CGPA</span>
+              </div>
+              <div class="text-center border-l border-outline-variant/20">
+                <span class="block font-headline font-bold text-xl">7+</span>
+                <span class="text-[9px] text-on-surface-variant/60 uppercase tracking-widest">Certifications</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </main>
+    {{> site-footer}}
+    {{> site-mobile-nav}}
+  </body>
+</html>
