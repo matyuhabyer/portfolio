@@ -1,13 +1,20 @@
 @import "tailwindcss";
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+}
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-@import "@fontsource-variable/geist";
+@import "@dannymichel/proxima-nova";
+@import "@dannymichel/proxima-nova/700.css";
 
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
     --font-heading: var(--font-sans);
-    --font-sans: 'Geist Variable', sans-serif;
+    --font-sans: "Proxima Nova", system-ui, sans-serif;
     --color-sidebar-ring: var(--sidebar-ring);
     --color-sidebar-border: var(--sidebar-border);
     --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -48,83 +55,148 @@
     --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+/* Brand: primary #EEB211, secondary/tertiary #00E054, canvas #14181C (dark) */
+
 :root {
-    --background: oklch(1 0 0);
-    --foreground: oklch(0.145 0 0);
-    --card: oklch(1 0 0);
-    --card-foreground: oklch(0.145 0 0);
-    --popover: oklch(1 0 0);
-    --popover-foreground: oklch(0.145 0 0);
-    --primary: oklch(0.205 0 0);
-    --primary-foreground: oklch(0.985 0 0);
-    --secondary: oklch(0.97 0 0);
-    --secondary-foreground: oklch(0.205 0 0);
-    --muted: oklch(0.97 0 0);
-    --muted-foreground: oklch(0.556 0 0);
-    --accent: oklch(0.97 0 0);
-    --accent-foreground: oklch(0.205 0 0);
+    --background: #fafafa;
+    --foreground: #14181c;
+    --card: #ffffff;
+    --card-foreground: #14181c;
+    --popover: #ffffff;
+    --popover-foreground: #14181c;
+    --primary: #eeb211;
+    --primary-foreground: #14181c;
+    --secondary: #00e054;
+    --secondary-foreground: #14181c;
+    --muted: #f4f4f5;
+    --muted-foreground: #52525b;
+    --accent: #00e054;
+    --accent-foreground: #14181c;
     --destructive: oklch(0.577 0.245 27.325);
-    --border: oklch(0.922 0 0);
-    --input: oklch(0.922 0 0);
-    --ring: oklch(0.708 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
+    --border: #e4e4e7;
+    --input: #e4e4e7;
+    --ring: #eeb211;
+    --chart-1: #eeb211;
+    --chart-2: #00e054;
+    --chart-3: oklch(0.65 0.12 250);
+    --chart-4: oklch(0.55 0.1 250);
+    --chart-5: oklch(0.45 0.08 250);
     --radius: 0.625rem;
-    --sidebar: oklch(0.985 0 0);
-    --sidebar-foreground: oklch(0.145 0 0);
-    --sidebar-primary: oklch(0.205 0 0);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.97 0 0);
-    --sidebar-accent-foreground: oklch(0.205 0 0);
-    --sidebar-border: oklch(0.922 0 0);
-    --sidebar-ring: oklch(0.708 0 0);
+    --sidebar: #f4f4f5;
+    --sidebar-foreground: #14181c;
+    --sidebar-primary: #eeb211;
+    --sidebar-primary-foreground: #14181c;
+    --sidebar-accent: #e4e4e7;
+    --sidebar-accent-foreground: #14181c;
+    --sidebar-border: #e4e4e7;
+    --sidebar-ring: #eeb211;
 }
 
 .dark {
-    --background: oklch(0.145 0 0);
-    --foreground: oklch(0.985 0 0);
-    --card: oklch(0.205 0 0);
-    --card-foreground: oklch(0.985 0 0);
-    --popover: oklch(0.205 0 0);
-    --popover-foreground: oklch(0.985 0 0);
-    --primary: oklch(0.922 0 0);
-    --primary-foreground: oklch(0.205 0 0);
-    --secondary: oklch(0.269 0 0);
-    --secondary-foreground: oklch(0.985 0 0);
-    --muted: oklch(0.269 0 0);
-    --muted-foreground: oklch(0.708 0 0);
-    --accent: oklch(0.269 0 0);
-    --accent-foreground: oklch(0.985 0 0);
-    --destructive: oklch(0.704 0.191 22.216);
-    --border: oklch(1 0 0 / 10%);
-    --input: oklch(1 0 0 / 15%);
-    --ring: oklch(0.556 0 0);
-    --chart-1: oklch(0.87 0 0);
-    --chart-2: oklch(0.556 0 0);
-    --chart-3: oklch(0.439 0 0);
-    --chart-4: oklch(0.371 0 0);
-    --chart-5: oklch(0.269 0 0);
-    --sidebar: oklch(0.205 0 0);
-    --sidebar-foreground: oklch(0.985 0 0);
-    --sidebar-primary: oklch(0.488 0.243 264.376);
-    --sidebar-primary-foreground: oklch(0.985 0 0);
-    --sidebar-accent: oklch(0.269 0 0);
-    --sidebar-accent-foreground: oklch(0.985 0 0);
+    --background: #14181c;
+    --foreground: #f4f4f5;
+    --card: #1c2128;
+    --card-foreground: #f4f4f5;
+    --popover: #1c2128;
+    --popover-foreground: #f4f4f5;
+    --primary: #eeb211;
+    --primary-foreground: #14181c;
+    --secondary: #00e054;
+    --secondary-foreground: #14181c;
+    --muted: #1e242b;
+    --muted-foreground: #a1a1aa;
+    --accent: #00e054;
+    --accent-foreground: #14181c;
+    --destructive: oklch(0.65 0.2 25);
+    --border: oklch(1 0 0 / 12%);
+    --input: oklch(1 0 0 / 14%);
+    --ring: #eeb211;
+    --chart-1: #eeb211;
+    --chart-2: #00e054;
+    --chart-3: oklch(0.55 0.08 250);
+    --chart-4: oklch(0.45 0.06 250);
+    --chart-5: oklch(0.35 0.04 250);
+    --sidebar: #1a1f26;
+    --sidebar-foreground: #f4f4f5;
+    --sidebar-primary: #eeb211;
+    --sidebar-primary-foreground: #14181c;
+    --sidebar-accent: #1e242b;
+    --sidebar-accent-foreground: #f4f4f5;
     --sidebar-border: oklch(1 0 0 / 10%);
-    --sidebar-ring: oklch(0.556 0 0);
+    --sidebar-ring: #eeb211;
+}
+
+/* Hero portrait — fire ring on hover */
+@keyframes hero-fire-flicker {
+    0%,
+    100% {
+        opacity: 0.45;
+        transform: scale(1);
+        filter: blur(8px);
+    }
+    25% {
+        opacity: 0.95;
+        transform: scale(1.07);
+        filter: blur(6px);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(0.96);
+        filter: blur(11px);
+    }
+    75% {
+        opacity: 0.88;
+        transform: scale(1.04);
+        filter: blur(7px);
+    }
+}
+
+@keyframes hero-fire-pulse {
+    0%,
+    100% {
+        opacity: 0.35;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 0.75;
+        transform: scale(1.14);
+    }
+}
+
+/* About page — publication materials marquee */
+@keyframes pubmat-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@layer utilities {
+  .bg-poster-gradient {
+    background: linear-gradient(to top, var(--background) 0%, transparent 60%);
+  }
+
+  .animate-pubmat-marquee {
+    animation: pubmat-marquee 50s linear infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-pubmat-marquee {
+      animation: none;
+    }
+  }
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    }
+  }
   body {
     @apply bg-background text-foreground;
-    }
+  }
   html {
     @apply font-sans;
-    }
+  }
 }

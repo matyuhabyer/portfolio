@@ -1,93 +1,33 @@
-# Matthew Benison Javier - Portfolio
+# Matthew Benison Javier — Portfolio
 
-## Tech Stack
+Personal site built with **Vite**, **React**, **TypeScript**, **Tailwind CSS v4**, and **shadcn-style** UI (Base UI). Content lives in `src/data/portfolio.ts`; static assets are under `public/`.
 
-### Backend
-- **Node.js** - JavaScript runtime
-- **Express.js** - Web application framework
-- **Handlebars (express-handlebars)** - Templating engine
+## Scripts
 
-### Frontend
-- **HTML5** - Semantic markup
-- **CSS3** - Modern styling with CSS Grid and Flexbox
-- **JavaScript** - Interactive functionality
-- **Google Fonts** - Inter font family
+| Command        | Description                          |
+| -------------- | ------------------------------------ |
+| `npm run dev`  | Dev server (Vite, default port 5173) |
+| `npm run build`| Typecheck + production bundle to `dist/` |
+| `npm start`    | Serves `dist/` via `vite preview`    |
 
-## Project Structure
+## Project layout
 
 ```
-Portfolio/
-├── app.js                 # Main server file
-├── package.json           # Dependencies and scripts
-├── views/                 # Handlebars templates
-│   ├── about.hbs         # About page template
-│   ├── experience.hbs    # Experience page template
-│   ├── projects.hbs      # Projects page template
-│   ├── layouts/          # Main layout
-│   │   └── main.hbs
-│   └── partials/         # Reusable components
-│       ├── header.hbs    # Sidebar and navigation
-│       └── footer.hbs    # Footer content
-├── public/               # Static assets
-│   ├── css/
-│   │   └── style.css     # Main stylesheet
-│   ├── js/
-│   │   └── script.js     # Client-side JavaScript
-│   └── assets/           # Images, icons, and documents
-│       ├── images/
-│       ├── icons/
-│       ├── tech/
-│       └── certifications/
-└── README.md             # This file
+├── src/           # React app (pages, components, styles)
+├── public/        # Static files (images, PDFs, favicon)
+├── index.html     # SPA shell
+├── vite.config.ts
+└── package.json
 ```
 
-## Installation & Setup
+## Prerequisites
 
-### Prerequisites
-- Node.js (version 14.0.0 or higher)
-- npm (comes with Node.js)
-
-### Installation Steps
-
-1. **Clone or download the repository**
-   ```bash
-   git clone <repository-url>
-   cd Portfolio
-   ```
-
-2. **Install dependencies**
-   ```bash
-   npm install
-   ```
-
-3. **Start the development server**
-   ```bash
-   npm run dev
-   ```
-   Or for production:
-   ```bash
-   npm start
-   ```
-
-4. **Open your browser**
-   Navigate to `http://localhost:3000`
-
-## Development
-
-### Running in Development Mode
-```bash
-npm run dev
-```
-This uses nodemon for automatic server restart on file changes.
-
-### Running in Production Mode
-```bash
-npm start
-```
+- Node.js 18+
 
 ## Contact
 
 **Matthew Benison Javier**
+
 - Email: matthewbenisonjavier@gmail.com
 - LinkedIn: [matthewbenisonjavier](https://www.linkedin.com/in/matthewbenisonjavier/)
 - GitHub: [matyuhabyer](https://github.com/matyuhabyer)

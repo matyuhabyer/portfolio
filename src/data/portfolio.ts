@@ -1,3 +1,10 @@
+/** Plain string or inline links for the About page bio */
+export type AboutParagraphSegment =
+  | { type: "text"; content: string }
+  | { type: "link"; content: string; href: string };
+
+export type AboutParagraph = string | { segments: AboutParagraphSegment[] };
+
 export const portfolioData = {
   profile: {
     name: "Matthew Benison Javier",
@@ -12,13 +19,60 @@ export const portfolioData = {
     email: "matthewbenisonjavier@gmail.com",
     linkedin: "https://www.linkedin.com/in/matthewbenisonjavier/",
     github: "https://github.com/matyuhabyer",
-    resume: "/assets/Matthew_Javier_Resume_2025.pdf"
+    resume: "/assets/Matthew_Javier_Resume_2026.pdf"
   },
   about: {
-    subtitle: "Design, Data, and Development",
+    profileImage: "/assets/images/about-profile.jpeg",
+    tagline: "Crafting experiences, one interaction at a time.",
     paragraphs: [
-      "Information Technology Undergraduate with a robust academic background and hands-on experience spanning the full technical lifecycle. Skillset ranges from Database Administration and Cloud Computing to UI/UX Design and Software Development. Technical proficiency includes SQL, MERN stack, Figma, and AWS, backed by exposure to Data Analytics, Project Management, and Quality Assurance. Adaptable and detail-oriented intern candidate ready to contribute immediately to dynamic IT teams."
-        ]
+      "Hey, I'm Matthew, an Information Technology student at De La Salle University Manila, passionate about bridging the gap between users and technology.",
+      "My primary interest lies in UI/UX Design and Human-Computer Interaction, with a specific goal of improving how Filipinos experience and interact with technology in their everyday lives. Beyond design, I've built a broad technical foundation across Software Development, Database Administration, Quality Assurance, Project Management, and Data Analytics.",
+      "I care deeply about craft. Whether I'm building a system or designing a publication material, I bring the same attention to detail and design thinking to everything I work on—because good products aren't just functional, they're intentional.",
+      {
+        segments: [
+          { type: "text", content: "Previously, I held leadership roles in the " },
+          {
+            type: "link",
+            content: "La Salle Computer Society",
+            href: "https://dlsu-lscs.org/",
+          },
+          { type: "text", content: " and the " },
+          {
+            type: "link",
+            content: "Computer Studies Government",
+            href: "https://oneccshub.com/",
+          },
+          {
+            type: "text",
+            content:
+              ", where I contributed to initiatives that served the student community. Currently, I am actively volunteering for the ",
+          },
+          {
+            type: "link",
+            content: "IEEE Computer Society Philippines Chapter",
+            href: "https://r10.ieee.org/philippines/",
+          },
+          {
+            type: "text",
+            content:
+              ", reflecting my ongoing commitment to the advancement of technology beyond the classroom.",
+          },
+        ],
+      },
+      "I'm always looking for opportunities to grow, build, and collaborate—working alongside people who care about what they make and helping create products that genuinely make people's lives easier.",
+    ] satisfies AboutParagraph[],
+    /**
+     * Publication materials gallery. Add files under e.g. public/assets/pubmats/
+     * and set imageSrc per item.
+     */
+    pubmatGallery: [
+      { id: "pubmat-1", title: "Publication material 1" },
+      { id: "pubmat-2", title: "Publication material 2" },
+      { id: "pubmat-3", title: "Publication material 3" },
+      { id: "pubmat-4", title: "Publication material 4" },
+      { id: "pubmat-5", title: "Publication material 5" },
+      { id: "pubmat-6", title: "Publication material 6" },
+    ] as Array<{ id: string; title: string; imageSrc?: string }>,
   },
   techStack: {
     backend: [
@@ -298,11 +352,24 @@ export const portfolioData = {
       "DOST-SEI Merit Scholar"
     ]
   },
+  workExperience: [
+    {
+      name: "Rakso Computer Technology, Inc.",
+      dates: "Jan. 2026 - Mar. 2026",
+      role: "System Development Intern",
+      logo: "/assets/logos/raksoct.jpg",
+      highlights: [
+        "Co-spearheaded end-to-end development of the Rakso Computer Technology CRM platform.",
+        "Managed a team of four interns and implemented Scrum methodology for delivery cadence."
+      ]
+    }
+  ],
   organizations: [
     {
       name: "La Salle Computer Society",
-      dates: "September 2024 - August 2025",
+      dates: "Sept. 2024 - Aug. 2025",
       role: "Associate Vice President for Publicity and Creatives",
+      logo: "/assets/logos/lscs.jpg",
       highlights: [
         "Led a 10-member Publicity & Creatives committee for the organization’s flagship event.",
         "Produced high-volume publicity materials and managed multi-project social media channels.",
@@ -311,8 +378,9 @@ export const portfolioData = {
     },
     {
       name: "Computer Studies Government",
-      dates: "February 2024 – September 2025",
+      dates: "Feb. 2024 – Sept. 2025",
       role: "Director for Integrated Marketing Communications - Publicity",
+      logo: "/assets/logos/csg.jpg",
       highlights: [
         "Led a 9-member Publicity committee handling requests from multiple project heads and committees.",
         "Managed social media platforms with 1,000+ student engagement and 5,000+ total reach.",
@@ -321,8 +389,9 @@ export const portfolioData = {
     },
     {
       name: "Animo Film Lab",
-      dates: "November 2023 - August 2024",
+      dates: "Nov. 2023 - Aug. 2024",
       role: "Assistant Vice President for Documentations and Logistics",
+      logo: "/assets/logos/afl.jpg",
       highlights: [
         "Oversaw the document processing of the organization such as passing of letters, entry permits, reservation of venues, and equipment entry.",
         "Oversaw the deadlines for the pre-activity and post-activity requirements of the projects implemented.",
@@ -331,8 +400,9 @@ export const portfolioData = {
     },
     {
       name: "LEAP 2024 Central Committee",
-      dates: "April 2024 - July 2024",
+      dates: "Apr. 2024 - Jul. 2024",
       role: "Assistant Team Head for Documentations",
+      logo: "/assets/logos/leap2024.jpg",
       highlights: [
         "Worked on managing the post-activity documents of the LEAP projects.",
         "Reviewed and compiled documents completed by the other LEAP committees for approval."
