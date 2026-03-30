@@ -14,7 +14,14 @@ export function TechPill({ item }: { item: { name: string; image?: string } }) {
         aria-label={item.name}
       >
         {item.image ? (
-          <img src={item.image} alt="" className="size-8 object-contain" />
+          <img
+            src={item.image}
+            alt=""
+            className={cn(
+              "size-8 object-contain",
+              item.name === "Express.js" && "brightness-0 invert"
+            )}
+          />
         ) : (
           <span className="px-1 text-center text-[9px] leading-tight text-muted-foreground">
             {item.name}
