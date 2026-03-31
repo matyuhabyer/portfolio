@@ -5,6 +5,12 @@ export type AboutParagraphSegment =
 
 export type AboutParagraph = string | { segments: AboutParagraphSegment[] };
 
+/** Creative gallery item: `thumbAspect` sets the marquee frame (4×3 vs square 4×4). */
+export type PubmatGalleryItem = {
+  src: string;
+  thumbAspect: "4/3" | "1/1";
+};
+
 export const portfolioData = {
   profile: {
     name: "Matthew Benison Javier",
@@ -50,7 +56,7 @@ export const portfolioData = {
           {
             type: "link",
             content: "IEEE Computer Society Philippines Chapter",
-            href: "https://r10.ieee.org/philippines/",
+            href: "https://www.facebook.com/IEEECSPH/",
           },
           {
             type: "text",
@@ -62,17 +68,13 @@ export const portfolioData = {
       "I'm always looking for opportunities to grow, build, and collaborate—working alongside people who care about what they make and helping create products that genuinely make people's lives easier.",
     ] satisfies AboutParagraph[],
     /**
-     * Publication materials gallery. Add files under e.g. public/assets/pubmats/
-     * and set imageSrc per item.
+     * Publication materials gallery (Home: “My Creative Gallery”). 17 images in order.
+     * Set `thumbAspect` to `"4/3"` or `"1/1"` (square / 4×4) per thumbnail. Full image in the lightbox is never cropped.
      */
-    pubmatGallery: [
-      { id: "pubmat-1", title: "Publication material 1" },
-      { id: "pubmat-2", title: "Publication material 2" },
-      { id: "pubmat-3", title: "Publication material 3" },
-      { id: "pubmat-4", title: "Publication material 4" },
-      { id: "pubmat-5", title: "Publication material 5" },
-      { id: "pubmat-6", title: "Publication material 6" },
-    ] as Array<{ id: string; title: string; imageSrc?: string }>,
+    pubmatGallery: Array.from({ length: 17 }, (_, i) => ({
+      src: `/assets/pubmats/${i + 1}.jpg`,
+      thumbAspect: "1/1",
+    })) satisfies PubmatGalleryItem[],
   },
   techStack: {
     backend: [

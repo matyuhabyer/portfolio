@@ -182,6 +182,10 @@
     animation: pubmat-marquee 50s linear infinite;
   }
 
+  .pubmat-marquee-paused {
+    animation-play-state: paused;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .animate-pubmat-marquee {
       animation: none;

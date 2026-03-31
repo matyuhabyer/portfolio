@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { ArrowRight, Building2, ChevronDown, FileText, Mail } from "lucide-react";
 import { TypewriterText } from "@/components/typewriter-text";
 import { portfolioData } from "@/data/portfolio";
+import { ContactEmailForm } from "@/components/contact-email-form";
+import { CreativeGallerySection } from "@/components/creative-gallery-section";
 import { TechPill } from "@/components/tech-pill";
 import { TECH_CATEGORY_LABELS, TECH_HOME_PREVIEW_KEYS } from "@/lib/tech-stack";
 import { Badge } from "@/components/ui/badge";
@@ -317,6 +319,8 @@ export function HomePage() {
         </Card>
       </section>
 
+      <CreativeGallerySection />
+
       <section className="-mt-5 rounded-xl border border-border/50 bg-card/40 p-6 shadow-inner sm:p-8">
         <div className="mb-4 flex items-center gap-2 sm:mb-5 sm:gap-3">
           <span className="h-6 w-1.5 rounded-sm bg-secondary sm:h-7" aria-hidden />
@@ -325,17 +329,14 @@ export function HomePage() {
         <p className="mb-6 max-w-full text-sm leading-relaxed text-muted-foreground sm:text-base">
           I'm currently seeking exciting internship opportunities! If you'd like to connect or collaborate, feel free to reach out by email or connect with me on LinkedIn or check out my GitHub.
         </p>
+
+        <div className="mb-8 rounded-lg border border-border/60 bg-muted/20 p-4 sm:p-5">
+          <h3 className="mb-4 font-heading text-base font-semibold text-foreground sm:text-lg">Send me a message</h3>
+          <ContactEmailForm />
+        </div>
+
+        <p className="mb-3 text-xs font-medium uppercase tracking-wider text-muted-foreground">You can also reach out to me through these platforms:</p>
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          <a
-            href={`mailto:${profile.email}`}
-            className={cn(
-              buttonVariants({ size: "lg" }),
-              "inline-flex w-full gap-2 shadow-lg shadow-primary/20 sm:w-auto"
-            )}
-          >
-            <Mail className="size-4" aria-hidden />
-            Email me
-          </a>
           <a
             href={profile.linkedin}
             target="_blank"
