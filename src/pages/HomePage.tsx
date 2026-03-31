@@ -327,7 +327,7 @@ export function HomePage() {
           <h2 className="font-heading text-2xl font-bold sm:text-3xl">Let's Connect!</h2>
         </div>
         <p className="mb-6 max-w-full text-sm leading-relaxed text-muted-foreground sm:text-base">
-          I'm currently seeking exciting internship opportunities! If you'd like to connect or collaborate, feel free to reach out by email or connect with me on LinkedIn or check out my GitHub.
+          I'm currently seeking exciting internship opportunities! If you'd like to connect or collaborate, feel free to reach out by email, connect with me on LinkedIn, or check out my GitHub.
         </p>
 
         <div className="mb-8 rounded-lg border border-border/60 bg-muted/20 p-4 sm:p-5">
