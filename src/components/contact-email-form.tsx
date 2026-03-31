@@ -28,7 +28,9 @@ export function ContactEmailForm() {
     if (!accessKey?.trim()) {
       setStatus("error");
       setErrorMessage(
-        "Contact form is not configured. Add VITE_WEB3FORMS_ACCESS_KEY to your .env file (get a free key at web3forms.com)."
+        import.meta.env.PROD
+          ? "The contact form is missing its access key in this deployment. In Netlify, Vercel, Cloudflare Pages, etc., add environment variable VITE_WEB3FORMS_ACCESS_KEY (same value as in local .env), then trigger a new build—not just a redeploy of old assets."
+          : "Contact form is not configured. Add VITE_WEB3FORMS_ACCESS_KEY to your .env file (get a free key at web3forms.com)."
       );
       return;
     }
@@ -184,9 +186,18 @@ export function ContactEmailForm() {
           )}
         </Button>
         {!accessKey?.trim() ? (
-          <p className="text-xs text-muted-foreground sm:max-w-xs sm:text-right">
-            Dev: set <code className="rounded bg-muted px-1 font-mono">VITE_WEB3FORMS_ACCESS_KEY</code> in{" "}
-            <code className="rounded bg-muted px-1 font-mono">.env</code> — free at web3forms.com
+          <p className="max-w-xl text-xs text-muted-foreground sm:text-right">
+            {import.meta.env.PROD ? (
+              <>
+                Add <code className="rounded bg-muted px-1 font-mono">VITE_WEB3FORMS_ACCESS_KEY</code> to your
+                hosting provider&apos;s env vars and run a <strong>new build</strong> (Vite needs it at build time).
+              </>
+            ) : (
+              <>
+                Local: set <code className="rounded bg-muted px-1 font-mono">VITE_WEB3FORMS_ACCESS_KEY</code> in{" "}
+                <code className="rounded bg-muted px-1 font-mono">.env</code> — free at web3forms.com
+              </>
+            )}
           </p>
         ) : null}
       </div>
