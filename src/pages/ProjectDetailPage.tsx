@@ -8,6 +8,8 @@ import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { NotFoundPage } from "@/pages/NotFoundPage";
+import { SheinCaseStudy } from "@/components/projects/SheinCaseStudy";
+import { SHEIN_CASE_STUDY_SLUG } from "@/data/sheinCaseStudy";
 
 export type ProjectDetailReferrer = "home" | "projects";
 
@@ -31,6 +33,12 @@ export function ProjectDetailPage() {
 
   if (!slug || !project) {
     return <NotFoundPage />;
+  }
+
+  if (slug === SHEIN_CASE_STUDY_SLUG) {
+    return (
+      <SheinCaseStudy project={project} backLink={backLink} />
+    );
   }
 
   const showUxLessons =

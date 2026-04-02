@@ -121,34 +121,19 @@ export const portfolioData = {
   },
   projects: [
     {
-      slug: "shein-mobile-app-research",
-      name: "SHEIN Mobile App Redesign & Research",
+      slug: "shein-mobile-app-redesign",
+      name: "SHEIN Mobile App Redesign",
       label: "UX Case Study",
-      tech: "Figma · UX Research · UI Design",
-      description: "Redesigned the SHEIN mobile shopping experience through qualitative UX research and prototyping focusing on core tasks and user pain points.",
-      longDescription: "Led a two-month research and redesign of the SHEIN mobile application focused on browsing, adding to cart, and checkout flows. Conducted qualitative interviews to identify user pain points, ideated solutions through user journey maps and wireframes, and validated high-fidelity prototypes with moderated usability testing.",
-      role: "UX Lead · UI/UX Researcher & Designer",
-      timeline: "February - April 2025",
-      highlights: [
-        "Conducted 5 semi-structured user interviews to analyze user behavior, surface pain points, and improve user retention and efficiency when using the app.",
-        "Synthesized findings with thematic analysis, mapped the end-to-end customer journey, and defined opportunity areas to guide ideation.",
-        "Redesign Solution: Streamlined navigation, reducing ads/banners into one scrollable banner, addition of whitespace, AI Search Assistant, consolidated rewards section, checkout confirmation pop-up, interactive size guide",
-        "Applied Interaction Design Patterns and Nielsen's 10 Usability Heuristics to identify and prioritize usability issues.",
-        "Performed moderated usability tests using the think-aloud protocol and recorded task completion times and verbal/non-verbal feedback to inform iterative design changes.",
-        "Delivered comprehensive documentation and design rationale; received top course scores and faculty commendation for research rigor and justification."
-      ],
-      lessonsLearned: [
-        "Behavioral Design Over Logic – A logically correct solution (like a confirmation pop-up) may not change user behavior; effective design must reframe the decision process itself.",
-        "Flexibility Builds Confidence – Allowing users multiple ways to achieve the same goal increases efficiency and aligns with Nielsen’s Flexibility and Efficiency of Use heuristic.",
-        "Small Visual Tweaks, Big Impact – Simple visual improvements like dark mode or decluttered layouts can significantly reduce fatigue and enhance user satisfaction.",
-        "Recognizing Business-Driven UX Trade-offs – Some frustrating designs are intentional business strategies; good UX requires balancing user satisfaction with business goals."
-      ],
-      image: "/assets/images/shein-image.jpg",
-      heroImage: "/assets/images/shein-hero-image.jpg",
+      description:
+        "Problem-first case study: qualitative research, streamlined IA, SH-AI-N search, and usability-tested hi-fi — including an honest partial outcome on impulsive buying.",
+      role: "UX Researcher, UI/UX Designer, UX Lead",
+      timeline: "February – April 2025",
+      image: "/assets/images/shein-image.png",
+      heroImage: "/assets/images/shein-hero-image.png",
       ctaPresentationLabel: "View Presentation",
       ctaPresentationUrl: "https://www.figma.com/deck/oFKoRUJctJmpkMra78mZIe/MCO5_Pookies?node-id=1-42&t=1j6DcZ7VNGDh3Q2h-1",
       ctaPrototypeLabel: "Interactive Prototype",
-      ctaPrototypeUrl: "https://www.figma.com/proto/PVa8jKMPEc79J2G2vMc0pW/Pookies---SHEIN-Redesign?page-id=340%3A1818&node-id=340-1820&p=f&viewport=775%2C29%2C0.12&t=WmbIkHfVP6vOLYNl-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=340%3A1820"
+      ctaPrototypeUrl: "https://www.figma.com/proto/PVa8jKMPEc79J2G2vMc0pW/Pookies---SHEIN-Redesign?page-id=340%3A1818&node-id=340-1820&viewport=3423%2C-421%2C0.71&t=0xY41v8PH9zs0g72-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=340%3A1820"
     },
     {
       slug: "check-yourself-app",
