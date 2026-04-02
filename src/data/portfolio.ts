@@ -353,6 +353,15 @@ export const portfolioData = {
   ],
   organizations: [
     {
+      name: "IEEE Computer Society Philippines Chapter",
+      dates: "Jan. 2026 - Present",
+      role: "Volunteer",
+      logo: "/assets/logos/ieeecsph.jpg",
+      highlights: [
+        "Contributed to publications and promotions by designing materials for the organization’s events and activities."
+      ]
+    },
+    {
       name: "La Salle Computer Society",
       dates: "Sept. 2024 - Aug. 2025",
       role: "Associate Vice President for Publicity and Creatives",
