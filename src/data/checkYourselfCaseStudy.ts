@@ -7,11 +7,12 @@ export const checkYourselfCaseStudy = {
     "A mobile platform enabling at-home STD testing kit ordering and result tracking, designed to break down systemic barriers to sexual health access in the Philippines.",
   meta: [
     { label: "Timeline", value: "Feb – Apr 2025" },
-    { label: "Platform", value: "Mobile (iOS)" },
+    { label: "Tools", value: "Figma · Zoom · Google Docs · FigJam" },
     {
       label: "Methods",
       value: "Interviews · Prototyping · Usability Testing",
     },
+    { label: "Team size", value: "4 members" }
   ],
   empathize: {
     intro:

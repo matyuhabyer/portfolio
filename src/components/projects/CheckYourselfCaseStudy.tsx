@@ -146,7 +146,7 @@ export function CheckYourselfCaseStudy({
           </div>
 
           <div className="not-prose space-y-4">
-            <h3 className="font-heading text-lg font-bold text-foreground">
+            <h3 className="font-heading text-lg font-bold text-primary">
               {C.empathize.barriersUncovered.title}
             </h3>
             <div className="grid gap-4 md:grid-cols-3">
@@ -202,7 +202,7 @@ export function CheckYourselfCaseStudy({
           </div>
 
           <div>
-            <h3 className="font-heading text-base font-bold text-foreground">
+            <h3 className="font-heading text-base font-bold text-primary">
               How Might We
             </h3>
             <ul className="mt-3 list-inside list-disc space-y-2 pl-1">
@@ -275,7 +275,7 @@ export function CheckYourselfCaseStudy({
           </div>
 
           <div className="not-prose mt-8">
-            <h3 className="font-heading text-lg font-bold text-foreground">
+            <h3 className="font-heading text-lg font-bold text-primary">
               Prototype iterations
             </h3>
             <div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-3">
@@ -338,7 +338,7 @@ export function CheckYourselfCaseStudy({
 
         <section aria-labelledby="cy-insights" className="space-y-4">
           <SectionTitle id="cy-insights">06 — Insights</SectionTitle>
-          <h3 className="font-heading text-base font-bold text-foreground">{C.insights.title}</h3>
+          <h3 className="font-heading text-base font-bold text-primary">{C.insights.title}</h3>
           <ul className="not-prose grid grid-cols-1 gap-2 sm:grid-cols-2 md:grid-cols-3 text-xs">
             {C.insights.insights.map((f) => (
               <li key={f} className="rounded border border-border bg-card/30 px-3 py-2">
