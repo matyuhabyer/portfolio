@@ -159,25 +159,6 @@ export const portfolioData = {
       ctaUrl: "https://www.figma.com/proto/ON7M6aCXSSSUqPIinw8r0Y/ISDESTH?page-id=0%3A1&node-id=19-97&starting-point-node-id=75%3A480&t=jZ39LpHCs7vmP8sg-1"
     },
     {
-      slug: "tafteria-web-application",
-      name: "Tafteria Web Application",
-      label: "Full-Stack Development",
-      tech: "Figma · HTML/Tailwind CSS · JavaScript · Node.js · Express.js · MongoDB",
-      description: "Led full-stack development of a web application that allows users in Taft, Manila to disvover and review local establishments.",
-      longDescription: "Tafteria is a review-based web application designed for the Taft, Manila community to explore, rate, and share feedback about local establishments. As the Full-Stack Developer and Database Engineer, I led the development of both the front-end and back-end systems. I designed and implemented REST API endpoints using Node.js and Express.js, and structured a MongoDB database with flexible document schemas to support user-generated reviews and content. On the client side, I developed features for user registration, CRUD operations for reviews and users, and search functionality with filters for easier discoverability. Through this project, I strengthened my understanding of full-stack architecture, data modeling, and user-centered web design, while building a platform that connects the Taft community through authentic local insights.",
-      role: "Full-Stack Developer, Database Administrator",
-      timeline: "June – August 2024",
-      highlights: [
-        "Led full-stack development of a local establishments review platform; implemented user registration, CRUD for reviews and users, and robust search functionality.",
-        "Built REST API endpoints (Node.js) and used MongoDB for flexible review/document schemas to support user-generated content.",
-        "Integrated client-side forms and validation, implemented search filters to improve discoverability of establishments."
-      ],
-      image: "/assets/images/tafteria-image.jpg",
-      heroImage: "/assets/images/tafteria-hero-image.jpg",
-      ctaLabel: "View Source on GitHub",
-      ctaUrl: "https://github.com/matyuhabyer/tafteria-web-application"
-    },
-    {
       slug: "cafe-database-application",
       name: "Cafe Database Application",
       label: "Full-Stack Development",
@@ -198,6 +179,25 @@ export const portfolioData = {
       heroImage: "/assets/images/cafedb-image.jpg",
       ctaLabel: "View Source on GitHub",
       ctaUrl: "https://github.com/matyuhabyer/cafe-database-application"
+    },
+    {
+      slug: "tafteria-web-application",
+      name: "Tafteria Web Application",
+      label: "Full-Stack Development",
+      tech: "Figma · HTML/Tailwind CSS · JavaScript · Node.js · Express.js · MongoDB",
+      description: "Led full-stack development of a web application that allows users in Taft, Manila to disvover and review local establishments.",
+      longDescription: "Tafteria is a review-based web application designed for the Taft, Manila community to explore, rate, and share feedback about local establishments. As the Full-Stack Developer and Database Engineer, I led the development of both the front-end and back-end systems. I designed and implemented REST API endpoints using Node.js and Express.js, and structured a MongoDB database with flexible document schemas to support user-generated reviews and content. On the client side, I developed features for user registration, CRUD operations for reviews and users, and search functionality with filters for easier discoverability. Through this project, I strengthened my understanding of full-stack architecture, data modeling, and user-centered web design, while building a platform that connects the Taft community through authentic local insights.",
+      role: "Full-Stack Developer, Database Administrator",
+      timeline: "June – August 2024",
+      highlights: [
+        "Led full-stack development of a local establishments review platform; implemented user registration, CRUD for reviews and users, and robust search functionality.",
+        "Built REST API endpoints (Node.js) and used MongoDB for flexible review/document schemas to support user-generated content.",
+        "Integrated client-side forms and validation, implemented search filters to improve discoverability of establishments."
+      ],
+      image: "/assets/images/tafteria-image.jpg",
+      heroImage: "/assets/images/tafteria-hero-image.jpg",
+      ctaLabel: "View Source on GitHub",
+      ctaUrl: "https://github.com/matyuhabyer/tafteria-web-application"
     },
     {
       slug: "cinema-database-application",

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRight, Building2, ChevronDown, FileText, Mail } from "lucide-react";
 import { TypewriterText } from "@/components/typewriter-text";
@@ -10,6 +10,7 @@ import { TECH_CATEGORY_LABELS, TECH_HOME_PREVIEW_KEYS } from "@/lib/tech-stack";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { projectDisplayYear } from "@/lib/project";
 import { cn } from "@/lib/utils";
 
 const HERO_BG = "/assets/images/wavebg.png";
@@ -26,7 +27,15 @@ const SOCIAL_LINKEDIN_ICON =
 
 export function HomePage() {
   const { profile, workExperience, organizations, projects, certifications } = portfolioData;
-  const recentProjects = projects.slice(0, RECENT_PROJECT_COUNT);
+  const recentProjects = useMemo(() => {
+    return [...projects]
+      .sort((a, b) => {
+        const ya = projectDisplayYear(a) ?? 0;
+        const yb = projectDisplayYear(b) ?? 0;
+        return yb - ya;
+      })
+      .slice(0, RECENT_PROJECT_COUNT);
+  }, [projects]);
   const recentCertifications = certifications.slice(0, RECENT_CERTIFICATIONS_COUNT);
   const [openExperienceId, setOpenExperienceId] = useState<string | null>(null);
 

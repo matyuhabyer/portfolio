@@ -2,21 +2,10 @@ import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { portfolioData } from "@/data/portfolio";
 import { buttonVariants } from "@/components/ui/button";
+import { projectDisplayYear } from "@/lib/project";
 import { cn } from "@/lib/utils";
 
-type ProjectItem = (typeof portfolioData.projects)[number];
-
 type SortMode = "newest" | "name";
-
-function extractYearsFromTimeline(timeline: string): number[] {
-  const matches = timeline.match(/\b(20\d{2})\b/g);
-  return matches ? matches.map((y) => parseInt(y, 10)) : [];
-}
-
-function projectDisplayYear(project: ProjectItem): number | null {
-  const ys = extractYearsFromTimeline(project.timeline);
-  return ys.length ? Math.max(...ys) : null;
-}
 
 function posterCategoryLabel(label: string | undefined): string {
   if (!label) return "PROJECT";
