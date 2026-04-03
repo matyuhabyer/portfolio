@@ -25,6 +25,26 @@ export function ContactEmailForm() {
     e.preventDefault();
     setErrorMessage("");
 
+    const trimmed = {
+      firstName: firstName.trim(),
+      lastName: lastName.trim(),
+      email: email.trim(),
+      phone: phone.trim(),
+      message: message.trim(),
+    };
+
+    if (
+      !trimmed.firstName ||
+      !trimmed.lastName ||
+      !trimmed.email ||
+      !trimmed.phone ||
+      !trimmed.message
+    ) {
+      setStatus("error");
+      setErrorMessage("Please fill in every field before sending your message.");
+      return;
+    }
+
     if (!accessKey?.trim()) {
       setStatus("error");
       setErrorMessage(
@@ -37,7 +57,7 @@ export function ContactEmailForm() {
 
     setStatus("loading");
 
-    const fullName = [firstName.trim(), lastName.trim()].filter(Boolean).join(" ") || "Portfolio visitor";
+    const fullName = [trimmed.firstName, trimmed.lastName].join(" ");
 
     try {
       const res = await fetch("https://api.web3forms.com/submit", {
@@ -50,9 +70,9 @@ export function ContactEmailForm() {
           access_key: accessKey,
           subject: `[Portfolio] Message from ${fullName}`,
           name: fullName,
-          email,
-          phone: phone.trim() || "—",
-          message: message.trim(),
+          email: trimmed.email,
+          phone: trimmed.phone,
+          message: trimmed.message,
         }),
       });
 
@@ -135,6 +155,7 @@ export function ContactEmailForm() {
             name="phone"
             type="tel"
             autoComplete="tel"
+            required
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
             className={fieldClass}
