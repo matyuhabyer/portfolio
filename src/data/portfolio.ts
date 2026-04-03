@@ -88,18 +88,23 @@ export const portfolioData = {
     frontend: [
       { name: "JavaScript", image: "/assets/tech/javascript.png" },
       { name: "TypeScript", image: "/assets/tech/typescript.png" },
-      { name: "React.js", image: "/assets/tech/react.png" },
+      { name: "React", image: "/assets/tech/react.png" },
       { name: "HTML5", image: "/assets/tech/html5.png" },
       { name: "CSS3", image: "/assets/tech/css3.png" },
-      { name: "Tailwind CSS", image: "/assets/tech/tailwindcss.png" }
+      { name: "Tailwind CSS", image: "/assets/tech/tailwindcss.png" },
+      { name: "Vite", image: "/assets/tech/vite.png" },
+      { name: "Shadcn UI", image: "/assets/tech/shadcn.png" },
+      { name: "Bootstrap", image: "/assets/tech/bootstrap.png" },
+
     ],
     databases: [
       { name: "SQL (MySQL/PostgreSQL/NoSQL)", image: "/assets/tech/sql.png" },
-      { name: "MongoDB", image: "/assets/tech/mongodb.png" }
+      { name: "MongoDB", image: "/assets/tech/mongodb.png" },
+      { name: "Firebase", image: "/assets/tech/firebase.png" },
+      { name: "Supabase", image: "/assets/tech/supabase.png" }
     ],
     cloudDevops: [
       { name: "AWS", image: "/assets/tech/aws.png" },
-      { name: "Oracle Cloud", image: "/assets/tech/oracle.png" },
       { name: "Git/GitHub", image: "/assets/icons/mdi_github.svg" },
       { name: "Linux", image: "/assets/tech/linux.png" },
       { name: "Apache", image: "/assets/tech/apache.png" }
@@ -116,7 +121,12 @@ export const portfolioData = {
       { name: "Notion", image: "/assets/tech/notion.png" },
       { name: "Google Workspace", image: "/assets/tech/google.png" },
       { name: "MS Office", image: "/assets/tech/msoffice.png" },
-      { name: "Canva", image: "/assets/tech/canva.png" }
+      { name: "Canva", image: "/assets/tech/canva.png" },
+      { name: "phpMyAdmin", image: "/assets/tech/phpmyadmin.png" },
+      { name: "Power BI", image: "/assets/tech/powerbi.png" },
+      { name: "Claude", image: "/assets/tech/claude.png" },
+      { name: "Vercel", image: "/assets/tech/vercel.png" },
+      { name: "YouTrack", image: "/assets/tech/youtrack.png" }
     ]
   },
   projects: [
