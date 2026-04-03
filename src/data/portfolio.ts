@@ -126,7 +126,7 @@ export const portfolioData = {
       label: "UX Case Study",
       description:
         "Problem-first case study: qualitative research, streamlined IA, SH-AI-N search, and usability-tested hi-fi — including an honest partial outcome on impulsive buying.",
-      role: "UX Researcher, UI/UX Designer, UX Lead",
+      role: "UX Lead, UI/UX Researcher & Designer",
       timeline: "February – April 2025",
       image: "/assets/images/shein-image.png",
       heroImage: "/assets/images/shein-hero-image.png",
@@ -139,23 +139,10 @@ export const portfolioData = {
       slug: "check-yourself-app",
       name: "CheckYourself Mobile Application",
       label: "UX Case Study",
-      tech: "Figma · UX Research · UI Design",
-      description: "Conducted end-to-end UX research to design a privacy-first mobile app addressing barriers to STD testing in the Philippines, focused on overcoming user stigma and accessibility issues",
-      longDescription: "Led a healthcare UX case study for a mobile health app concept that provides confidential at-home STD testing kits and consultations to address critical gaps in the Philippines' public health system. Through the design thinking process, it was identified that deep-seated societal stigma and privacy fears, rather than logistical access, were the primary user barriers. The high-fidelity prototype delivers a complete and secure ecosystem that includes confidential ordering, tele-consultations with doctors, educational resources, and lab result tracking.",
-      role: "UX Lead · UI/UX Researcher & Designer",
-      timeline: "Februrary – April 2025",
-      highlights: [
-        "Led user research and ideation for a telehealth app enabling STD consultation and at-home test kit ordering.",
-        "Conducted semi-structured interviews, developed POV statements, and generated HMW questions to frame design opportunities; facilitated ideation (Crazy 8’s) and brainstorming sessions.",
-        "Ran usability sessions and captured insights with feedback capture grids to guide iterations and improve user flows.",
-        "Conducted three cycles of iterative prototype testing, using feedback grids to implement critical UI/UX improvements like security verification and tutorial screens."
-      ],
-      lessonsLearned: [ 
-        "Empathy Uncovers the Real Problem – User interviews revealed that the main barrier wasn’t logistics but fear and stigma, shifting the design focus toward psychological safety.", 
-        "Design for Trust and Safety– For a sensitive health issue, the product must be a 'safe space,' not just a tool. Building user trust through privacy-first features (like at-home kits and secure chats) is the primary goal.", 
-        "Iterate to Eliminate Confusion – Iterative testing on simple flows is critical. User feedback on the ordering process exposed major confusion, which was resolved by adding simple tutorial screens, a small change that fixed a major usability gap.", 
-        "Design thinking is Essential for Innovation – Applying design thinking ensures that solutions stay human-centered and adaptive throughout development."
-      ],
+      description:
+        "A mobile platform for at-home STD testing and result tracking, designed to break down barriers to sexual health access in the Philippines.",
+      role: "UX Lead, UI/UX Researcher & Designer",
+      timeline: "February – April 2025",
       image: "/assets/images/checkyourself-image.jpg",
       heroImage: "/assets/images/checkyourself-hero-image.jpg",
       ctaLabel: "View Interactive Prototype (Use iPhone SE as Device)",

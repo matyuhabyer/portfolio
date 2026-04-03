@@ -9,6 +9,8 @@ import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 import { NotFoundPage } from "@/pages/NotFoundPage";
 import { SheinCaseStudy } from "@/components/projects/SheinCaseStudy";
+import { CheckYourselfCaseStudy } from "@/components/projects/CheckYourselfCaseStudy";
+import { CHECKYOURSELF_CASE_STUDY_SLUG } from "@/data/checkYourselfCaseStudy";
 import { SHEIN_CASE_STUDY_SLUG } from "@/data/sheinCaseStudy";
 
 export type ProjectDetailReferrer = "home" | "projects";
@@ -41,9 +43,20 @@ export function ProjectDetailPage() {
     );
   }
 
+  if (slug === CHECKYOURSELF_CASE_STUDY_SLUG) {
+    return (
+      <CheckYourselfCaseStudy project={project} backLink={backLink} />
+    );
+  }
+
+  const lessonsLearnedRaw =
+    "lessonsLearned" in project ? project.lessonsLearned : undefined;
+  const lessonsLearned = Array.isArray(lessonsLearnedRaw)
+    ? lessonsLearnedRaw
+    : undefined;
   const showUxLessons =
-    project.lessonsLearned &&
-    project.lessonsLearned.length > 0 &&
+    lessonsLearned &&
+    lessonsLearned.length > 0 &&
     isUXProject(project);
 
   return (
@@ -108,13 +121,13 @@ export function ProjectDetailPage() {
           </section>
         ) : null}
 
-        {showUxLessons && project.lessonsLearned ? (
+        {showUxLessons && lessonsLearned ? (
           <section>
             <h2 className="mb-4 font-heading text-xl font-bold text-foreground">
               Key lessons learned
             </h2>
             <ul className="list-inside list-disc space-y-2">
-              {project.lessonsLearned.map((l) => (
+              {lessonsLearned.map((l) => (
                 <li key={l.slice(0, 40)} dangerouslySetInnerHTML={{ __html: l }} />
               ))}
             </ul>
