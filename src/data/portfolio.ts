@@ -25,6 +25,7 @@ export const portfolioData = {
     email: "matthewbenisonjavier@gmail.com",
     linkedin: "https://www.linkedin.com/in/matthewbenisonjavier/",
     github: "https://github.com/matyuhabyer",
+    instagram: "https://www.instagram.com/matyuhabyer/",
     resume: "/assets/Matthew_Javier_Resume_2026.pdf"
   },
   about: {

@@ -24,6 +24,8 @@ const SOCIAL_GITHUB_ICON =
   "https://raw.githubusercontent.com/CLorant/readme-social-icons/main/medium/light/github.svg";
 const SOCIAL_LINKEDIN_ICON =
   "https://raw.githubusercontent.com/CLorant/readme-social-icons/main/medium/light/linkedin.svg";
+const SOCIAL_INSTAGRAM_ICON =
+  "https://raw.githubusercontent.com/CLorant/readme-social-icons/main/medium/light/instagram.svg";
 
 export function HomePage() {
   const { profile, workExperience, organizations, projects, certifications } = portfolioData;
@@ -80,7 +82,7 @@ export function HomePage() {
                 className="font-heading text-2xl font-bold tracking-tight text-secondary sm:text-3xl md:text-4xl lg:text-5xl"
               />
             </p>
-            <div className="mt-4 flex flex-col gap-2.5 sm:mt-5 sm:flex-row sm:flex-wrap sm:gap-3">
+            <div className="mt-4 flex flex-col gap-2.5 sm:mt-5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
               <a
                 href={profile.resume}
                 target="_blank"
@@ -94,14 +96,71 @@ export function HomePage() {
                 View Resume
               </a>
               <a
-                href={`mailto:${profile.email}`}
+                href="#contact"
                 className={cn(
                   buttonVariants({ variant: "outline", size: "lg" }),
                   "gap-2"
                 )}
               >
-                <Mail className="size-4" />
+                <Mail className="size-4" aria-hidden />
                 Get in touch
+              </a>
+              <a
+                href={profile.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  buttonVariants({ variant: "outline", size: "lg" }),
+                  "inline-flex gap-2"
+                )}
+              >
+                <img
+                  src={SOCIAL_LINKEDIN_ICON}
+                  alt=""
+                  width={16}
+                  height={16}
+                  className="size-4 shrink-0 object-contain"
+                  aria-hidden
+                />
+                LinkedIn
+              </a>
+              <a
+                href={profile.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  buttonVariants({ variant: "outline", size: "lg" }),
+                  "inline-flex gap-2"
+                )}
+              >
+                <img
+                  src={SOCIAL_GITHUB_ICON}
+                  alt=""
+                  width={16}
+                  height={16}
+                  className="size-4 shrink-0 object-contain"
+                  aria-hidden
+                />
+                GitHub
+              </a>
+              <a
+                href={profile.instagram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(
+                  buttonVariants({ variant: "outline", size: "lg" }),
+                  "inline-flex gap-2"
+                )}
+              >
+                <img
+                  src={SOCIAL_INSTAGRAM_ICON}
+                  alt=""
+                  width={16}
+                  height={16}
+                  className="size-4 shrink-0 object-contain"
+                  aria-hidden
+                />
+                Instagram
               </a>
             </div>
           </div>
@@ -330,7 +389,10 @@ export function HomePage() {
 
       <CreativeGallerySection />
 
-      <section className="-mt-5 rounded-xl border border-border/50 bg-card/40 p-6 shadow-inner sm:p-8">
+      <section
+        id="contact"
+        className="-mt-5 scroll-mt-24 rounded-xl border border-border/50 bg-card/40 p-6 shadow-inner sm:p-8 sm:scroll-mt-28"
+      >
         <div className="mb-4 flex items-center gap-2 sm:mb-5 sm:gap-3">
           <span className="h-6 w-1.5 rounded-sm bg-secondary sm:h-7" aria-hidden />
           <h2 className="font-heading text-2xl font-bold sm:text-3xl">Let's Connect!</h2>
@@ -342,48 +404,6 @@ export function HomePage() {
         <div className="mb-8 rounded-lg border border-border/60 bg-muted/20 p-4 sm:p-5">
           <h3 className="mb-4 font-heading text-base font-semibold text-foreground sm:text-lg">Send me a message</h3>
           <ContactEmailForm />
-        </div>
-
-        <p className="mb-3 text-xs font-medium uppercase tracking-wider text-muted-foreground">You can also reach out to me through these platforms:</p>
-        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-          <a
-            href={profile.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={cn(
-              buttonVariants({ variant: "outline", size: "lg" }),
-              "inline-flex w-full gap-2 sm:w-auto"
-            )}
-          >
-            <img
-              src={SOCIAL_LINKEDIN_ICON}
-              alt=""
-              width={16}
-              height={16}
-              className="size-4 shrink-0 object-contain"
-              aria-hidden
-            />
-            LinkedIn
-          </a>
-          <a
-            href={profile.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={cn(
-              buttonVariants({ variant: "outline", size: "lg" }),
-              "inline-flex w-full gap-2 sm:w-auto"
-            )}
-          >
-            <img
-              src={SOCIAL_GITHUB_ICON}
-              alt=""
-              width={16}
-              height={16}
-              className="size-4 shrink-0 object-contain"
-              aria-hidden
-            />
-            GitHub
-          </a>
         </div>
       </section>
     </div>
