@@ -19,6 +19,8 @@ const HERO_PLACEHOLDER_AFTER = "/assets/images/herobg-after.png";
 
 const RECENT_PROJECT_COUNT = 3;
 const RECENT_CERTIFICATIONS_COUNT = 6;
+const INTRO_VISIBLE_MS = 3500;
+const INTRO_TOTAL_MS = 4500;
 
 const SOCIAL_GITHUB_ICON =
   "https://raw.githubusercontent.com/CLorant/readme-social-icons/main/medium/light/github.svg";
@@ -26,6 +28,14 @@ const SOCIAL_LINKEDIN_ICON =
   "https://raw.githubusercontent.com/CLorant/readme-social-icons/main/medium/light/linkedin.svg";
 const SOCIAL_INSTAGRAM_ICON =
   "https://raw.githubusercontent.com/CLorant/readme-social-icons/main/medium/light/instagram.svg";
+
+function shouldRunSessionIntro() {
+  if (typeof window === "undefined") return false;
+  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReducedMotion) return false;
+  const introStorageKey = "portfolio-intro-seen-session";
+  return window.sessionStorage.getItem(introStorageKey) !== "1";
+}
 
 export function HomePage() {
   const { profile, workExperience, organizations, projects, certifications } = portfolioData;
@@ -40,13 +50,90 @@ export function HomePage() {
   }, [projects]);
   const recentCertifications = certifications.slice(0, RECENT_CERTIFICATIONS_COUNT);
   const [openExperienceId, setOpenExperienceId] = useState<string | null>(null);
+  const [runIntro, setRunIntro] = useState(() => shouldRunSessionIntro());
+  const [introOverlayStage, setIntroOverlayStage] = useState<"hidden" | "visible" | "exiting">(() =>
+    shouldRunSessionIntro() ? "visible" : "hidden"
+  );
+  const [introProgress, setIntroProgress] = useState(0);
 
   useEffect(() => {
     document.title = "Matthew Benison Javier";
   }, []);
 
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const introStorageKey = "portfolio-intro-seen-session";
+    const introShouldRun = shouldRunSessionIntro();
+    if (introShouldRun) {
+      setRunIntro(true);
+      window.sessionStorage.setItem(introStorageKey, "1");
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!runIntro) return;
+
+    setIntroProgress(0);
+    setIntroOverlayStage("visible");
+    const kickProgress = window.setTimeout(() => {
+      setIntroProgress(100);
+    }, 60);
+    const beginExit = window.setTimeout(() => {
+      setIntroOverlayStage("exiting");
+    }, INTRO_VISIBLE_MS);
+    const hideOverlay = window.setTimeout(() => {
+      setIntroOverlayStage("hidden");
+    }, INTRO_TOTAL_MS);
+
+    return () => {
+      window.clearTimeout(kickProgress);
+      window.clearTimeout(beginExit);
+      window.clearTimeout(hideOverlay);
+    };
+  }, [runIntro]);
+
   return (
-    <div className="space-y-12 sm:space-y-16">
+    <div className="relative">
+      {introOverlayStage !== "hidden" ? (
+        <div
+          className={cn(
+            "fixed inset-0 z-50 flex items-center justify-center bg-background/95 px-6 backdrop-blur-md",
+            "transition-opacity duration-500 ease-out",
+            introOverlayStage === "exiting" ? "opacity-0" : "opacity-100"
+          )}
+          aria-hidden
+        >
+          <div
+            className={cn(
+              "text-center transition-all duration-500 ease-out",
+              introOverlayStage === "exiting" ? "translate-y-1 scale-95 opacity-0" : "translate-y-0 scale-100 opacity-100"
+            )}
+          >
+            <p className="font-heading text-[30px] font-bold tracking-tight text-primary sm:text-[48px]">
+              Welcome to My Portfolio!
+            </p>
+            <p className="mt-3 text-[14px] font-medium tracking-wide text-muted-foreground sm:text-[16px]">
+              Loading experience...
+            </p>
+            <div className="mx-auto mt-5 h-[6px] w-[224px] overflow-hidden rounded-full bg-muted/60 sm:w-[288px]">
+              <div
+                className="h-full rounded-full bg-linear-to-r from-primary to-secondary transition-[width] duration-1800 ease-out"
+                style={{
+                  width: `${introProgress}%`,
+                  transitionDuration: `${INTRO_VISIBLE_MS}ms`,
+                }}
+                aria-hidden
+              />
+            </div>
+          </div>
+        </div>
+      ) : null}
+      <div
+        className={cn(
+          "space-y-12 transition-[opacity,transform,filter] duration-500 ease-out sm:space-y-16",
+          introOverlayStage !== "hidden" && "pointer-events-none scale-[0.995] blur-[1px] opacity-0"
+        )}
+      >
       <section className="relative mb-6 flex min-h-[min(380px,78svh)] w-full flex-col justify-end overflow-hidden rounded-lg border border-border/50 px-4 py-7 shadow-2xl sm:mb-8 sm:min-h-[min(440px,75vh)] sm:rounded-xl sm:px-6 sm:py-9 md:px-12 md:py-11">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat brightness-175"
@@ -59,17 +146,43 @@ export function HomePage() {
         />
         <div className="relative z-10 flex w-full flex-col gap-5 sm:gap-6 lg:flex-row lg:items-start lg:justify-between lg:gap-8">
           <div className="min-w-0 max-w-7xl flex-1 text-left">
-            <p className="text-xl font-medium text-foreground/90 sm:text-2xl md:text-3xl">
+            <p
+              className={cn(
+                "font-['Inter'] text-xl font-medium text-foreground/90 sm:text-2xl md:text-3xl",
+                runIntro && "animate-in fade-in slide-in-from-bottom-2 duration-500"
+              )}
+            >
               Hello, I&apos;m
             </p>
-            <h1 className="mt-0.5 bg-linear-to-b from-primary to-secondary bg-clip-text font-heading text-[clamp(2.35rem,6.5vw,4.25rem)] font-extrabold tracking-tight text-transparent md:text-7xl lg:text-8xl">
+            <h1
+              className={cn(
+                "mt-0.5 bg-linear-to-b from-primary to-secondary bg-clip-text font-['Inter'] text-[clamp(2.35rem,6.5vw,4.25rem)] font-extrabold tracking-tight text-transparent md:text-7xl lg:text-8xl",
+                runIntro &&
+                  "animate-in fade-in zoom-in-95 slide-in-from-bottom-2 duration-700"
+              )}
+              style={{
+                fontFamily: '"Inter", system-ui, sans-serif',
+                fontSynthesis: "none",
+                ...(runIntro ? { animationDelay: "100ms" } : {}),
+              }}
+            >
               {profile.name}
             </h1>
             <div
-              className="mt-3 h-2 w-36 rounded-full bg-secondary sm:mt-3.5 sm:w-18"
+              className={cn(
+                "mt-3 h-2 w-36 rounded-full bg-secondary sm:mt-3.5 sm:w-18",
+                runIntro && "animate-in fade-in duration-500"
+              )}
+              style={runIntro ? { animationDelay: "160ms" } : undefined}
               aria-hidden
             />
-            <p className="mt-3 text-2xl font-bold tracking-tight text-foreground sm:mt-3.5 sm:text-3xl md:text-4xl lg:text-5xl">
+            <p
+              className={cn(
+                "mt-3 font-['Inter'] text-2xl font-bold tracking-tight text-foreground sm:mt-3.5 sm:text-3xl md:text-4xl lg:text-5xl",
+                runIntro && "animate-in fade-in slide-in-from-bottom-1 duration-700"
+              )}
+              style={runIntro ? { animationDelay: "220ms" } : undefined}
+            >
               I am a{" "}
               <TypewriterText
                 texts={[
@@ -79,10 +192,16 @@ export function HomePage() {
                   "Database Administrator.",
                   "Lifelong Learner.",
                 ]}
-                className="font-heading text-2xl font-bold tracking-tight text-secondary sm:text-3xl md:text-4xl lg:text-5xl"
+                className="font-['Inter'] text-2xl font-bold tracking-tight text-secondary sm:text-3xl md:text-4xl lg:text-5xl"
               />
             </p>
-            <div className="mt-4 flex flex-col gap-2.5 sm:mt-5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3">
+            <div
+              className={cn(
+                "mt-4 flex flex-col gap-2.5 sm:mt-5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3",
+                runIntro && "animate-in fade-in slide-in-from-bottom-2 duration-700"
+              )}
+              style={runIntro ? { animationDelay: "320ms" } : undefined}
+            >
               <a
                 href={profile.resume}
                 target="_blank"
@@ -164,7 +283,13 @@ export function HomePage() {
               </a>
             </div>
           </div>
-          <div className="mx-auto shrink-0 p-2 sm:p-4 lg:mx-0 lg:mt-2">
+          <div
+            className={cn(
+              "mx-auto shrink-0 p-2 sm:p-4 lg:mx-0 lg:mt-2",
+              runIntro && "animate-in fade-in zoom-in-95 duration-700"
+            )}
+            style={runIntro ? { animationDelay: "240ms" } : undefined}
+          >
             <div
               className={cn(
                 "group relative size-52 cursor-default sm:size-60 md:size-72 lg:size-80",
@@ -406,6 +531,7 @@ export function HomePage() {
           <ContactEmailForm />
         </div>
       </section>
+      </div>
     </div>
   );
 }
