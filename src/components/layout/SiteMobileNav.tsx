@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { LayoutGrid, UserRound, Zap } from "lucide-react";
+import { LayoutGrid, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 function itemClass(active: boolean) {
@@ -20,10 +20,6 @@ export function SiteMobileNav() {
         <NavLink to="/projects" className={({ isActive }) => itemClass(isActive)}>
           <LayoutGrid className="size-5" />
           Projects
-        </NavLink>
-        <NavLink to="/about" className={({ isActive }) => itemClass(isActive)}>
-          <UserRound className="size-5" />
-          About
         </NavLink>
       </div>
     </nav>

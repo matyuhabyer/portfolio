@@ -17,7 +17,7 @@ function navLinkClass(active: boolean) {
 export function SiteNav() {
   return (
     <nav className="fixed top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl min-h-14 items-center justify-between gap-3 px-4 py-3 sm:min-h-0 sm:px-6 sm:py-4">
+      <div className="mx-auto flex max-w-screen-2xl min-h-14 items-center justify-between gap-3 px-4 py-3 sm:min-h-0 sm:px-6 sm:py-4">
         <Link
           to="/"
           className="flex min-w-0 items-center gap-2 font-heading text-lg font-black tracking-tighter text-primary sm:gap-3 sm:text-xl"
@@ -40,12 +40,6 @@ export function SiteNav() {
             className={({ isActive }) => navLinkClass(isActive)}
           >
             Projects
-          </NavLink>
-          <NavLink
-            to="/about"
-            className={({ isActive }) => navLinkClass(isActive)}
-          >
-            About
           </NavLink>
         </div>
         <div className="flex shrink-0 items-center gap-2">

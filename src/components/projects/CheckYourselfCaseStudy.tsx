@@ -4,6 +4,10 @@ import { portfolioData } from "@/data/portfolio";
 import { checkYourselfCaseStudy as C } from "@/data/checkYourselfCaseStudy";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
+import {
+  LetterboxedProjectHero,
+  ProjectPosterHeader,
+} from "@/components/projects/project-film-detail";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 
@@ -60,7 +64,7 @@ export function CheckYourselfCaseStudy({
   backLink: { to: string; label: string };
 }) {
   return (
-    <article className="mx-auto w-full min-w-0 max-w-3xl pb-16">
+    <article className="mx-auto w-full min-w-0 max-w-4xl pb-16">
       <div className="mb-8">
         <Link
           to={backLink.to}
@@ -74,36 +78,13 @@ export function CheckYourselfCaseStudy({
         </Link>
       </div>
 
-      <header className="mb-8">
-        <h1 className="font-heading text-3xl font-extrabold md:text-4xl">
-          {project.name}
-        </h1>
-        {project.label ? (
-          <Badge className="mt-3" variant="secondary">
-            {project.label}
-          </Badge>
-        ) : null}
-        
-        <br />
-
-        {project.role ? (
-          <dl className="mt-4 text-sm">
-            <dt className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-              Role
-            </dt>
-            <dd className="mt-1 text-secondary">{project.role}</dd>
-          </dl>
-        ) : null}
-      </header>
+      <ProjectPosterHeader project={project} />
 
       {project.heroImage ? (
-        <div className="mb-10 overflow-hidden rounded-xl border border-border shadow">
-          <img
-            src={project.heroImage}
-            alt={`${project.name} mockup`}
-            className="w-full object-cover"
-          />
-        </div>
+        <LetterboxedProjectHero
+          src={project.heroImage}
+          alt={`${project.name} mockup`}
+        />
       ) : null}
 
       <p className="text-base leading-relaxed text-muted-foreground">

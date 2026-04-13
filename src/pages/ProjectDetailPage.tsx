@@ -3,7 +3,6 @@ import { Link, useLocation, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
 import { isUXProject } from "@/lib/project";
-import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
@@ -12,6 +11,10 @@ import { SheinCaseStudy } from "@/components/projects/SheinCaseStudy";
 import { CheckYourselfCaseStudy } from "@/components/projects/CheckYourselfCaseStudy";
 import { CHECKYOURSELF_CASE_STUDY_SLUG } from "@/data/checkYourselfCaseStudy";
 import { SHEIN_CASE_STUDY_SLUG } from "@/data/sheinCaseStudy";
+import {
+  LetterboxedProjectHero,
+  ProjectPosterHeader,
+} from "@/components/projects/project-film-detail";
 
 export type ProjectDetailReferrer = "home" | "projects";
 
@@ -38,15 +41,11 @@ export function ProjectDetailPage() {
   }
 
   if (slug === SHEIN_CASE_STUDY_SLUG) {
-    return (
-      <SheinCaseStudy project={project} backLink={backLink} />
-    );
+    return <SheinCaseStudy project={project} backLink={backLink} />;
   }
 
   if (slug === CHECKYOURSELF_CASE_STUDY_SLUG) {
-    return (
-      <CheckYourselfCaseStudy project={project} backLink={backLink} />
-    );
+    return <CheckYourselfCaseStudy project={project} backLink={backLink} />;
   }
 
   const lessonsLearnedRaw =
@@ -60,7 +59,7 @@ export function ProjectDetailPage() {
     isUXProject(project);
 
   return (
-    <article className="mx-auto w-full min-w-0 max-w-3xl pb-12">
+    <article className="mx-auto w-full min-w-0 max-w-4xl pb-12">
       <div className="mb-8">
         <Link
           to={backLink.to}
@@ -74,43 +73,29 @@ export function ProjectDetailPage() {
         </Link>
       </div>
 
-      <header className="mb-8">
-        <h1 className="font-heading text-3xl font-extrabold md:text-4xl">{project.name}</h1>
-        {project.label ? (
-          <Badge className="mt-3" variant="secondary">
-            {project.label}
-          </Badge>
-        ) : null}
-        {project.timeline ? (
-          <p className="mt-4 text-sm text-muted-foreground">{project.timeline}</p>
-        ) : null}
-        {project.role ? (
-          <p className="mt-1 text-sm text-primary">{project.role}</p>
-        ) : null}
-      </header>
+      <ProjectPosterHeader project={project} />
 
       {project.heroImage ? (
-        <div className="mb-10 overflow-hidden rounded-xl border border-border shadow">
-          <img
-            src={project.heroImage}
-            alt={`${project.name} mockup`}
-            className="w-full object-cover"
-          />
-        </div>
+        <LetterboxedProjectHero
+          src={project.heroImage}
+          alt={`${project.name} mockup`}
+        />
       ) : null}
 
       <div className="space-y-8 text-sm leading-relaxed text-muted-foreground">
         {project.tech ? (
           <p>
-            <span className="font-semibold text-foreground">Skills &amp; tools:</span>{" "}
-            {project.tech}
+            <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+              Skills &amp; tools
+            </span>
+            <span className="mt-2 block text-foreground/90">{project.tech}</span>
           </p>
         ) : null}
         {project.longDescription ? <p>{project.longDescription}</p> : null}
 
         {project.highlights && project.highlights.length > 0 ? (
           <section>
-            <h2 className="mb-4 font-heading text-xl font-bold text-foreground">
+            <h2 className="mb-4 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
               Highlights
             </h2>
             <ul className="list-inside list-disc space-y-2">
@@ -123,7 +108,7 @@ export function ProjectDetailPage() {
 
         {showUxLessons && lessonsLearned ? (
           <section>
-            <h2 className="mb-4 font-heading text-xl font-bold text-foreground">
+            <h2 className="mb-4 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
               Key lessons learned
             </h2>
             <ul className="list-inside list-disc space-y-2">

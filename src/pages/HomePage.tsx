@@ -19,8 +19,8 @@ const HERO_PLACEHOLDER_AFTER = "/assets/images/herobg-after.png";
 
 const RECENT_PROJECT_COUNT = 3;
 const RECENT_CERTIFICATIONS_COUNT = 6;
-const INTRO_VISIBLE_MS = 3500;
-const INTRO_TOTAL_MS = 4500;
+const INTRO_VISIBLE_MS = 4240;
+const INTRO_TOTAL_MS = 5240;
 
 const SOCIAL_GITHUB_ICON =
   "https://raw.githubusercontent.com/CLorant/readme-social-icons/main/medium/light/github.svg";
@@ -109,9 +109,12 @@ export function HomePage() {
               introOverlayStage === "exiting" ? "translate-y-1 scale-95 opacity-0" : "translate-y-0 scale-100 opacity-100"
             )}
           >
-            <p className="font-heading text-[30px] font-bold tracking-tight text-primary sm:text-[48px]">
-              Welcome to My Portfolio!
-            </p>
+            <iframe
+              src="https://lottie.host/embed/f5003000-a191-4e18-88a3-9c3f64652870/SVn5IcU6tG.json"
+              title="Welcome animation"
+              className="mx-auto h-[220px] w-[560px] max-w-full border-0 sm:h-[260px] sm:w-[640px]"
+              loading="eager"
+            />
             <p className="mt-3 text-[14px] font-medium tracking-wide text-muted-foreground sm:text-[16px]">
               Loading experience...
             </p>
@@ -148,7 +151,7 @@ export function HomePage() {
           <div className="min-w-0 max-w-7xl flex-1 text-left">
             <p
               className={cn(
-                "font-['Inter'] text-xl font-medium text-foreground/90 sm:text-2xl md:text-3xl",
+                "font-sans text-2xl font-medium text-foreground/90 sm:text-3xl md:text-4xl",
                 runIntro && "animate-in fade-in slide-in-from-bottom-2 duration-500"
               )}
             >
@@ -156,12 +159,11 @@ export function HomePage() {
             </p>
             <h1
               className={cn(
-                "mt-0.5 bg-linear-to-b from-primary to-secondary bg-clip-text font-['Inter'] text-[clamp(2.35rem,6.5vw,4.25rem)] font-extrabold tracking-tight text-transparent md:text-7xl lg:text-8xl",
+                "mt-0.5 bg-linear-to-b from-primary to-secondary bg-clip-text font-sans text-[clamp(2.7rem,7.1vw,4.8rem)] font-extrabold tracking-tight text-transparent md:text-8xl lg:text-9xl",
                 runIntro &&
                   "animate-in fade-in zoom-in-95 slide-in-from-bottom-2 duration-700"
               )}
               style={{
-                fontFamily: '"Inter", system-ui, sans-serif',
                 fontSynthesis: "none",
                 ...(runIntro ? { animationDelay: "100ms" } : {}),
               }}
@@ -178,7 +180,7 @@ export function HomePage() {
             />
             <p
               className={cn(
-                "mt-3 font-['Inter'] text-2xl font-bold tracking-tight text-foreground sm:mt-3.5 sm:text-3xl md:text-4xl lg:text-5xl",
+                "mt-3 font-sans text-3xl font-bold tracking-tight text-foreground sm:mt-3.5 sm:text-4xl md:text-5xl lg:text-6xl",
                 runIntro && "animate-in fade-in slide-in-from-bottom-1 duration-700"
               )}
               style={runIntro ? { animationDelay: "220ms" } : undefined}
@@ -192,7 +194,7 @@ export function HomePage() {
                   "Database Administrator.",
                   "Lifelong Learner.",
                 ]}
-                className="font-['Inter'] text-2xl font-bold tracking-tight text-secondary sm:text-3xl md:text-4xl lg:text-5xl"
+                className="font-sans text-3xl font-bold tracking-tight text-secondary sm:text-4xl md:text-5xl lg:text-6xl"
               />
             </p>
             <div
@@ -208,7 +210,7 @@ export function HomePage() {
                 rel="noopener noreferrer"
                 className={cn(
                   buttonVariants({ size: "lg" }),
-                  "gap-2 shadow-lg shadow-primary/20"
+                  "gap-2 text-base sm:text-lg shadow-lg shadow-primary/20"
                 )}
               >
                 <FileText className="size-4" aria-hidden />
@@ -218,7 +220,7 @@ export function HomePage() {
                 href="#contact"
                 className={cn(
                   buttonVariants({ variant: "outline", size: "lg" }),
-                  "gap-2"
+                  "gap-2 text-base sm:text-lg"
                 )}
               >
                 <Mail className="size-4" aria-hidden />
@@ -228,9 +230,10 @@ export function HomePage() {
                 href={profile.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="LinkedIn"
                 className={cn(
                   buttonVariants({ variant: "outline", size: "lg" }),
-                  "inline-flex gap-2"
+                  "inline-flex"
                 )}
               >
                 <img
@@ -241,15 +244,15 @@ export function HomePage() {
                   className="size-4 shrink-0 object-contain"
                   aria-hidden
                 />
-                LinkedIn
               </a>
               <a
                 href={profile.github}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="GitHub"
                 className={cn(
                   buttonVariants({ variant: "outline", size: "lg" }),
-                  "inline-flex gap-2"
+                  "inline-flex"
                 )}
               >
                 <img
@@ -260,15 +263,15 @@ export function HomePage() {
                   className="size-4 shrink-0 object-contain"
                   aria-hidden
                 />
-                GitHub
               </a>
               <a
                 href={profile.instagram}
                 target="_blank"
                 rel="noopener noreferrer"
+                aria-label="Instagram"
                 className={cn(
                   buttonVariants({ variant: "outline", size: "lg" }),
-                  "inline-flex gap-2"
+                  "inline-flex"
                 )}
               >
                 <img
@@ -279,7 +282,6 @@ export function HomePage() {
                   className="size-4 shrink-0 object-contain"
                   aria-hidden
                 />
-                Instagram
               </a>
             </div>
           </div>
@@ -292,7 +294,7 @@ export function HomePage() {
           >
             <div
               className={cn(
-                "group relative size-52 cursor-default sm:size-60 md:size-72 lg:size-80",
+                "group relative size-60 cursor-default sm:size-72 md:size-80 lg:size-96",
                 "transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] will-change-transform",
                 "hover:scale-110 hover:-rotate-2",
                 "motion-reduce:transition-none motion-reduce:hover:scale-100 motion-reduce:hover:rotate-0"

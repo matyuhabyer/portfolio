@@ -15,3 +15,20 @@ export function projectDisplayYear(project: { timeline?: string }): number | nul
   const ys = extractYearsFromTimeline(project.timeline ?? "");
   return ys.length ? Math.max(...ys) : null;
 }
+
+/** Poster-style category line (archive grid / detail header). */
+export function projectPosterCategoryLabel(label: string | undefined): string {
+  if (!label) return "PROJECT";
+  if (label.includes("UX")) return "UX / RESEARCH";
+  if (label.includes("Full-Stack")) return "FULL-STACK";
+  if (label.includes("Database")) return "DATABASE";
+  return label.toUpperCase();
+}
+
+export function projectCategoryAccentClass(label: string | undefined): string {
+  if (!label) return "text-muted-foreground";
+  if (label.includes("UX")) return "text-sky-400";
+  if (label.includes("Database")) return "text-primary";
+  if (label.includes("Full-Stack")) return "text-secondary";
+  return "text-muted-foreground";
+}
