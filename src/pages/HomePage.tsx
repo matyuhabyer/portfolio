@@ -185,14 +185,16 @@ export function HomePage() {
               )}
               style={runIntro ? { animationDelay: "220ms" } : undefined}
             >
-              I am a{" "}
+              I am {" "}
               <TypewriterText
                 texts={[
-                  "UI/UX Designer.",
-                  "Web Developer.",
-                  "UX Researcher.",
-                  "Database Administrator.",
-                  "Lifelong Learner.",
+                  "a UI/UX Designer.",
+                  "a Software Developer.",
+                  "a UX Researcher.",
+                  "a Database Administrator.",
+                  "an Analyst.",
+                  "an All-Arounder.",
+                  "a Lifelong Learner.",
                 ]}
                 className="font-sans text-3xl font-bold tracking-tight text-secondary sm:text-4xl md:text-5xl lg:text-6xl"
               />
