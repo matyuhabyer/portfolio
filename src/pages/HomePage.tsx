@@ -189,7 +189,7 @@ export function HomePage() {
               <TypewriterText
                 texts={[
                   "a UI/UX Designer.",
-                  "a Software Developer.",
+                  "a Software Engineer.",
                   "a UX Researcher.",
                   "a Database Administrator.",
                   "an Analyst.",

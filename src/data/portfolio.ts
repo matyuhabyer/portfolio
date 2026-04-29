@@ -341,7 +341,7 @@ export const portfolioData = {
     {
       name: "Rakso Computer Technology, Inc.",
       dates: "Jan. 2026 - Mar. 2026",
-      role: "System Development Intern",
+      role: "Software Development Intern",
       logo: "/assets/logos/raksoct.jpg",
       highlights: [
         "Co-spearheaded end-to-end development of the Rakso Computer Technology CRM platform.",
