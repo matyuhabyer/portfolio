@@ -21,7 +21,7 @@ function ProjectArchiveCard({ project }: { project: Project }) {
       to={`/projects/${project.slug}`}
       state={{ from: "projects" }}
       className={cn(
-        "group relative block aspect-2/3 cursor-pointer overflow-hidden rounded-md border border-border/60 bg-muted",
+        "group relative block aspect-3/2 cursor-pointer overflow-hidden rounded-md border border-border/60 bg-muted",
         "transition-all duration-200 ease-out",
         "hover:z-10 hover:-translate-y-1 hover:border-secondary/45",
         "motion-reduce:transition-none motion-reduce:hover:translate-y-0"
@@ -143,10 +143,10 @@ export function ProjectsPage() {
     const numericKeys = [...map.keys()]
       .filter((k): k is number => k !== "other")
       .sort((a, b) => b - a);
-    const keys: (number | "other")[] = [...numericKeys];
+    const keys: (number | "other")[] = map.has(archiveYear) ? [...numericKeys] : [archiveYear, ...numericKeys];
     if (map.has("other")) keys.push("other");
-    return keys.map((yearKey) => ({ yearKey, items: map.get(yearKey)! }));
-  }, [filteredSorted, sortBy]);
+    return keys.map((yearKey) => ({ yearKey, items: map.get(yearKey) ?? [] }));
+  }, [archiveYear, filteredSorted, sortBy]);
 
   return (
     <div className="pb-12">
@@ -316,16 +316,22 @@ export function ProjectsPage() {
                       {items.length} {items.length === 1 ? "project" : "projects"}
                     </span>
                   </div>
-                  <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
-                    {items.map((project) => (
-                      <ProjectArchiveCard key={project.slug} project={project} />
-                    ))}
-                  </div>
+                  {items.length === 0 ? (
+                    <div className="rounded-lg border border-dashed border-border/60 bg-muted/20 px-4 py-8 text-sm text-muted-foreground">
+                      Projects for this shelf are still in progress.
+                    </div>
+                  ) : (
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
+                      {items.map((project) => (
+                        <ProjectArchiveCard key={project.slug} project={project} />
+                      ))}
+                    </div>
+                  )}
                 </section>
               ))}
             </div>
           ) : (
-            <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
               {filteredSorted.map((project) => (
                 <ProjectArchiveCard key={project.slug} project={project} />
               ))}

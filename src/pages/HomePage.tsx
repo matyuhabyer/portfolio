@@ -1,10 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Building2, ChevronDown, FileText, Mail } from "lucide-react";
+import { ArrowRight, FileText, Mail } from "lucide-react";
 import { TypewriterText } from "@/components/typewriter-text";
 import { portfolioData } from "@/data/portfolio";
 import { ContactEmailForm } from "@/components/contact-email-form";
 import { CreativeGallerySection } from "@/components/creative-gallery-section";
+import { ExperienceEntries } from "@/components/experience-entries";
 import { TechPill } from "@/components/tech-pill";
 import { TECH_CATEGORY_LABELS, TECH_HOME_PREVIEW_KEYS } from "@/lib/tech-stack";
 import { Badge } from "@/components/ui/badge";
@@ -97,7 +98,7 @@ export function HomePage() {
       {introOverlayStage !== "hidden" ? (
         <div
           className={cn(
-            "fixed inset-0 z-50 flex items-center justify-center bg-background/95 px-6 backdrop-blur-md",
+            "fixed inset-0 z-[100] flex items-center justify-center bg-background px-6",
             "transition-opacity duration-500 ease-out",
             introOverlayStage === "exiting" ? "opacity-0" : "opacity-100"
           )}
@@ -347,12 +348,23 @@ export function HomePage() {
       </section>
 
       <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-12 md:gap-6 lg:gap-8">
-        <div className="space-y-5 md:col-span-8 md:space-y-6">
-          <div className="flex items-center justify-between">
-            <h2 className="flex items-center gap-2 font-heading text-2xl font-bold sm:gap-3 sm:text-3xl">
-              <span className="h-7 w-1.5 rounded-sm bg-secondary sm:h-8" />
+        <Card className="border border-border/50 bg-card/40 shadow-inner ring-0 transition-[colors,box-shadow] duration-300 ease-out hover:bg-muted/30 hover:shadow-md md:col-span-8">
+          <CardContent className="space-y-5 px-6 pb-6 pt-0 sm:px-6 sm:pb-6 sm:pt-0">
+          <div className="flex items-center justify-between gap-3">
+            <h2 className="flex items-center gap-2 font-heading text-xl font-bold sm:gap-3 sm:text-2xl">
+              <span className="h-6 w-1.5 rounded-sm bg-secondary transition-colors duration-300 ease-out" />
               Recent Projects
             </h2>
+            <Link
+              to="/projects"
+              className={cn(
+                buttonVariants({ variant: "outline", size: "sm" }),
+                "shrink-0 gap-1.5"
+              )}
+            >
+              View all projects
+              <ArrowRight className="size-3.5" aria-hidden />
+            </Link>
           </div>
 
           <div className="flex flex-col gap-4">
@@ -393,25 +405,28 @@ export function HomePage() {
             ))}
           </div>
 
-          <Link
-            to="/projects"
-            className={cn(
-              buttonVariants({ variant: "outline", size: "default" }),
-              "inline-flex w-full gap-2 sm:w-auto"
-            )}
-          >
-            View all projects
-            <ArrowRight className="size-4" aria-hidden />
-          </Link>
-        </div>
+          </CardContent>
+        </Card>
 
         <aside className="space-y-8 md:col-span-4 md:space-y-10">
           <Card className="border border-border/50 bg-card/40 shadow-inner ring-0 transition-[colors,box-shadow] duration-300 ease-out hover:bg-muted/30 hover:shadow-md">
             <CardContent className="space-y-4 sm:space-y-4 px-6 pb-6 pt-0 sm:px-6 sm:pb-6 sm:pt-0">
-              <h3 className="flex items-center gap-2 font-heading text-xl font-bold sm:gap-3 sm:text-2xl">
-                <span className="h-6 w-1.5 rounded-sm bg-secondary transition-colors duration-300 ease-out" />
-                Experience
-              </h3>
+              <div className="flex items-center justify-between gap-3">
+                <h3 className="flex items-center gap-2 font-heading text-xl font-bold sm:gap-3 sm:text-2xl">
+                  <span className="h-6 w-1.5 rounded-sm bg-secondary transition-colors duration-300 ease-out" />
+                  Experience
+                </h3>
+                <Link
+                  to="/experience"
+                  className={cn(
+                    buttonVariants({ variant: "outline", size: "sm" }),
+                    "shrink-0 gap-1.5"
+                  )}
+                >
+                  View all
+                  <ArrowRight className="size-3.5" aria-hidden />
+                </Link>
+              </div>
 
               <div>
                 <p className="mb-3 text-[9px] font-bold uppercase tracking-widest text-muted-foreground">
@@ -419,7 +434,7 @@ export function HomePage() {
                 </p>
                 <ExperienceEntries
                   sectionKey="work"
-                  entries={workExperience}
+                  entries={workExperience.slice(0, 2)}
                   openId={openExperienceId}
                   onOpenChange={setOpenExperienceId}
                 />
@@ -431,7 +446,7 @@ export function HomePage() {
                 </p>
                 <ExperienceEntries
                   sectionKey="organizations"
-                  entries={organizations}
+                  entries={organizations.slice(0, 4)}
                   openId={openExperienceId}
                   onOpenChange={setOpenExperienceId}
                 />
@@ -536,119 +551,6 @@ export function HomePage() {
         </div>
       </section>
       </div>
-    </div>
-  );
-}
-
-type ExperienceEntry = {
-  name: string;
-  dates: string;
-  role: string;
-  highlights: string[];
-  /** Optional logo URL; when absent, a neutral placeholder is shown */
-  logo?: string;
-};
-
-function ExperienceEntries({
-  entries,
-  sectionKey,
-  openId,
-  onOpenChange,
-}: {
-  entries: readonly ExperienceEntry[];
-  sectionKey: string;
-  openId: string | null;
-  onOpenChange: (id: string | null) => void;
-}) {
-  return (
-    <div className="space-y-2">
-      {entries.map((item, i) => {
-        const id = `${sectionKey}-${i}`;
-        const isOpen = openId === id;
-
-        return (
-        <details
-          key={id}
-          open={isOpen}
-          className={cn(
-            "group overflow-hidden rounded-lg border border-border/50 bg-muted/10 shadow-sm",
-            "transition-[border-color,box-shadow,background-color] duration-300 ease-out",
-            "hover:border-primary/40 hover:bg-muted/30",
-            "open:border-secondary/25 open:bg-secondary/4 open:shadow-md",
-            "open:hover:border-secondary/25 open:hover:bg-secondary/4",
-            "motion-reduce:transition-none"
-          )}
-        >
-          <summary
-            className={cn(
-              "flex cursor-pointer list-none items-start gap-2 p-2.5 outline-none marker:hidden sm:p-3 [&::-webkit-details-marker]:hidden",
-              "rounded-lg transition-[background-color,color] duration-200 ease-out",
-              "group-open:bg-secondary/8",
-              "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-            )}
-            onClick={(e) => {
-              e.preventDefault();
-              onOpenChange(isOpen ? null : id);
-            }}
-          >
-            <div className="flex min-w-0 flex-1 items-start gap-2 sm:gap-2.5">
-              <div
-                className="relative size-9 shrink-0 overflow-hidden rounded-md border border-border/50 bg-muted/40 transition-[border-color,background-color] duration-300 ease-out group-open:border-secondary/20 group-open:bg-muted/60 sm:size-10"
-                aria-hidden
-              >
-                {item.logo ? (
-                  <img src={item.logo} alt="" className="size-full object-cover" />
-                ) : (
-                  <span className="flex size-full items-center justify-center motion-safe:transition-transform motion-safe:duration-300 motion-safe:ease-out motion-safe:group-open:scale-105">
-                    <Building2 className="size-4 text-muted-foreground/35" strokeWidth={1.25} aria-hidden />
-                  </span>
-                )}
-              </div>
-              <div className="min-w-0 flex-1 text-left">
-                <span className="block wrap-break-word font-heading text-sm font-semibold leading-snug text-white sm:text-base">
-                  {item.role}
-                </span>
-                <span className="mt-1 block text-[11px] leading-snug text-muted-foreground sm:text-xs">
-                  {item.name}
-                  <span aria-hidden> · </span>
-                  {item.dates}
-                </span>
-              </div>
-            </div>
-            <ChevronDown
-              className="mt-0.5 size-4 shrink-0 text-muted-foreground transition-transform duration-300 ease-out group-open:rotate-180 motion-reduce:transition-none"
-              aria-hidden
-            />
-          </summary>
-          <div
-            className={cn(
-              "grid grid-rows-[0fr] transition-[grid-template-rows] duration-300 ease-out",
-              "motion-reduce:transition-none group-open:grid-rows-[1fr]"
-            )}
-          >
-            <div className="min-h-0 overflow-hidden">
-              <div className="border-t border-border/40 px-3 pb-3 pt-3">
-                <ul className="list-outside list-disc space-y-2 pl-4 text-sm leading-relaxed text-muted-foreground marker:text-muted-foreground/90">
-                  {item.highlights.map((h, i) => (
-                    <li
-                      key={`${item.name}-${i}`}
-                      className={cn(
-                        "pl-0.5 motion-safe:transition-[opacity,transform] motion-safe:duration-300 motion-safe:ease-out",
-                        "translate-y-1 opacity-0 group-open:translate-y-0 group-open:opacity-100",
-                        "motion-reduce:translate-y-0 motion-reduce:opacity-100 motion-reduce:transition-none"
-                      )}
-                      style={{ transitionDelay: `${Math.min(i, 5) * 45}ms` }}
-                    >
-                      {h}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-        </details>
-        );
-      })}
     </div>
   );
 }

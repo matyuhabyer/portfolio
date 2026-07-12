@@ -339,21 +339,53 @@ export const portfolioData = {
   },
   workExperience: [
     {
-      name: "Rakso Computer Technology, Inc.",
-      dates: "Jan. 2026 - Mar. 2026",
+      name: "Department of Science and Technology",
+      dates: "Jun 2026 - Jul 2026",
       role: "Software Development Intern",
+      logo: "/assets/logos/dost.png",
+      highlights: [
+        "Developed frontend and backend features for DOSTrack, a document tracking system for managing document workflows.",
+        "Implemented the Incoming Documents module with searchable tables, filters, status tracking, pagination, work-order modals, and attachment workflows to support document intake and processing.",
+        "Built the User Profile Dashboard, including edit information and change password flows.",
+        "Collaborated in standups, debugging sessions, branch-based development, and code reviews to support feature delivery."
+      ]
+    },
+    {
+      name: "Rakso Computer Technology, Inc.",
+      dates: "Jan 2026 - Mar 2026",
+      role: "Systems Development Intern",
       logo: "/assets/logos/raksoct.jpg",
       highlights: [
-        "Co-spearheaded end-to-end development of the Rakso Computer Technology CRM platform.",
-        "Managed a team of four interns and implemented Scrum methodology for delivery cadence."
+        "Served as one of the project leads for the end-to-end design and development of a company-wide CRM platform, coordinating requirements across multiple functional teams.",
+        "Managed a 4-person frontend team while contributing directly to frontend development, delegating tasks, enforcing deadlines, and aligning deliverables with business priorities.",
+        "Produced high-fidelity Figma prototypes that consolidated requirements and accelerated stakeholder design reviews.",
+        "Introduced Scrum workflows in YouTrack, improving sprint visibility, task ownership, and deadline tracking."
       ]
     }
   ],
   organizations: [
     {
+      name: "IEEE Industrial Electronics & Photonics Philippine Joint Chapter",
+      dates: "Jun 2026 - Present",
+      role: "Promotions / Web & Systems Volunteer",
+      logo: "/assets/logos/ieee-electronicsph.jpg",
+      highlights: [
+        "Supported the chapter's promotions, web, and systems initiatives."
+      ]
+    },
+    {
+      name: "DLSU Microsoft Student Community",
+      dates: "Oct 2025 - Present",
+      role: "Executive for Research & Development - Technology Development",
+      logo: "/assets/logos/msc.png",
+      highlights: [
+        "Contributed to research and technology development initiatives for the organization."
+      ]
+    },
+    {
       name: "IEEE Computer Society Philippines Chapter",
-      dates: "Jan. 2026 - Present",
-      role: "Volunteer",
+      dates: "Jan 2026 - Jun 2026",
+      role: "Promotions Volunteer",
       logo: "/assets/logos/ieeecsph.jpg",
       highlights: [
         "Contributed to publications and promotions by designing materials for the organization’s events and activities."
@@ -361,7 +393,7 @@ export const portfolioData = {
     },
     {
       name: "La Salle Computer Society",
-      dates: "Sept. 2024 - Aug. 2025",
+      dates: "Sep 2024 - Aug 2025",
       role: "Associate Vice President for Publicity and Creatives",
       logo: "/assets/logos/lscs.jpg",
       highlights: [
@@ -372,7 +404,7 @@ export const portfolioData = {
     },
     {
       name: "Computer Studies Government",
-      dates: "Feb. 2024 – Sept. 2025",
+      dates: "Feb 2024 - Sep 2025",
       role: "Director for Integrated Marketing Communications - Publicity",
       logo: "/assets/logos/csg.jpg",
       highlights: [
@@ -383,7 +415,7 @@ export const portfolioData = {
     },
     {
       name: "Animo Film Lab",
-      dates: "Nov. 2023 - Aug. 2024",
+      dates: "Nov 2023 - Aug 2024",
       role: "Assistant Vice President for Documentations and Logistics",
       logo: "/assets/logos/afl.jpg",
       highlights: [
@@ -394,7 +426,7 @@ export const portfolioData = {
     },
     {
       name: "LEAP 2024 Central Committee",
-      dates: "Apr. 2024 - Jul. 2024",
+      dates: "Apr 2024 - Jul 2024",
       role: "Assistant Team Head for Documentations",
       logo: "/assets/logos/leap2024.jpg",
       highlights: [
