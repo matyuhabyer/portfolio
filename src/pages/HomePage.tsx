@@ -1,556 +1,354 @@
-import { useEffect, useMemo, useState } from "react";
-import { Link } from "react-router-dom";
-import { ArrowRight, FileText, Mail } from "lucide-react";
-import { TypewriterText } from "@/components/typewriter-text";
-import { portfolioData } from "@/data/portfolio";
+import { useEffect, useMemo, useRef, useState } from "react";
+import {
+  ArrowRight, Award, BriefcaseBusiness, ChevronDown, ExternalLink, FileText,
+  Mail, Orbit, Send, Sparkles,
+} from "lucide-react";
 import { ContactEmailForm } from "@/components/contact-email-form";
 import { CreativeGallerySection } from "@/components/creative-gallery-section";
-import { ExperienceEntries } from "@/components/experience-entries";
-import { TechPill } from "@/components/tech-pill";
-import { TECH_CATEGORY_LABELS, TECH_HOME_PREVIEW_KEYS } from "@/lib/tech-stack";
-import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { projectDisplayYear } from "@/lib/project";
+import { CelestialBackdrop } from "@/components/celestial-backdrop";
+import { FoxPet } from "@/components/fox-pet";
+import { SheinCaseStudy } from "@/components/projects/SheinCaseStudy";
+import { CheckYourselfCaseStudy } from "@/components/projects/CheckYourselfCaseStudy";
+import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
+import { Button, buttonVariants } from "@/components/ui/button";
+import { portfolioData } from "@/data/portfolio";
+import { SHEIN_CASE_STUDY_SLUG } from "@/data/sheinCaseStudy";
+import { CHECKYOURSELF_CASE_STUDY_SLUG } from "@/data/checkYourselfCaseStudy";
+import { TECH_CATEGORY_LABELS, TECH_CATEGORY_ORDER, type TechCategoryKey } from "@/lib/tech-stack";
+import { SOCIAL_GITHUB_ICON, SOCIAL_INSTAGRAM_ICON, SOCIAL_LINKEDIN_ICON } from "@/lib/social-icons";
 import { cn } from "@/lib/utils";
 
-const HERO_BG = "/assets/images/wavebg.png";
-const HERO_PLACEHOLDER_BEFORE = "/assets/images/herobg-before.JPG";
-const HERO_PLACEHOLDER_AFTER = "/assets/images/herobg-after.png";
+type Project = (typeof portfolioData.projects)[number];
 
-const RECENT_PROJECT_COUNT = 3;
-const RECENT_CERTIFICATIONS_COUNT = 6;
-const INTRO_VISIBLE_MS = 4240;
-const INTRO_TOTAL_MS = 5240;
+function projectYear(project: Project) {
+  const match = project.timeline?.match(/20\d{2}/g);
+  return match?.at(-1) ?? "Selected work";
+}
 
-const SOCIAL_GITHUB_ICON =
-  "https://raw.githubusercontent.com/CLorant/readme-social-icons/main/medium/light/github.svg";
-const SOCIAL_LINKEDIN_ICON =
-  "https://raw.githubusercontent.com/CLorant/readme-social-icons/main/medium/light/linkedin.svg";
-const SOCIAL_INSTAGRAM_ICON =
-  "https://raw.githubusercontent.com/CLorant/readme-social-icons/main/medium/light/instagram.svg";
+function ProjectDialog({ project, onClose }: { project: Project | null; onClose: () => void }) {
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const modalStartRef = useRef<HTMLDivElement>(null);
 
-function shouldRunSessionIntro() {
-  if (typeof window === "undefined") return false;
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  if (prefersReducedMotion) return false;
-  const introStorageKey = "portfolio-intro-seen-session";
-  return window.sessionStorage.getItem(introStorageKey) !== "1";
+  useEffect(() => {
+    if (!project) return;
+
+    let secondFrame = 0;
+    const firstFrame = window.requestAnimationFrame(() => {
+      modalStartRef.current?.focus({ preventScroll: true });
+      dialogRef.current?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      secondFrame = window.requestAnimationFrame(() => {
+        dialogRef.current?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      });
+    });
+
+    return () => {
+      window.cancelAnimationFrame(firstFrame);
+      window.cancelAnimationFrame(secondFrame);
+    };
+  }, [project?.slug]);
+
+  if (!project) return null;
+  const isSheinCaseStudy = project.slug === SHEIN_CASE_STUDY_SLUG;
+  const isCheckYourselfCaseStudy = project.slug === CHECKYOURSELF_CASE_STUDY_SLUG;
+  const isFullUxCaseStudy = isSheinCaseStudy || isCheckYourselfCaseStudy;
+  const projectIndex = portfolioData.projects.findIndex((entry) => entry.slug === project.slug);
+  const projectNumber = String(projectIndex + 1).padStart(2, "0");
+  const projectTotal = String(portfolioData.projects.length).padStart(2, "0");
+  const highlights = "highlights" in project ? project.highlights : undefined;
+  const longDescription = "longDescription" in project ? project.longDescription : undefined;
+  const links = [
+    "ctaUrl" in project && project.ctaUrl ? { label: project.ctaLabel ?? "View project", href: project.ctaUrl } : null,
+    "ctaPresentationUrl" in project && project.ctaPresentationUrl ? { label: project.ctaPresentationLabel ?? "View presentation", href: project.ctaPresentationUrl } : null,
+    "ctaPrototypeUrl" in project && project.ctaPrototypeUrl ? { label: project.ctaPrototypeLabel ?? "View prototype", href: project.ctaPrototypeUrl } : null,
+  ].filter(Boolean) as { label: string; href: string }[];
+
+  return (
+    <Dialog open onOpenChange={(open) => !open && onClose()}>
+      <DialogContent
+        ref={dialogRef}
+        initialFocus={modalStartRef}
+        overlayClassName="editorial-overlay"
+        closeButtonClassName="editorial-dialog-close"
+        className={cn(
+          "editorial-dialog project-dialog",
+          isFullUxCaseStudy && "project-dialog-ux"
+        )}
+      >
+        <div ref={modalStartRef} tabIndex={-1} role="group" aria-label={`${project.name} project preview`} className="project-modal-hero">
+          <img src={project.heroImage || project.image} alt={`${project.name} project preview`} />
+          <span aria-hidden />
+        </div>
+        <header className="project-modal-masthead">
+          <div className="project-modal-coordinate" aria-hidden>
+            <span>Project</span>
+            <strong>{projectNumber}</strong>
+            <small>/ {projectTotal}</small>
+          </div>
+          <div className="project-modal-heading">
+            <p className="section-eyebrow">{projectYear(project)} · {project.label}</p>
+            <DialogTitle>{project.name}</DialogTitle>
+            <DialogDescription>{project.role}</DialogDescription>
+          </div>
+        </header>
+        {isFullUxCaseStudy ? (
+          <div className="case-study-modal-body px-4 pb-4 pt-7 sm:px-8 sm:pb-8 sm:pt-9 lg:px-12">
+            {isSheinCaseStudy ? (
+              <SheinCaseStudy project={project} backLink={{ to: "/#projects", label: "Back to Projects" }} onBack={onClose} showHeroImage={false} showBackLink={false} showHeader={false} />
+            ) : (
+              <CheckYourselfCaseStudy project={project} backLink={{ to: "/#projects", label: "Back to Projects" }} onBack={onClose} showHeroImage={false} showBackLink={false} showHeader={false} />
+            )}
+          </div>
+        ) : (
+          <div className="project-modal-content">
+            <aside className="project-modal-meta" aria-label="Project details">
+              <p className="section-eyebrow">Archive notes</p>
+              <dl>
+                <div><dt>Timeline</dt><dd>{project.timeline}</dd></div>
+                <div><dt>Discipline</dt><dd>{project.label}</dd></div>
+                {"tech" in project && project.tech ? <div><dt>Technology</dt><dd>{project.tech}</dd></div> : null}
+              </dl>
+            </aside>
+            <div className="project-modal-narrative">
+              <p className="project-modal-summary">{longDescription || project.description}</p>
+              {highlights?.length ? (
+                <div className="project-modal-contributions">
+                  <h3>What I contributed</h3>
+                  <ul>
+                    {highlights.map((highlight) => <li key={highlight}><Sparkles className="size-4 shrink-0 text-primary" aria-hidden />{highlight}</li>)}
+                  </ul>
+                </div>
+              ) : null}
+              <div className="project-modal-actions">
+                {links.map((link) => (
+                  <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className={cn(buttonVariants({ size: "lg" }), "celestial-pill gap-2")}>
+                    {link.label}<ExternalLink className="size-4" aria-hidden />
+                  </a>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+      </DialogContent>
+    </Dialog>
+  );
 }
 
 export function HomePage() {
-  const { profile, workExperience, organizations, projects, certifications } = portfolioData;
-  const recentProjects = useMemo(() => {
-    return [...projects]
-      .sort((a, b) => {
-        const ya = projectDisplayYear(a) ?? 0;
-        const yb = projectDisplayYear(b) ?? 0;
-        return yb - ya;
-      })
-      .slice(0, RECENT_PROJECT_COUNT);
+  const { profile, about, projects, workExperience, organizations, certifications, techStack } = portfolioData;
+  const [showAllProjects, setShowAllProjects] = useState(false);
+  const [showAllCertifications, setShowAllCertifications] = useState(false);
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [journeyModal, setJourneyModal] = useState<"work" | "organizations" | null>(null);
+
+  const syncProjectFromUrl = useMemo(() => () => {
+    const slug = new URLSearchParams(window.location.search).get("project");
+    setSelectedProject(projects.find((project) => project.slug === slug) ?? null);
   }, [projects]);
-  const recentCertifications = certifications.slice(0, RECENT_CERTIFICATIONS_COUNT);
-  const [openExperienceId, setOpenExperienceId] = useState<string | null>(null);
-  const [runIntro, setRunIntro] = useState(() => shouldRunSessionIntro());
-  const [introOverlayStage, setIntroOverlayStage] = useState<"hidden" | "visible" | "exiting">(() =>
-    shouldRunSessionIntro() ? "visible" : "hidden"
-  );
-  const [introProgress, setIntroProgress] = useState(0);
 
   useEffect(() => {
-    document.title = "Matthew Benison Javier";
-  }, []);
+    document.title = "Matthew Benison Javier — Product Designer & Developer";
+    syncProjectFromUrl();
+    window.addEventListener("popstate", syncProjectFromUrl);
+    return () => window.removeEventListener("popstate", syncProjectFromUrl);
+  }, [syncProjectFromUrl]);
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const introStorageKey = "portfolio-intro-seen-session";
-    const introShouldRun = shouldRunSessionIntro();
-    if (introShouldRun) {
-      setRunIntro(true);
-      window.sessionStorage.setItem(introStorageKey, "1");
-    }
-  }, []);
+  function openProject(project: Project) {
+    const url = new URL(window.location.href);
+    url.searchParams.set("project", project.slug);
+    url.hash = "projects";
+    window.history.pushState({}, "", url);
+    setSelectedProject(project);
+  }
 
-  useEffect(() => {
-    if (!runIntro) return;
+  function closeProject() {
+    const url = new URL(window.location.href);
+    url.searchParams.delete("project");
+    url.hash = "projects";
+    window.history.pushState({}, "", url);
+    setSelectedProject(null);
+  }
 
-    setIntroProgress(0);
-    setIntroOverlayStage("visible");
-    const kickProgress = window.setTimeout(() => {
-      setIntroProgress(100);
-    }, 60);
-    const beginExit = window.setTimeout(() => {
-      setIntroOverlayStage("exiting");
-    }, INTRO_VISIBLE_MS);
-    const hideOverlay = window.setTimeout(() => {
-      setIntroOverlayStage("hidden");
-    }, INTRO_TOTAL_MS);
-
-    return () => {
-      window.clearTimeout(kickProgress);
-      window.clearTimeout(beginExit);
-      window.clearTimeout(hideOverlay);
-    };
-  }, [runIntro]);
+  const visibleProjects = showAllProjects ? projects : projects.slice(0, 3);
+  const visibleCertifications = showAllCertifications ? certifications : certifications.slice(0, 6);
+  const visibleWorkExperience = workExperience.slice(0, 4);
+  const visibleOrganizations = organizations.slice(0, 4);
+  const journeyModalEntries = journeyModal === "work" ? workExperience : organizations;
 
   return (
-    <div className="relative">
-      {introOverlayStage !== "hidden" ? (
-        <div
-          className={cn(
-            "fixed inset-0 z-[100] flex items-center justify-center bg-background px-6",
-            "transition-opacity duration-500 ease-out",
-            introOverlayStage === "exiting" ? "opacity-0" : "opacity-100"
-          )}
-          aria-hidden
-        >
-          <div
-            className={cn(
-              "text-center transition-all duration-500 ease-out",
-              introOverlayStage === "exiting" ? "translate-y-1 scale-95 opacity-0" : "translate-y-0 scale-100 opacity-100"
-            )}
-          >
-            <iframe
-              src="https://lottie.host/embed/f5003000-a191-4e18-88a3-9c3f64652870/SVn5IcU6tG.json"
-              title="Welcome animation"
-              className="mx-auto h-[220px] w-[560px] max-w-full border-0 sm:h-[260px] sm:w-[640px]"
-              loading="eager"
-            />
-            <p className="mt-3 text-[14px] font-medium tracking-wide text-muted-foreground sm:text-[16px]">
-              Loading experience...
-            </p>
-            <div className="mx-auto mt-5 h-[6px] w-[224px] overflow-hidden rounded-full bg-muted/60 sm:w-[288px]">
-              <div
-                className="h-full rounded-full bg-linear-to-r from-primary to-secondary transition-[width] duration-1800 ease-out"
-                style={{
-                  width: `${introProgress}%`,
-                  transitionDuration: `${INTRO_VISIBLE_MS}ms`,
-                }}
-                aria-hidden
-              />
+    <>
+      <CelestialBackdrop />
+      <FoxPet />
+      <div className="celestial-page">
+        <section id="home" className="hero-one-page scroll-mt-24" aria-labelledby="hero-title">
+          <span className="hero-cover-rule" aria-hidden />
+          <div className="hero-copy">
+            <p className="section-eyebrow"><Sparkles className="size-4" aria-hidden /> my place among the stars</p>
+            <h1 id="hero-title">Matthew<br /><span>Benison Javier</span></h1>
+            <p className="hero-lede">I design and build useful digital products—turning research, systems, and thoughtful details into experiences that feel effortless.</p>
+            <div className="hero-actions">
+              <a href="#projects" className={cn(buttonVariants({ size: "lg" }), "celestial-pill gap-2")}>Explore my work <ArrowRight className="size-4" aria-hidden /></a>
+              <a href={profile.resume} target="_blank" rel="noopener noreferrer" className={cn(buttonVariants({ variant: "outline", size: "lg" }), "celestial-pill gap-2")}><FileText className="size-4" aria-hidden /> Resume</a>
             </div>
           </div>
-        </div>
-      ) : null}
-      <div
-        className={cn(
-          "space-y-12 transition-[opacity,transform,filter] duration-500 ease-out sm:space-y-16",
-          introOverlayStage !== "hidden" && "pointer-events-none scale-[0.995] blur-[1px] opacity-0"
-        )}
-      >
-      <section className="relative mb-6 flex min-h-[min(380px,78svh)] w-full flex-col justify-end overflow-hidden rounded-lg border border-border/50 px-4 py-7 shadow-2xl sm:mb-8 sm:min-h-[min(440px,75vh)] sm:rounded-xl sm:px-6 sm:py-9 md:px-12 md:py-11">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat brightness-175"
-          style={{ backgroundImage: `url(${HERO_BG})` }}
-          aria-hidden
-        />
-        <div
-          className="absolute inset-0 bg-linear-to-t from-background via-background/75 to-background/35"
-          aria-hidden
-        />
-        <div className="relative z-10 flex w-full flex-col gap-5 sm:gap-6 lg:flex-row lg:items-start lg:justify-between lg:gap-8">
-          <div className="min-w-0 max-w-7xl flex-1 text-left">
-            <p
-              className={cn(
-                "font-sans text-2xl font-medium text-foreground/90 sm:text-3xl md:text-4xl",
-                runIntro && "animate-in fade-in slide-in-from-bottom-2 duration-500"
-              )}
-            >
-              Hello, I&apos;m
-            </p>
-            <h1
-              className={cn(
-                "mt-0.5 bg-linear-to-b from-primary to-secondary bg-clip-text font-sans text-[clamp(2.7rem,7.1vw,4.8rem)] font-extrabold tracking-tight text-transparent md:text-8xl lg:text-9xl",
-                runIntro &&
-                  "animate-in fade-in zoom-in-95 slide-in-from-bottom-2 duration-700"
-              )}
-              style={{
-                fontSynthesis: "none",
-                ...(runIntro ? { animationDelay: "100ms" } : {}),
-              }}
-            >
-              {profile.name}
-            </h1>
-            <div
-              className={cn(
-                "mt-3 h-2 w-36 rounded-full bg-secondary sm:mt-3.5 sm:w-18",
-                runIntro && "animate-in fade-in duration-500"
-              )}
-              style={runIntro ? { animationDelay: "160ms" } : undefined}
-              aria-hidden
-            />
-            <p
-              className={cn(
-                "mt-3 font-sans text-3xl font-bold tracking-tight text-foreground sm:mt-3.5 sm:text-4xl md:text-5xl lg:text-6xl",
-                runIntro && "animate-in fade-in slide-in-from-bottom-1 duration-700"
-              )}
-              style={runIntro ? { animationDelay: "220ms" } : undefined}
-            >
-              I am {" "}
-              <TypewriterText
-                texts={[
-                  "a UI/UX Designer.",
-                  "a Software Engineer.",
-                  "a UX Researcher.",
-                  "a Database Administrator.",
-                  "an Analyst.",
-                  "an All-Arounder.",
-                  "a Lifelong Learner.",
-                ]}
-                className="font-sans text-3xl font-bold tracking-tight text-secondary sm:text-4xl md:text-5xl lg:text-6xl"
-              />
-            </p>
-            <div
-              className={cn(
-                "mt-4 flex flex-col gap-2.5 sm:mt-5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-3",
-                runIntro && "animate-in fade-in slide-in-from-bottom-2 duration-700"
-              )}
-              style={runIntro ? { animationDelay: "320ms" } : undefined}
-            >
-              <a
-                href={profile.resume}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cn(
-                  buttonVariants({ size: "lg" }),
-                  "gap-2 text-base sm:text-lg shadow-lg shadow-primary/20"
-                )}
-              >
-                <FileText className="size-4" aria-hidden />
-                View Resume
-              </a>
-              <a
-                href="#contact"
-                className={cn(
-                  buttonVariants({ variant: "outline", size: "lg" }),
-                  "gap-2 text-base sm:text-lg"
-                )}
-              >
-                <Mail className="size-4" aria-hidden />
-                Get in touch
-              </a>
-              <a
-                href={profile.linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className={cn(
-                  buttonVariants({ variant: "outline", size: "lg" }),
-                  "inline-flex"
-                )}
-              >
-                <img
-                  src={SOCIAL_LINKEDIN_ICON}
-                  alt=""
-                  width={16}
-                  height={16}
-                  className="size-4 shrink-0 object-contain"
-                  aria-hidden
-                />
-              </a>
-              <a
-                href={profile.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="GitHub"
-                className={cn(
-                  buttonVariants({ variant: "outline", size: "lg" }),
-                  "inline-flex"
-                )}
-              >
-                <img
-                  src={SOCIAL_GITHUB_ICON}
-                  alt=""
-                  width={16}
-                  height={16}
-                  className="size-4 shrink-0 object-contain"
-                  aria-hidden
-                />
-              </a>
-              <a
-                href={profile.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className={cn(
-                  buttonVariants({ variant: "outline", size: "lg" }),
-                  "inline-flex"
-                )}
-              >
-                <img
-                  src={SOCIAL_INSTAGRAM_ICON}
-                  alt=""
-                  width={16}
-                  height={16}
-                  className="size-4 shrink-0 object-contain"
-                  aria-hidden
-                />
-              </a>
+          <figure className="hero-portrait-planet">
+            <span className="hero-portrait-orbit" aria-hidden><i /></span>
+            <span className="hero-portrait-star hero-portrait-star-one" aria-hidden />
+            <span className="hero-portrait-star hero-portrait-star-two" aria-hidden />
+            <div className="hero-portrait-ring">
+              <img src={about.profileImage} alt="Matthew Benison Javier" />
+              <span className="hero-portrait-glaze" aria-hidden />
+              <span className="hero-portrait-craters" aria-hidden><i /><i /><i /></span>
             </div>
-          </div>
-          <div
-            className={cn(
-              "mx-auto shrink-0 p-2 sm:p-4 lg:mx-0 lg:mt-2",
-              runIntro && "animate-in fade-in zoom-in-95 duration-700"
-            )}
-            style={runIntro ? { animationDelay: "240ms" } : undefined}
-          >
-            <div
-              className={cn(
-                "group relative size-60 cursor-default sm:size-72 md:size-80 lg:size-96",
-                "transition-transform duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] will-change-transform",
-                "hover:scale-110 hover:-rotate-2",
-                "motion-reduce:transition-none motion-reduce:hover:scale-100 motion-reduce:hover:rotate-0"
-              )}
-              role="img"
-              aria-label={`${profile.name} — hover to reveal alternate photo`}
-            >
-              {/* Fire glow — only on hover */}
-              <div
-                className="pointer-events-none absolute -inset-3 z-1 opacity-0 transition-opacity duration-300 group-hover:opacity-100 motion-reduce:group-hover:opacity-0"
-                aria-hidden
-              >
-                <div
-                  className="absolute inset-0 rounded-full bg-[radial-gradient(ellipse_130%_110%_at_50%_100%,rgba(255,140,40,0.65)_0%,rgba(255,70,0,0.45)_35%,rgba(255,40,0,0.2)_55%,transparent_72%)]"
-                  style={{
-                    animation: "hero-fire-flicker 0.42s ease-in-out infinite",
-                  }}
-                />
-                <div
-                  className="absolute -inset-1 rounded-full bg-[radial-gradient(ellipse_100%_90%_at_50%_110%,rgba(255,220,80,0.55)_0%,rgba(255,100,20,0.4)_45%,transparent_68%)] mix-blend-screen"
-                  style={{
-                    animation: "hero-fire-flicker 0.55s ease-in-out infinite",
-                    animationDelay: "0.08s",
-                  }}
-                />
-              </div>
-              <div
-                className="pointer-events-none absolute inset-0 z-2 animate-spin rounded-full border-2 border-dashed border-primary animation-duration-[30s] motion-reduce:animate-none"
-                aria-hidden
-              />
-              <div className="absolute inset-[8px] z-10 overflow-hidden rounded-full bg-muted/50 shadow-inner">
-                <img
-                  src={HERO_PLACEHOLDER_BEFORE}
-                  alt=""
-                  className="absolute inset-0 size-full object-cover object-center transition-opacity duration-500 group-hover:opacity-0 motion-reduce:group-hover:opacity-100"
-                  draggable={false}
-                />
-                <img
-                  src={HERO_PLACEHOLDER_AFTER}
-                  alt=""
-                  className="absolute inset-0 size-full object-cover object-center opacity-0 transition-opacity duration-500 group-hover:opacity-100 motion-reduce:hidden"
-                  draggable={false}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+          </figure>
+        </section>
 
-      <div className="grid grid-cols-1 items-start gap-6 md:grid-cols-12 md:gap-6 lg:gap-8">
-        <Card className="border border-border/50 bg-card/40 shadow-inner ring-0 transition-[colors,box-shadow] duration-300 ease-out hover:bg-muted/30 hover:shadow-md md:col-span-8">
-          <CardContent className="space-y-5 px-6 pb-6 pt-0 sm:px-6 sm:pb-6 sm:pt-0">
-          <div className="flex items-center justify-between gap-3">
-            <h2 className="flex items-center gap-2 font-heading text-xl font-bold sm:gap-3 sm:text-2xl">
-              <span className="h-6 w-1.5 rounded-sm bg-secondary transition-colors duration-300 ease-out" />
-              Recent Projects
-            </h2>
-            <Link
-              to="/projects"
-              className={cn(
-                buttonVariants({ variant: "outline", size: "sm" }),
-                "shrink-0 gap-1.5"
-              )}
-            >
-              View all projects
-              <ArrowRight className="size-3.5" aria-hidden />
-            </Link>
+        <section id="projects" className="celestial-section projects-section scroll-mt-24" aria-labelledby="projects-title">
+          <div className="section-heading">
+            <p className="section-eyebrow">Selected worlds</p>
+            <h2 id="projects-title">Projects with a purpose</h2>
+            <p>Each project begins with a real problem and ends with a practical, considered outcome.</p>
           </div>
-
-          <div className="flex flex-col gap-4">
-            {recentProjects.map((project) => (
-              <Link
-                key={project.slug}
-                to={`/projects/${project.slug}`}
-                state={{ from: "home" }}
-                className="group block"
-              >
-                <Card className="border border-border/50 bg-card/40 shadow-inner ring-0 transition-[colors,box-shadow] duration-300 ease-out hover:border-primary/40 hover:bg-muted/30 hover:shadow-md">
-                  <CardContent className="flex flex-row items-stretch gap-4 p-4 sm:gap-5 sm:p-5">
-                    <div className="relative h-28 w-36 shrink-0 overflow-hidden rounded-lg border border-border/50 bg-card/30 sm:h-32 sm:w-44">
-                      <img
-                        src={project.image}
-                        alt=""
-                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
-                      />
-                    </div>
-                    <div className="flex min-w-0 flex-1 flex-col gap-1.5 py-1">
-                      <h3 className="font-heading text-base font-bold leading-snug sm:text-lg">
-                        {project.name}
-                      </h3>
-                      {project.label ? (
-                        <Badge variant="secondary" className="w-fit text-[10px] sm:text-xs mt-1">
-                          {project.label}
-                        </Badge>
-                      ) : null}
-                      {project.description ? (
-                        <p className="line-clamp-3 text-sm leading-relaxed text-muted-foreground mt-3">
-                          {project.description}
-                        </p>
-                      ) : null}
-                    </div>
-                  </CardContent>
-                </Card>
-              </Link>
+          <div className="projects-grid">
+            {visibleProjects.map((project, index) => (
+              <article key={project.slug} className={cn("project-card", index === 0 && "project-featured")}>
+                <span className="project-index" aria-hidden>{String(index + 1).padStart(2, "0")}</span>
+                {index === 0 ? <span className="project-featured-badge"><Sparkles className="size-3.5" aria-hidden /> Featured</span> : null}
+                <button type="button" onClick={() => openProject(project)} className="project-card-button" aria-label={`View ${project.name} case study`}>
+                  <div className="project-image"><img src={project.image} alt="" loading={index > 2 ? "lazy" : "eager"} /></div>
+                  <div className="project-copy">
+                    <p className="section-eyebrow">{projectYear(project)} · {project.label}</p>
+                    <h3>{project.name}</h3>
+                    <p className="project-role">{project.role}</p>
+                    <p>{project.description}</p>
+                    <span>Read more <ArrowRight className="size-4" aria-hidden /></span>
+                  </div>
+                </button>
+              </article>
             ))}
           </div>
+          {!showAllProjects ? <div className="section-action"><Button variant="outline" size="lg" className="celestial-pill" onClick={() => setShowAllProjects(true)}>View all {projects.length} projects</Button></div> : null}
+        </section>
 
-          </CardContent>
-        </Card>
-
-        <aside className="space-y-8 md:col-span-4 md:space-y-10">
-          <Card className="border border-border/50 bg-card/40 shadow-inner ring-0 transition-[colors,box-shadow] duration-300 ease-out hover:bg-muted/30 hover:shadow-md">
-            <CardContent className="space-y-4 sm:space-y-4 px-6 pb-6 pt-0 sm:px-6 sm:pb-6 sm:pt-0">
-              <div className="flex items-center justify-between gap-3">
-                <h3 className="flex items-center gap-2 font-heading text-xl font-bold sm:gap-3 sm:text-2xl">
-                  <span className="h-6 w-1.5 rounded-sm bg-secondary transition-colors duration-300 ease-out" />
-                  Experience
-                </h3>
-                <Link
-                  to="/experience"
-                  className={cn(
-                    buttonVariants({ variant: "outline", size: "sm" }),
-                    "shrink-0 gap-1.5"
-                  )}
-                >
-                  View all
-                  <ArrowRight className="size-3.5" aria-hidden />
-                </Link>
+        <section id="experience" className="celestial-section experience-section scroll-mt-24" aria-labelledby="experience-title">
+          <div className="section-heading">
+            <p className="section-eyebrow">My journey</p>
+            <h2 id="experience-title">Experience in orbit</h2>
+            <p>Professional roles and communities that shaped how I lead, collaborate, and build.</p>
+          </div>
+          <div className="journey-grid">
+            <div>
+              <h3 className="journey-label"><BriefcaseBusiness className="size-5" aria-hidden /> Work experience</h3>
+              <div className="journey-line">
+                {visibleWorkExperience.map((entry) => <ExperienceCard key={`${entry.name}-${entry.role}`} entry={entry} />)}
               </div>
-
-              <div>
-                <p className="mb-3 text-[9px] font-bold uppercase tracking-widest text-muted-foreground">
-                  Work experience
-                </p>
-                <ExperienceEntries
-                  sectionKey="work"
-                  entries={workExperience.slice(0, 2)}
-                  openId={openExperienceId}
-                  onOpenChange={setOpenExperienceId}
-                />
+              {workExperience.length > 4 ? <Button variant="ghost" className="journey-more-action" onClick={() => setJourneyModal("work")}>View all work experience <ArrowRight className="size-4" aria-hidden /></Button> : null}
+            </div>
+            <div>
+              <h3 className="journey-label"><Orbit className="size-5" aria-hidden /> Organizations</h3>
+              <div className="journey-line">
+                {visibleOrganizations.map((entry) => <ExperienceCard key={`${entry.name}-${entry.role}`} entry={entry} />)}
               </div>
+              {organizations.length > 4 ? <Button variant="ghost" className="journey-more-action" onClick={() => setJourneyModal("organizations")}>View all organizations <ArrowRight className="size-4" aria-hidden /></Button> : null}
+            </div>
+          </div>
+        </section>
 
-              <div>
-                <p className="mb-3 text-[9px] font-bold uppercase tracking-widest text-muted-foreground">
-                  Organizations
-                </p>
-                <ExperienceEntries
-                  sectionKey="organizations"
-                  entries={organizations.slice(0, 4)}
-                  openId={openExperienceId}
-                  onOpenChange={setOpenExperienceId}
-                />
-              </div>
-            </CardContent>
-          </Card>
-        </aside>
+        <section id="skills" className="celestial-section skills-section scroll-mt-24" aria-labelledby="skills-title">
+          <div className="section-heading">
+            <p className="section-eyebrow">Working constellations</p>
+            <h2 id="skills-title">Tools I build with</h2>
+            <p>A broad technical foundation organized around the work each tool helps me accomplish.</p>
+          </div>
+          <div className="skills-grid">
+            {TECH_CATEGORY_ORDER.map((key: TechCategoryKey, index) => (
+              <article key={key} className="skill-constellation">
+                <p className="constellation-number">0{index + 1}</p>
+                <h3>{TECH_CATEGORY_LABELS[key]}</h3>
+                <div className="tech-list">
+                  {techStack[key].map((item) => <span key={item.name}><img src={item.image} alt="" loading="lazy" />{item.name}</span>)}
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="certifications" className="celestial-section certifications-section scroll-mt-24" aria-labelledby="certifications-title">
+          <div className="section-heading">
+            <p className="section-eyebrow">Coordinates of growth</p>
+            <h2 id="certifications-title">Certifications</h2>
+            <p>Milestones from a habit of learning across design, development, data, and cloud technology.</p>
+          </div>
+          <div className="cert-grid">
+            {visibleCertifications.map((certification, index) => (
+              <a key={certification.title} href={certification.link} target="_blank" rel="noopener noreferrer" className="cert-card">
+                <Award className="size-5 text-primary" aria-hidden />
+                <span className="cert-coordinate">STAR {String(index + 1).padStart(2, "0")}</span>
+                <h3>{certification.title}</h3>
+                <p>{certification.issuer}</p><time>{certification.date}</time>
+                <ExternalLink className="cert-link size-4" aria-hidden />
+              </a>
+            ))}
+          </div>
+          {!showAllCertifications ? <div className="section-action"><Button variant="outline" size="lg" className="celestial-pill" onClick={() => setShowAllCertifications(true)}>View all {certifications.length} certifications</Button></div> : null}
+        </section>
+
+        <CreativeGallerySection />
+
+        <section id="contact" className="celestial-section contact-section scroll-mt-24" aria-labelledby="contact-title">
+          <div className="contact-copy">
+            <p className="section-eyebrow">One message away</p>
+            <h2 id="contact-title">Let’s create something meaningful.</h2>
+            <p>Whether you have an opportunity, a product idea, or simply want to talk about thoughtful technology, I’d love to hear from you.</p>
+            <div className="contact-links">
+              <a href={`mailto:${profile.email}`} aria-label="Email Matthew"><Mail aria-hidden /></a>
+              <a href={profile.linkedin} target="_blank" rel="noopener noreferrer" aria-label="Matthew on LinkedIn"><img src={SOCIAL_LINKEDIN_ICON} alt="" aria-hidden /></a>
+              <a href={profile.github} target="_blank" rel="noopener noreferrer" aria-label="Matthew on GitHub"><img src={SOCIAL_GITHUB_ICON} alt="" aria-hidden /></a>
+              <a href={profile.instagram} target="_blank" rel="noopener noreferrer" aria-label="Matthew on Instagram"><img src={SOCIAL_INSTAGRAM_ICON} alt="" aria-hidden /></a>
+            </div>
+          </div>
+          <div className="contact-form-card">
+            <div className="mb-6 flex items-center gap-3"><Send className="size-5 text-primary" aria-hidden /><h3 className="font-heading text-xl text-[#fff8df]">Send a message</h3></div>
+            <ContactEmailForm />
+          </div>
+        </section>
       </div>
-
-      <section className="-mt-5 grid grid-cols-1 gap-6 sm:-mt-7 lg:grid-cols-2">
-        <Card className="border border-border/50 bg-card/40 shadow-inner ring-0 transition-shadow duration-300 ease-out hover:shadow-md">
-          <CardContent className="px-4 pb-4 pt-3">
-            <div className="mb-3 flex items-center justify-between gap-3">
-              <h2 className="flex items-center gap-2 font-heading text-xl font-bold sm:gap-3 sm:text-2xl">
-               <span className="h-7 w-1.5 rounded-sm bg-secondary transition-colors duration-300 ease-out" />
-                Tech Stack
-              </h2>
-              <Link
-                to="/tech-stack"
-                className={cn(
-                  buttonVariants({ variant: "outline", size: "sm" }),
-                  "shrink-0 gap-1.5"
-                )}
-              >
-                View all
-                <ArrowRight className="size-3.5" aria-hidden />
-              </Link>
+      <ProjectDialog project={selectedProject} onClose={closeProject} />
+      <Dialog open={journeyModal !== null} onOpenChange={(open) => !open && setJourneyModal(null)}>
+        <DialogContent
+          overlayClassName="editorial-overlay"
+          closeButtonClassName="editorial-dialog-close"
+          className="editorial-dialog journey-dialog"
+        >
+          <header className="journey-modal-masthead">
+            <div className="journey-modal-coordinate" aria-hidden><span>Archive</span><strong>{journeyModal === "work" ? "01" : "02"}</strong></div>
+            <div>
+              <p className="section-eyebrow">Complete journey</p>
+              <DialogTitle>{journeyModal === "work" ? "Work experience" : "Organizations"}</DialogTitle>
+              <DialogDescription>
+                {journeyModal === "work" ? "All professional roles and contributions." : "All communities, leadership roles, and volunteer work."}
+              </DialogDescription>
             </div>
-            <div className="space-y-5">
-              {TECH_HOME_PREVIEW_KEYS.map((key) => {
-                const items = portfolioData.techStack[key];
-                return (
-                  <div key={key}>
-                    <h3 className="mb-2 font-heading text-sm font-semibold text-foreground">
-                      {TECH_CATEGORY_LABELS[key]}
-                    </h3>
-                    <div className="flex flex-wrap gap-2">
-                      {items.map((item) => (
-                        <TechPill key={item.name} item={item} />
-                      ))}
-                    </div>
-                  </div>
-                );
-              })}
+          </header>
+          <div className={`journey-modal-list${journeyModal === "organizations" ? " is-single" : ""}`}>
+            <div className="journey-line">
+              {journeyModalEntries.map((entry) => <ExperienceCard key={`${entry.name}-${entry.role}`} entry={entry} />)}
             </div>
-          </CardContent>
-        </Card>
+          </div>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+}
 
-        <Card className="border border-border/50 bg-card/40 shadow-inner ring-0 transition-shadow duration-300 ease-out hover:shadow-md">
-          <CardContent className="px-4 pb-4 pt-3">
-            <div className="mb-3 flex items-center justify-between gap-3">
-              <h2 className="flex items-center gap-2 font-heading text-xl font-bold sm:gap-3 sm:text-2xl">
-                <span className="h-7 w-1.5 rounded-sm bg-secondary transition-colors duration-300 ease-out" />
-                Recent Certifications</h2>
-              <Link
-                to="/certifications"
-                className={cn(
-                  buttonVariants({ variant: "outline", size: "sm" }),
-                  "shrink-0 gap-1.5"
-                )}
-              >
-                View all
-                <ArrowRight className="size-3.5" aria-hidden />
-              </Link>
-            </div>
-            <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-              {recentCertifications.map((c) => (
-                <a
-                  key={c.title}
-                  href={c.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block rounded-lg border border-border/50 bg-muted/10 p-2.5 transition-colors hover:border-primary/40 hover:bg-muted/30"
-                >
-                  <p className="font-heading text-sm font-bold leading-snug">{c.title}</p>
-                  <p className="text-xs text-muted-foreground">{c.issuer}</p>
-                  <p className="mt-1 text-[10px] uppercase tracking-wider text-primary">{c.date}</p>
-                </a>
-              ))}
-            </div>
-          </CardContent>
-        </Card>
-      </section>
-
-      <CreativeGallerySection />
-
-      <section
-        id="contact"
-        className="-mt-5 scroll-mt-24 rounded-xl border border-border/50 bg-card/40 p-6 shadow-inner sm:p-8 sm:scroll-mt-28"
-      >
-        <div className="mb-4 flex items-center gap-2 sm:mb-5 sm:gap-3">
-          <span className="h-6 w-1.5 rounded-sm bg-secondary sm:h-7" aria-hidden />
-          <h2 className="font-heading text-2xl font-bold sm:text-3xl">Let's Connect!</h2>
-        </div>
-        <p className="mb-6 max-w-full text-sm leading-relaxed text-muted-foreground sm:text-base">
-          I'm currently seeking exciting internship opportunities! If you'd like to connect or collaborate, feel free to reach out by email, connect with me on LinkedIn, or check out my GitHub.
-        </p>
-
-        <div className="mb-8 rounded-lg border border-border/60 bg-muted/20 p-4 sm:p-5">
-          <h3 className="mb-4 font-heading text-base font-semibold text-foreground sm:text-lg">Send me a message</h3>
-          <ContactEmailForm />
-        </div>
-      </section>
-      </div>
-    </div>
+function ExperienceCard({ entry }: { entry: (typeof portfolioData.workExperience)[number] }) {
+  return (
+    <details className="journey-card group">
+      <summary>
+        <span className="journey-planet"><img src={entry.logo} alt="" /></span>
+        <span className="min-w-0 flex-1"><strong>{entry.role}</strong><small>{entry.name}</small><time>{entry.dates}</time></span>
+        <ChevronDown className="size-5 shrink-0 transition-transform group-open:rotate-180" aria-hidden />
+      </summary>
+      <ul>{entry.highlights.map((highlight) => <li key={highlight}>{highlight}</li>)}</ul>
+    </details>
   );
 }

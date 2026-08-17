@@ -64,7 +64,7 @@ function PullQuote({
 function OutcomeSummaryWidget() {
   const w = C.outcomeWidget;
   return (
-    <div className="not-prose mb-12 overflow-hidden rounded-xl border border-white/10 bg-[#14181C] text-zinc-100 shadow-lg">
+    <div className="case-study-summary-widget not-prose mb-12 overflow-hidden rounded-xl border border-white/10 text-zinc-100 shadow-lg">
       <div className="grid gap-4 border-b border-white/10 px-4 py-5 sm:grid-cols-2 lg:grid-cols-4 lg:px-6">
         {w.meta.map((row) => (
           <div key={row.label}>
@@ -113,7 +113,7 @@ function OutcomeSummaryWidget() {
           {w.outcomes.map((o) => (
             <li
               key={o.title}
-              className="flex flex-col gap-2 rounded-lg border border-white/10 bg-black/20 px-4 py-3 sm:flex-row sm:items-start sm:gap-3"
+              className="flex flex-col gap-2 rounded-lg border border-white/10 bg-white/[0.035] px-4 py-3 sm:flex-row sm:items-start sm:gap-3"
             >
               <span
                 className={cn(
@@ -167,28 +167,44 @@ function SectionTitle({
 export function SheinCaseStudy({
   project,
   backLink,
+  onBack,
+  showHeroImage = true,
+  showBackLink = true,
+  showHeader = true,
 }: {
   project: Project;
   backLink: { to: string; label: string };
+  onBack?: () => void;
+  showHeroImage?: boolean;
+  showBackLink?: boolean;
+  showHeader?: boolean;
 }) {
   return (
     <article className="mx-auto w-full min-w-0 max-w-4xl pb-16">
-      <div className="mb-8">
-        <Link
-          to={backLink.to}
-          className={cn(
-            buttonVariants({ variant: "ghost", size: "sm" }),
-            "gap-1 pl-0 text-primary"
-          )}
-        >
-          <ArrowLeft className="size-4" />
-          {backLink.label}
-        </Link>
-      </div>
+      {showBackLink ? <div className="mb-8">
+        {onBack ? (
+          <button
+            type="button"
+            onClick={onBack}
+            className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "gap-1 pl-0 text-primary")}
+          >
+            <ArrowLeft className="size-4" />
+            {backLink.label}
+          </button>
+        ) : (
+          <Link
+            to={backLink.to}
+            className={cn(buttonVariants({ variant: "ghost", size: "sm" }), "gap-1 pl-0 text-primary")}
+          >
+            <ArrowLeft className="size-4" />
+            {backLink.label}
+          </Link>
+        )}
+      </div> : null}
 
-      <ProjectPosterHeader project={project} />
+      {showHeader ? <ProjectPosterHeader project={project} /> : null}
 
-      {project.heroImage ? (
+      {showHeroImage && project.heroImage ? (
         <LetterboxedProjectHero
           src={project.heroImage}
           alt={`${project.name} mockup`}

@@ -1,26 +1,24 @@
-import { NavLink } from "react-router-dom";
-import { LayoutGrid, Zap } from "lucide-react";
+import { BriefcaseBusiness, Home, Mail, Sparkles } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useActiveSection } from "@/components/layout/SiteNav";
 
-function itemClass(active: boolean) {
-  return cn(
-    "flex flex-col items-center justify-center gap-1 text-[10px] font-medium uppercase tracking-widest",
-    active ? "text-primary" : "text-muted-foreground hover:text-foreground"
-  );
-}
+const ITEMS = [
+  ["home", "Home", Home],
+  ["projects", "Work", Sparkles],
+  ["experience", "Journey", BriefcaseBusiness],
+  ["contact", "Contact", Mail],
+] as const;
 
 export function SiteMobileNav() {
+  const active = useActiveSection();
   return (
-    <nav className="fixed bottom-0 z-50 w-full border-t border-border/40 bg-background/95 pb-[env(safe-area-inset-bottom)] backdrop-blur-xl md:hidden">
-      <div className="flex h-16 items-center justify-around px-4">
-        <NavLink to="/" end className={({ isActive }) => itemClass(isActive)}>
-          <Zap className="size-5" />
-          Home
-        </NavLink>
-        <NavLink to="/projects" className={({ isActive }) => itemClass(isActive)}>
-          <LayoutGrid className="size-5" />
-          Projects
-        </NavLink>
+    <nav aria-label="Mobile navigation" className="fixed inset-x-3 bottom-3 z-50 rounded-2xl border border-primary/20 bg-[#07142f]/92 pb-[env(safe-area-inset-bottom)] shadow-2xl backdrop-blur-xl lg:hidden">
+      <div className="grid min-h-16 grid-cols-4">
+        {ITEMS.map(([id, label, Icon]) => (
+          <a key={id} href={`#${id}`} aria-current={active === id ? "location" : undefined} className={cn("flex min-h-14 flex-col items-center justify-center gap-1 rounded-xl text-[10px] font-semibold uppercase tracking-wider", active === id ? "text-primary" : "text-muted-foreground")}>
+            <Icon className="size-5" aria-hidden />{label}
+          </a>
+        ))}
       </div>
     </nav>
   );

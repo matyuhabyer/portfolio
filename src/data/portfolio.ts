@@ -5,10 +5,10 @@ export type AboutParagraphSegment =
 
 export type AboutParagraph = string | { segments: AboutParagraphSegment[] };
 
-/** Creative gallery item: `thumbAspect` sets the marquee frame (4×3 vs square 4×4). */
+/** Creative gallery item: `thumbAspect` keeps artwork close to its source composition. */
 export type PubmatGalleryItem = {
   src: string;
-  thumbAspect: "4/3" | "1/1";
+  thumbAspect: "4/3" | "1/1" | "4/5";
 };
 
 export const portfolioData = {
@@ -29,7 +29,7 @@ export const portfolioData = {
     resume: "/assets/Matthew_Javier_CV_2026.pdf"
   },
   about: {
-    profileImage: "/assets/images/about-profile.jpeg",
+    profileImage: "/assets/images/herobg-before.JPG",
     tagline: "Crafting experiences, one interaction at a time.",
     paragraphs: [
       "Hey, I'm Matthew, an Information Technology student at De La Salle University Manila, passionate about bridging the gap between users and technology.",
@@ -70,11 +70,14 @@ export const portfolioData = {
     ] satisfies AboutParagraph[],
     /**
      * Publication materials gallery (Home: “My Creative Gallery”). 17 images in order.
-     * Set `thumbAspect` to `"4/3"` or `"1/1"` (square / 4×4) per thumbnail. Full image in the lightbox is never cropped.
+     * Full images are never cropped in the lightbox.
      */
-    pubmatGallery: Array.from({ length: 17 }, (_, i) => ({
+    pubmatGallery: ([
+      "4/3", "1/1", "1/1", "1/1", "4/5", "4/5", "4/5", "1/1", "4/5",
+      "4/5", "4/5", "4/5", "4/5", "4/5", "4/5", "4/5", "1/1",
+    ] as const).map((thumbAspect, i) => ({
       src: `/assets/pubmats/${i + 1}.jpg`,
-      thumbAspect: "1/1",
+      thumbAspect,
     })) satisfies PubmatGalleryItem[],
   },
   techStack: {
@@ -94,7 +97,7 @@ export const portfolioData = {
       { name: "CSS3", image: "/assets/tech/css3.png" },
       { name: "Tailwind CSS", image: "/assets/tech/tailwindcss.png" },
       { name: "Vite", image: "/assets/tech/vite.png" },
-      { name: "Shadcn UI", image: "/assets/tech/shadcn.png" },
+      { name: "shadcn/ui", image: "/assets/tech/shadcn.png" },
       { name: "Bootstrap", image: "/assets/tech/bootstrap.png" },
 
     ],
@@ -111,7 +114,8 @@ export const portfolioData = {
       { name: "Apache", image: "/assets/tech/apache.png" }
     ],
     uiux: [
-      { name: "Figma", image: "/assets/tech/figma.png" }
+      { name: "Figma", image: "/assets/tech/figma.png" },
+      { name: "Miro", image: "/assets/tech/miro.png" }
     ],
     tools: [
       { name: "VS Code", image: "/assets/tech/vscode.png" },
@@ -186,7 +190,7 @@ export const portfolioData = {
       name: "Tafteria Web Application",
       label: "Full-Stack Development",
       tech: "Figma · HTML/Tailwind CSS · JavaScript · Node.js · Express.js · MongoDB",
-      description: "Led full-stack development of a web application that allows users in Taft, Manila to disvover and review local establishments.",
+      description: "Led full-stack development of a web application that allows users in Taft, Manila to discover and review local establishments.",
       longDescription: "Tafteria is a review-based web application designed for the Taft, Manila community to explore, rate, and share feedback about local establishments. As the Full-Stack Developer and Database Engineer, I led the development of both the front-end and back-end systems. I designed and implemented REST API endpoints using Node.js and Express.js, and structured a MongoDB database with flexible document schemas to support user-generated reviews and content. On the client side, I developed features for user registration, CRUD operations for reviews and users, and search functionality with filters for easier discoverability. Through this project, I strengthened my understanding of full-stack architecture, data modeling, and user-centered web design, while building a platform that connects the Taft community through authentic local insights.",
       role: "Full-Stack Developer, Database Administrator",
       timeline: "June – August 2024",
@@ -367,7 +371,7 @@ export const portfolioData = {
     {
       name: "IEEE Industrial Electronics & Photonics Philippine Joint Chapter",
       dates: "Jun 2026 - Present",
-      role: "Promotions / Web & Systems Volunteer",
+      role: "Promotions / Technology Development Volunteer",
       logo: "/assets/logos/ieee-electronicsph.jpg",
       highlights: [
         "Supported the chapter's promotions, web, and systems initiatives."
@@ -375,11 +379,14 @@ export const portfolioData = {
     },
     {
       name: "DLSU Microsoft Student Community",
-      dates: "Oct 2025 - Present",
+      dates: "Oct 2025 - Aug 2026",
       role: "Executive for Research & Development - Technology Development",
       logo: "/assets/logos/msc.png",
       highlights: [
-        "Contributed to research and technology development initiatives for the organization."
+        "Researched and applied tools to support operations and events.",
+        "Provided tech support for registrations and logistics of the organization's events.",
+        "Assisted on the development of workshops and training on Microsoft technologies.",
+        "Contributed to the development of technologies for the organization such as its website."
       ]
     },
     {

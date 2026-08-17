@@ -4,17 +4,15 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
 const fieldClass =
-  "flex min-h-9 w-full rounded-md border border-input bg-background px-3 py-2 text-sm text-foreground shadow-sm transition-[color,box-shadow] placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50";
+  "contact-field-input flex min-h-11 w-full border-0 border-b border-input bg-transparent px-0 py-2 text-sm text-foreground shadow-none transition-[color,box-shadow] placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-0 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50";
 
-const labelClass = "mb-1.5 block text-xs font-medium text-foreground";
+const labelClass = "contact-field-label mb-1.5 block text-xs font-medium text-foreground";
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
 export function ContactEmailForm() {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
@@ -26,22 +24,18 @@ export function ContactEmailForm() {
     setErrorMessage("");
 
     const trimmed = {
-      firstName: firstName.trim(),
-      lastName: lastName.trim(),
+      name: name.trim(),
       email: email.trim(),
-      phone: phone.trim(),
       message: message.trim(),
     };
 
     if (
-      !trimmed.firstName ||
-      !trimmed.lastName ||
+      !trimmed.name ||
       !trimmed.email ||
-      !trimmed.phone ||
       !trimmed.message
     ) {
       setStatus("error");
-      setErrorMessage("Please fill in every field before sending your message.");
+      setErrorMessage("Please complete the required fields before sending your message.");
       return;
     }
 
@@ -49,15 +43,13 @@ export function ContactEmailForm() {
       setStatus("error");
       setErrorMessage(
         import.meta.env.PROD
-          ? "The contact form is missing its access key in this deployment. In Netlify, Vercel, Cloudflare Pages, etc., add environment variable VITE_WEB3FORMS_ACCESS_KEY (same value as in local .env), then trigger a new build—not just a redeploy of old assets."
+          ? "The message form is temporarily unavailable. Please use the email link below instead."
           : "Contact form is not configured. Add VITE_WEB3FORMS_ACCESS_KEY to your .env file (get a free key at web3forms.com)."
       );
       return;
     }
 
     setStatus("loading");
-
-    const fullName = [trimmed.firstName, trimmed.lastName].join(" ");
 
     try {
       const res = await fetch("https://api.web3forms.com/submit", {
@@ -68,10 +60,9 @@ export function ContactEmailForm() {
         },
         body: JSON.stringify({
           access_key: accessKey,
-          subject: `[Portfolio] Message from ${fullName}`,
-          name: fullName,
+          subject: `[Portfolio] Message from ${trimmed.name}`,
+          name: trimmed.name,
           email: trimmed.email,
-          phone: trimmed.phone,
           message: trimmed.message,
         }),
       });
@@ -80,10 +71,8 @@ export function ContactEmailForm() {
 
       if (data.success) {
         setStatus("success");
-        setFirstName("");
-        setLastName("");
+        setName("");
         setEmail("");
-        setPhone("");
         setMessage("");
       } else {
         setStatus("error");
@@ -96,38 +85,22 @@ export function ContactEmailForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+    <form onSubmit={handleSubmit} className="contact-form space-y-6" noValidate>
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
-          <label htmlFor="contact-first-name" className={labelClass}>
-            First name
+          <label htmlFor="contact-name" className={labelClass}>
+            Name
           </label>
           <input
-            id="contact-first-name"
-            name="firstName"
+            id="contact-name"
+            name="name"
             type="text"
-            autoComplete="given-name"
+            autoComplete="name"
             required
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
             className={fieldClass}
-            placeholder="Juan"
-          />
-        </div>
-        <div>
-          <label htmlFor="contact-last-name" className={labelClass}>
-            Last name
-          </label>
-          <input
-            id="contact-last-name"
-            name="lastName"
-            type="text"
-            autoComplete="family-name"
-            required
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-            className={fieldClass}
-            placeholder="Dela Cruz"
+            placeholder="Your name"
           />
         </div>
         <div>
@@ -144,22 +117,6 @@ export function ContactEmailForm() {
             onChange={(e) => setEmail(e.target.value)}
             className={fieldClass}
             placeholder="you@example.com"
-          />
-        </div>
-        <div>
-          <label htmlFor="contact-phone" className={labelClass}>
-            Phone no.
-          </label>
-          <input
-            id="contact-phone"
-            name="phone"
-            type="tel"
-            autoComplete="tel"
-            required
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-            className={fieldClass}
-            placeholder="+63 …"
           />
         </div>
       </div>
@@ -206,19 +163,10 @@ export function ContactEmailForm() {
             </>
           )}
         </Button>
-        {!accessKey?.trim() ? (
+        {!accessKey?.trim() && !import.meta.env.PROD ? (
           <p className="max-w-xl text-xs text-muted-foreground sm:text-right">
-            {import.meta.env.PROD ? (
-              <>
-                Add <code className="rounded bg-muted px-1 font-mono">VITE_WEB3FORMS_ACCESS_KEY</code> to your
-                hosting provider&apos;s env vars and run a <strong>new build</strong> (Vite needs it at build time).
-              </>
-            ) : (
-              <>
-                Local: set <code className="rounded bg-muted px-1 font-mono">VITE_WEB3FORMS_ACCESS_KEY</code> in{" "}
-                <code className="rounded bg-muted px-1 font-mono">.env</code> — free at web3forms.com
-              </>
-            )}
+            Local: set <code className="rounded bg-muted px-1 font-mono">VITE_WEB3FORMS_ACCESS_KEY</code> in{" "}
+            <code className="rounded bg-muted px-1 font-mono">.env</code> — free at web3forms.com
           </p>
         ) : null}
       </div>

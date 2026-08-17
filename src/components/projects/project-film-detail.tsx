@@ -12,16 +12,16 @@ type ProjectHeaderProject = {
 
 export function ProjectPosterHeader({ project }: { project: ProjectHeaderProject }) {
   return (
-    <header className="mb-8 text-left">
+    <header className="mb-8 border-b border-white/15 pb-7 text-left">
       <p
         className={cn(
-          "text-[10px] font-semibold uppercase tracking-widest",
+          "text-[11px] font-bold uppercase tracking-[0.16em]",
           projectCategoryAccentClass(project.label)
         )}
       >
         {projectPosterCategoryLabel(project.label)}
       </p>
-      <h1 className="font-heading mt-2 text-3xl font-extrabold tracking-tight text-foreground md:text-4xl">
+      <h1 className="font-heading mt-2 text-4xl font-black tracking-[-0.035em] text-white md:text-6xl">
         {project.name}
       </h1>
       {project.role ? (
@@ -30,7 +30,7 @@ export function ProjectPosterHeader({ project }: { project: ProjectHeaderProject
             <dt className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
               Role
             </dt>
-            <dd className="mt-1 text-secondary">{project.role}</dd>
+            <dd className="mt-1 font-semibold text-secondary">{project.role}</dd>
           </div>
         </dl>
       ) : null}
@@ -40,7 +40,7 @@ export function ProjectPosterHeader({ project }: { project: ProjectHeaderProject
 
 export function LetterboxedProjectHero({ src, alt }: { src: string; alt: string }) {
   return (
-    <figure className="mb-10 overflow-hidden rounded-lg border border-border/60 bg-muted/30 dark:bg-muted/20">
+    <figure className="film-surface film-poster-ring mb-10 overflow-hidden rounded-lg border border-white/10">
       <div className="flex min-h-[180px] items-center justify-center px-2 py-5 sm:px-6 sm:py-10">
         <img
           src={src}

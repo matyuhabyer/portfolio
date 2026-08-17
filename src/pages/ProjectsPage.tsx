@@ -21,9 +21,9 @@ function ProjectArchiveCard({ project }: { project: Project }) {
       to={`/projects/${project.slug}`}
       state={{ from: "projects" }}
       className={cn(
-        "group relative block aspect-3/2 cursor-pointer overflow-hidden rounded-md border border-border/60 bg-muted",
+        "film-poster-ring group relative block aspect-3/2 cursor-pointer overflow-hidden rounded-md border border-white/10 bg-muted",
         "transition-all duration-200 ease-out",
-        "hover:z-10 hover:-translate-y-1 hover:border-secondary/45",
+        "hover:z-10 hover:-translate-y-1 hover:border-secondary/60 focus-visible:z-10 focus-visible:-translate-y-1 focus-visible:border-secondary/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-secondary",
         "motion-reduce:transition-none motion-reduce:hover:translate-y-0"
       )}
     >
@@ -54,7 +54,7 @@ function ProjectArchiveCard({ project }: { project: Project }) {
             className={cn(
               "mt-0 max-h-0 overflow-hidden text-[11px] leading-snug text-muted-foreground opacity-0",
               "transition-[max-height,margin,opacity] duration-200 ease-out",
-              "group-hover:mt-1 group-hover:max-h-12 group-hover:opacity-100",
+              "group-hover:mt-1 group-hover:max-h-12 group-hover:opacity-100 group-focus-visible:mt-1 group-focus-visible:max-h-12 group-focus-visible:opacity-100",
               "line-clamp-2"
             )}
           >
@@ -143,7 +143,7 @@ export function ProjectsPage() {
     const numericKeys = [...map.keys()]
       .filter((k): k is number => k !== "other")
       .sort((a, b) => b - a);
-    const keys: (number | "other")[] = map.has(archiveYear) ? [...numericKeys] : [archiveYear, ...numericKeys];
+    const keys: (number | "other")[] = [...numericKeys];
     if (map.has("other")) keys.push("other");
     return keys.map((yearKey) => ({ yearKey, items: map.get(yearKey) ?? [] }));
   }, [archiveYear, filteredSorted, sortBy]);
@@ -174,6 +174,7 @@ export function ProjectsPage() {
             <button
               type="button"
               onClick={() => setSortBy("newest")}
+              aria-pressed={sortBy === "newest"}
               className={cn(
                 buttonVariants({ variant: sortBy === "newest" ? "default" : "ghost", size: "sm" }),
                 "h-8 rounded-md px-4 text-xs font-bold"
@@ -184,6 +185,7 @@ export function ProjectsPage() {
             <button
               type="button"
               onClick={() => setSortBy("name")}
+              aria-pressed={sortBy === "name"}
               className={cn(
                 buttonVariants({ variant: sortBy === "name" ? "default" : "ghost", size: "sm" }),
                 "h-8 rounded-md px-4 text-xs font-bold text-muted-foreground",
@@ -207,6 +209,7 @@ export function ProjectsPage() {
                 <button
                   type="button"
                   onClick={() => setCategoryFilter("all")}
+                  aria-pressed={categoryFilter === "all"}
                   className="group flex w-full cursor-pointer items-center justify-between text-left"
                 >
                   <span
@@ -227,6 +230,7 @@ export function ProjectsPage() {
                   <button
                     type="button"
                     onClick={() => setCategoryFilter(label)}
+                    aria-pressed={categoryFilter === label}
                     className="group flex w-full cursor-pointer items-center justify-between text-left"
                   >
                     <span
@@ -254,6 +258,7 @@ export function ProjectsPage() {
               <button
                 type="button"
                 onClick={() => setYearFilter("all")}
+                aria-pressed={yearFilter === "all"}
                 className={cn(
                   "col-span-2 rounded-md border border-transparent py-2 text-xs font-bold transition-colors",
                   yearFilter === "all"
@@ -268,6 +273,7 @@ export function ProjectsPage() {
                   key={y}
                   type="button"
                   onClick={() => setYearFilter(String(y))}
+                  aria-pressed={yearFilter === String(y)}
                   className={cn(
                     "rounded-md border border-transparent py-2 text-xs font-bold transition-colors",
                     yearFilter === String(y)
@@ -282,6 +288,7 @@ export function ProjectsPage() {
                 <button
                   type="button"
                   onClick={() => setYearFilter("Earlier")}
+                  aria-pressed={yearFilter === "Earlier"}
                   className={cn(
                     "col-span-2 rounded-md border border-transparent py-2 text-xs font-bold transition-colors",
                     yearFilter === "Earlier"
