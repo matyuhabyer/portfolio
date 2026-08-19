@@ -980,11 +980,6 @@ button, a, input, textarea, summary { touch-action: manipulation; }
 .activity-state h4 { color: #fff8df; font-family: var(--font-heading); font-size: 1.2rem; }
 .activity-state h4 + p { margin-top: .45rem; }
 .activity-error { margin-top: 1rem; color: #f5a89b; font-size: .85rem; }
-.activity-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-top: 1.5rem; }
-.activity-text-action { display: inline-flex; min-height: 44px; align-items: center; gap: .45rem; color: var(--muted-foreground); font-size: .78rem; }
-.activity-text-action:hover { color: #fff8df; }
-.activity-text-action svg { width: 1rem; }
-
 .spotify-track { display: grid; grid-template-columns: clamp(7rem, 14vw, 10rem) minmax(0, 1fr); align-items: center; gap: clamp(1.25rem, 3vw, 2rem); }
 .spotify-artwork { display: grid; aspect-ratio: 1; overflow: hidden; place-items: center; border: 1px solid rgb(255 255 255 / .12); background: rgb(16 36 75 / .72); box-shadow: 0 1.5rem 3rem rgb(1 7 20 / .28); }
 .spotify-artwork img { width: 100%; height: 100%; object-fit: cover; }
@@ -992,6 +987,9 @@ button, a, input, textarea, summary { touch-action: manipulation; }
 .spotify-status { display: inline-flex; align-items: center; gap: .45rem; color: var(--muted-foreground); font-size: .62rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
 .spotify-status::before { width: .45rem; height: .45rem; border-radius: 50%; content: ""; background: #8191ad; }
 .spotify-status.is-live::before { background: #1ed760; box-shadow: 0 0 .8rem rgb(30 215 96 / .75); }
+.spotify-auto-update { display: inline-flex; align-items: center; gap: .45rem; color: #d7f9df; font-size: .62rem; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.spotify-auto-update i { width: .45rem; height: .45rem; border-radius: 50%; background: #1ed760; box-shadow: 0 0 .8rem rgb(30 215 96 / .75); animation: spotify-live-pulse 2s ease-in-out infinite; }
+@keyframes spotify-live-pulse { 50% { opacity: .45; transform: scale(.78); } }
 .spotify-track-copy h4 { margin-top: .6rem; color: #fff8df; font-family: var(--font-heading); font-size: clamp(1.35rem, 2.2vw, 2rem); line-height: 1.08; }
 .spotify-track-copy > p { margin-top: .45rem; color: var(--muted-foreground); }
 .spotify-track-copy > a { display: inline-flex; min-height: 44px; align-items: center; gap: .4rem; margin-top: .8rem; color: var(--primary); font-size: .75rem; font-weight: 700; }

@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { ExternalLink, GitGraph, Headphones, Loader2, Music2, RefreshCw } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
+import { ExternalLink, GitGraph, Headphones, Loader2, Music2 } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
 import { cn } from "@/lib/utils";
 
@@ -79,9 +78,23 @@ function SpotifyActivity() {
     void loadListeningActivity();
     const interval = window.setInterval(() => {
       if (document.visibilityState === "visible") void loadListeningActivity();
-    }, 30_000);
+    }, 15_000);
     return () => window.clearInterval(interval);
   }, [loadListeningActivity]);
+
+  useEffect(() => {
+    if (!track?.isPlaying || !track.durationMs) return;
+
+    const interval = window.setInterval(() => {
+      setTrack((current) => {
+        if (!current?.isPlaying || !current.durationMs) return current;
+        const nextProgress = Math.min(current.durationMs, (current.progressMs ?? 0) + 1_000);
+        return nextProgress === current.progressMs ? current : { ...current, progressMs: nextProgress };
+      });
+    }, 1_000);
+
+    return () => window.clearInterval(interval);
+  }, [track?.durationMs, track?.isPlaying, track?.name]);
 
   const progress = track?.durationMs && track.progressMs
     ? Math.min(100, (track.progressMs / track.durationMs) * 100)
@@ -92,6 +105,7 @@ function SpotifyActivity() {
       <header className="activity-panel-heading">
         <span className="activity-panel-icon"><Headphones aria-hidden /></span>
         <div><p>Listening signal</p><h3>Spotify activity</h3></div>
+        <span className="spotify-auto-update"><i aria-hidden />Live</span>
       </header>
 
       <div className="activity-panel-body" aria-live="polite">
@@ -119,12 +133,6 @@ function SpotifyActivity() {
             </div>
           </div>
         )}
-
-        <div className="activity-actions">
-          <button type="button" className={cn(buttonVariants({ variant: "outline", size: "sm" }), "celestial-pill gap-2")} onClick={() => void loadListeningActivity()} disabled={status === "loading"}>
-            <RefreshCw className={cn(status === "loading" && "animate-spin")} aria-hidden /> Refresh activity
-          </button>
-        </div>
       </div>
     </article>
   );
@@ -197,7 +205,7 @@ export function ActivitySection() {
       <div className="section-heading">
         <p className="section-eyebrow">Signals from the present</p>
         <h2 id="activity-title">What I’m up to</h2>
-        <p>A live glimpse of the music accompanying the work and the code taking shape along the way.</p>
+        <p>A live glimpse of what I’m listening to and the code I’m bringing to life.</p>
       </div>
       <div className="activity-grid">
         <SpotifyActivity />
