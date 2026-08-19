@@ -105,7 +105,6 @@ function SpotifyActivity() {
       <header className="activity-panel-heading">
         <span className="activity-panel-icon"><Headphones aria-hidden /></span>
         <div><p>Listening signal</p><h3>Spotify activity</h3></div>
-        <span className="spotify-auto-update"><i aria-hidden />Live</span>
       </header>
 
       <div className="activity-panel-body" aria-live="polite">
