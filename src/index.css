@@ -1029,6 +1029,9 @@ button, a, input, textarea, summary { touch-action: manipulation; }
 .contact-field-label { color: var(--primary); letter-spacing: .1em; text-transform: uppercase; }
 .contact-field-input { border-color: rgb(255 255 255 / .22); border-radius: 0; }
 .contact-field-input:focus-visible { border-color: var(--primary); box-shadow: 0 1px 0 var(--primary); }
+.contact-captcha { display: grid; justify-items: start; gap: .6rem; }
+.contact-captcha .contact-field-label { margin: 0; }
+.contact-captcha-note { max-width: 34rem; color: var(--muted-foreground); font-size: .75rem; line-height: 1.5; }
 
 /* Celestial editorial modal system */
 .case-study-summary-widget {

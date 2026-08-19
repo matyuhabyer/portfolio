@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import HCaptcha from "@hcaptcha/react-hcaptcha";
 import { Loader2, Send } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -8,12 +9,16 @@ const fieldClass =
 
 const labelClass = "contact-field-label mb-1.5 block text-xs font-medium text-foreground";
 
+const WEB3FORMS_HCAPTCHA_SITE_KEY = "50b2fe65-b00b-4b9e-ad62-3ba471098be2";
+
 type FormStatus = "idle" | "loading" | "success" | "error";
 
 export function ContactEmailForm() {
+  const captchaRef = useRef<HCaptcha>(null);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
+  const [captchaToken, setCaptchaToken] = useState("");
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -49,6 +54,12 @@ export function ContactEmailForm() {
       return;
     }
 
+    if (!captchaToken) {
+      setStatus("error");
+      setErrorMessage("Please complete the CAPTCHA before sending your message.");
+      return;
+    }
+
     setStatus("loading");
 
     try {
@@ -64,6 +75,7 @@ export function ContactEmailForm() {
           name: trimmed.name,
           email: trimmed.email,
           message: trimmed.message,
+          "h-captcha-response": captchaToken,
         }),
       });
 
@@ -81,6 +93,9 @@ export function ContactEmailForm() {
     } catch {
       setStatus("error");
       setErrorMessage("Network error. Please try again or use the email button below.");
+    } finally {
+      setCaptchaToken("");
+      captchaRef.current?.resetCaptcha();
     }
   }
 
@@ -135,6 +150,31 @@ export function ContactEmailForm() {
           className={cn(fieldClass, "min-h-[120px] resize-y py-2.5")}
           placeholder="Write your message…"
         />
+      </div>
+
+      <div className="contact-captcha">
+        <p className={labelClass}>Human verification</p>
+        <HCaptcha
+          ref={captchaRef}
+          sitekey={WEB3FORMS_HCAPTCHA_SITE_KEY}
+          size="compact"
+          theme="dark"
+          reCaptchaCompat={false}
+          onVerify={(token) => {
+            setCaptchaToken(token);
+            if (status === "error" && errorMessage.includes("CAPTCHA")) {
+              setStatus("idle");
+              setErrorMessage("");
+            }
+          }}
+          onExpire={() => setCaptchaToken("")}
+          onError={() => {
+            setCaptchaToken("");
+            setStatus("error");
+            setErrorMessage("The CAPTCHA could not load. Please refresh the page and try again.");
+          }}
+        />
+        <p className="contact-captcha-note">This helps keep automated messages out of my inbox.</p>
       </div>
 
       {status === "error" && errorMessage ? (
