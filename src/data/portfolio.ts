@@ -136,6 +136,28 @@ export const portfolioData = {
   },
   projects: [
     {
+      slug: "luntiang-republika-iot-soil-monitoring-system",
+      name: "Luntiang Republika IoT Soil Monitoring System",
+      featured: true,
+      label: "Full-Stack Development",
+      tech: "React · Vite · Node.js · Express.js · Firebase · Figma · YouTrack",
+      description:
+        "An IoT-enabled soil monitoring and advisory platform for data-driven Thai basil cultivation at Luntiang Republika Ecofarm.",
+      longDescription:
+        "Engineered an IoT-enabled platform that transforms NPK, pH, and moisture readings into actionable alerts, recommendations, and historical insights, with role-based access for farm operators, managers, and administrators.",
+      role: "Full-Stack Developer & UI/UX Designer",
+      timeline: "2025 – 2026",
+      highlights: [
+        "Developed a React frontend integrated with Firebase Authentication and Cloud Firestore, including protected routes and dashboards for sensor monitoring, alerts, recommendations, and historical trends.",
+        "Built an Express.js API with the Firebase Admin SDK to manage alert workflows, recommendation lifecycles, user administration, audit logs, and calibrated sensor data.",
+        "Designed the UI/UX, page and information architecture, and end-to-end workflows for Operator, Manager, and Admin roles.",
+        "Implemented security features including authentication, authorization, RBAC, protected routes, and audit logging.",
+        "Coordinated Agile and Kanban delivery through YouTrack across a four-person capstone team, while producing complete and precise technical and project documentation."
+      ],
+      image: "/assets/images/luntiang-iot-soil-monitoring.svg",
+      heroImage: "/assets/images/luntiang-iot-soil-monitoring.svg"
+    },
+    {
       slug: "shein-mobile-app-redesign",
       name: "SHEIN Mobile App Redesign",
       label: "UX Case Study",

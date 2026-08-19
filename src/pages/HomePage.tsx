@@ -1,9 +1,10 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
-  ArrowRight, Award, BriefcaseBusiness, ChevronDown, ExternalLink, FileText,
+  ArrowRight, Award, BriefcaseBusiness, ChevronDown, ChevronLeft, ChevronRight, ExternalLink, FileText,
   Mail, Orbit, Send, Sparkles,
 } from "lucide-react";
 import { ContactEmailForm } from "@/components/contact-email-form";
+import { ActivitySection } from "@/components/activity-section";
 import { CreativeGallerySection } from "@/components/creative-gallery-section";
 import { CelestialBackdrop } from "@/components/celestial-backdrop";
 import { FoxPet } from "@/components/fox-pet";
@@ -20,6 +21,12 @@ import { cn } from "@/lib/utils";
 
 type Project = (typeof portfolioData.projects)[number];
 
+const CAPSTONE_PROJECT_SLUG = "luntiang-republika-iot-soil-monitoring-system";
+const CAPSTONE_MODAL_SLIDES = Array.from({ length: 7 }, (_, index) => ({
+  number: String(index + 1).padStart(2, "0"),
+  label: `Project image ${index + 1}`,
+}));
+
 function projectYear(project: Project) {
   const match = project.timeline?.match(/20\d{2}/g);
   return match?.at(-1) ?? "Selected work";
@@ -28,9 +35,12 @@ function projectYear(project: Project) {
 function ProjectDialog({ project, onClose }: { project: Project | null; onClose: () => void }) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const modalStartRef = useRef<HTMLDivElement>(null);
+  const [activeSlide, setActiveSlide] = useState(0);
 
   useEffect(() => {
     if (!project) return;
+
+    setActiveSlide(0);
 
     let secondFrame = 0;
     const firstFrame = window.requestAnimationFrame(() => {
@@ -50,6 +60,7 @@ function ProjectDialog({ project, onClose }: { project: Project | null; onClose:
   if (!project) return null;
   const isSheinCaseStudy = project.slug === SHEIN_CASE_STUDY_SLUG;
   const isCheckYourselfCaseStudy = project.slug === CHECKYOURSELF_CASE_STUDY_SLUG;
+  const hasImageCarousel = project.slug === CAPSTONE_PROJECT_SLUG;
   const isFullUxCaseStudy = isSheinCaseStudy || isCheckYourselfCaseStudy;
   const projectIndex = portfolioData.projects.findIndex((entry) => entry.slug === project.slug);
   const projectNumber = String(projectIndex + 1).padStart(2, "0");
@@ -75,7 +86,51 @@ function ProjectDialog({ project, onClose }: { project: Project | null; onClose:
         )}
       >
         <div ref={modalStartRef} tabIndex={-1} role="group" aria-label={`${project.name} project preview`} className="project-modal-hero">
-          <img src={project.heroImage || project.image} alt={`${project.name} project preview`} />
+          {hasImageCarousel ? (
+            <div className="project-modal-carousel" aria-roledescription="carousel" aria-label="Project images">
+              <div
+                className="project-modal-placeholder"
+                data-slide={activeSlide + 1}
+                role="group"
+                aria-roledescription="slide"
+                aria-label={`Slide ${activeSlide + 1} of ${CAPSTONE_MODAL_SLIDES.length}`}
+              >
+                <span>{CAPSTONE_MODAL_SLIDES[activeSlide].number}</span>
+                <strong>{CAPSTONE_MODAL_SLIDES[activeSlide].label}</strong>
+                <small>Placeholder</small>
+              </div>
+              <button
+                type="button"
+                className="project-carousel-control project-carousel-previous"
+                onClick={() => setActiveSlide((current) => (current - 1 + CAPSTONE_MODAL_SLIDES.length) % CAPSTONE_MODAL_SLIDES.length)}
+                aria-label="Show previous project image"
+              >
+                <ChevronLeft aria-hidden />
+              </button>
+              <button
+                type="button"
+                className="project-carousel-control project-carousel-next"
+                onClick={() => setActiveSlide((current) => (current + 1) % CAPSTONE_MODAL_SLIDES.length)}
+                aria-label="Show next project image"
+              >
+                <ChevronRight aria-hidden />
+              </button>
+              <div className="project-carousel-indicators" aria-label="Choose project image">
+                {CAPSTONE_MODAL_SLIDES.map((slide, index) => (
+                  <button
+                    key={slide.number}
+                    type="button"
+                    className={cn(index === activeSlide && "is-active")}
+                    onClick={() => setActiveSlide(index)}
+                    aria-label={`Show project image ${index + 1}`}
+                    aria-current={index === activeSlide ? "true" : undefined}
+                  />
+                ))}
+              </div>
+            </div>
+          ) : (
+            <img src={project.heroImage || project.image} alt={`${project.name} project preview`} />
+          )}
           <span aria-hidden />
         </div>
         <header className="project-modal-masthead">
@@ -168,7 +223,12 @@ export function HomePage() {
     setSelectedProject(null);
   }
 
-  const visibleProjects = showAllProjects ? projects : projects.slice(0, 3);
+  const orderedProjects = [...projects].sort((a, b) => {
+    const aFeatured = "featured" in a && a.featured === true;
+    const bFeatured = "featured" in b && b.featured === true;
+    return Number(bFeatured) - Number(aFeatured);
+  });
+  const visibleProjects = showAllProjects ? orderedProjects : orderedProjects.slice(0, 3);
   const visibleCertifications = showAllCertifications ? certifications : certifications.slice(0, 6);
   const visibleWorkExperience = workExperience.slice(0, 4);
   const visibleOrganizations = organizations.slice(0, 4);
@@ -186,8 +246,8 @@ export function HomePage() {
             <h1 id="hero-title">Matthew<br /><span>Benison Javier</span></h1>
             <p className="hero-lede">I design and build useful digital products—turning research, systems, and thoughtful details into experiences that feel effortless.</p>
             <div className="hero-actions">
-              <a href="#projects" className={cn(buttonVariants({ size: "lg" }), "celestial-pill gap-2")}>Explore my work <ArrowRight className="size-4" aria-hidden /></a>
-              <a href={profile.resume} target="_blank" rel="noopener noreferrer" className={cn(buttonVariants({ variant: "outline", size: "lg" }), "celestial-pill gap-2")}><FileText className="size-4" aria-hidden /> Resume</a>
+              <a href="#projects" className={cn(buttonVariants({ size: "lg" }), "celestial-pill min-w-48 justify-center font-bold")}>Explore my work</a>
+              <a href={profile.resume} target="_blank" rel="noopener noreferrer" className={cn(buttonVariants({ variant: "outline", size: "lg" }), "celestial-pill min-w-48 justify-center gap-2 font-bold")}><FileText className="size-4" aria-hidden /> Resume</a>
             </div>
           </div>
           <figure className="hero-portrait-planet">
@@ -210,9 +270,15 @@ export function HomePage() {
           </div>
           <div className="projects-grid">
             {visibleProjects.map((project, index) => (
-              <article key={project.slug} className={cn("project-card", index === 0 && "project-featured")}>
+              <article
+                key={project.slug}
+                className={cn(
+                  "project-card",
+                  "featured" in project && project.featured === true && "project-featured"
+                )}
+              >
                 <span className="project-index" aria-hidden>{String(index + 1).padStart(2, "0")}</span>
-                {index === 0 ? <span className="project-featured-badge"><Sparkles className="size-3.5" aria-hidden /> Featured</span> : null}
+                {"featured" in project && project.featured === true ? <span className="project-featured-badge"><Sparkles className="size-3.5" aria-hidden /> Featured</span> : null}
                 <button type="button" onClick={() => openProject(project)} className="project-card-button" aria-label={`View ${project.name} case study`}>
                   <div className="project-image"><img src={project.image} alt="" loading={index > 2 ? "lazy" : "eager"} /></div>
                   <div className="project-copy">
@@ -293,6 +359,8 @@ export function HomePage() {
         </section>
 
         <CreativeGallerySection />
+
+        <ActivitySection />
 
         <section id="contact" className="celestial-section contact-section scroll-mt-24" aria-labelledby="contact-title">
           <div className="contact-copy">

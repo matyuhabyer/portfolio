@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "spotify:authorize": "node scripts/spotify-authorize.mjs",
     "preview": "vite preview",
     "start": "vite preview"
   },

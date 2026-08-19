@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 
 export const ONE_PAGE_SECTIONS = [
   ["home", "Home"], ["projects", "Projects"], ["experience", "Experience"],
-  ["skills", "Skills"], ["certifications", "Certifications"], ["gallery", "Gallery"], ["contact", "Contact"],
+  ["skills", "Skills"], ["certifications", "Certifications"], ["gallery", "Gallery"], ["activity", "Activity"], ["contact", "Contact"],
 ] as const;
 
 export function useActiveSection() {
