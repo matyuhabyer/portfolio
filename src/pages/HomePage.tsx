@@ -60,13 +60,18 @@ function ProjectDialog({ project, onClose }: { project: Project | null; onClose:
   if (!project) return null;
   const isSheinCaseStudy = project.slug === SHEIN_CASE_STUDY_SLUG;
   const isCheckYourselfCaseStudy = project.slug === CHECKYOURSELF_CASE_STUDY_SLUG;
-  const hasImageCarousel = project.slug === CAPSTONE_PROJECT_SLUG;
+  const gallery = "gallery" in project && Array.isArray(project.gallery) ? project.gallery : undefined;
+  const hasGalleryCarousel = Boolean(gallery?.length);
+  const hasPlaceholderCarousel = project.slug === CAPSTONE_PROJECT_SLUG;
+  const hasImageCarousel = hasGalleryCarousel || hasPlaceholderCarousel;
+  const slideCount = gallery?.length ?? CAPSTONE_MODAL_SLIDES.length;
   const isFullUxCaseStudy = isSheinCaseStudy || isCheckYourselfCaseStudy;
   const projectIndex = portfolioData.projects.findIndex((entry) => entry.slug === project.slug);
   const projectNumber = String(projectIndex + 1).padStart(2, "0");
   const projectTotal = String(portfolioData.projects.length).padStart(2, "0");
   const highlights = "highlights" in project ? project.highlights : undefined;
   const longDescription = "longDescription" in project ? project.longDescription : undefined;
+  const highlightsLabel = "highlightsLabel" in project ? project.highlightsLabel : undefined;
   const links = [
     "ctaUrl" in project && project.ctaUrl ? { label: project.ctaLabel ?? "View project", href: project.ctaUrl } : null,
     "ctaPresentationUrl" in project && project.ctaPresentationUrl ? { label: project.ctaPresentationLabel ?? "View presentation", href: project.ctaPresentationUrl } : null,
@@ -87,22 +92,48 @@ function ProjectDialog({ project, onClose }: { project: Project | null; onClose:
       >
         <div ref={modalStartRef} tabIndex={-1} role="group" aria-label={`${project.name} project preview`} className="project-modal-hero">
           {hasImageCarousel ? (
-            <div className="project-modal-carousel" aria-roledescription="carousel" aria-label="Project images">
-              <div
-                className="project-modal-placeholder"
-                data-slide={activeSlide + 1}
-                role="group"
-                aria-roledescription="slide"
-                aria-label={`Slide ${activeSlide + 1} of ${CAPSTONE_MODAL_SLIDES.length}`}
-              >
-                <span>{CAPSTONE_MODAL_SLIDES[activeSlide].number}</span>
-                <strong>{CAPSTONE_MODAL_SLIDES[activeSlide].label}</strong>
-                <small>Placeholder</small>
-              </div>
+            <div
+              className="project-modal-carousel"
+              aria-roledescription="carousel"
+              aria-label={`${project.name} images`}
+              onKeyDown={(event) => {
+                if (event.key === "ArrowLeft") {
+                  event.preventDefault();
+                  setActiveSlide((current) => (current - 1 + slideCount) % slideCount);
+                }
+                if (event.key === "ArrowRight") {
+                  event.preventDefault();
+                  setActiveSlide((current) => (current + 1) % slideCount);
+                }
+              }}
+            >
+              {hasGalleryCarousel && gallery ? (
+                <img
+                  key={gallery[activeSlide]}
+                  className="project-modal-carousel-image"
+                  src={gallery[activeSlide]}
+                  alt={`${project.name} screenshot ${activeSlide + 1} of ${slideCount}`}
+                  role="group"
+                  aria-roledescription="slide"
+                  aria-label={`Slide ${activeSlide + 1} of ${slideCount}`}
+                />
+              ) : (
+                <div
+                  className="project-modal-placeholder"
+                  data-slide={activeSlide + 1}
+                  role="group"
+                  aria-roledescription="slide"
+                  aria-label={`Slide ${activeSlide + 1} of ${slideCount}`}
+                >
+                  <span>{CAPSTONE_MODAL_SLIDES[activeSlide].number}</span>
+                  <strong>{CAPSTONE_MODAL_SLIDES[activeSlide].label}</strong>
+                  <small>Placeholder</small>
+                </div>
+              )}
               <button
                 type="button"
                 className="project-carousel-control project-carousel-previous"
-                onClick={() => setActiveSlide((current) => (current - 1 + CAPSTONE_MODAL_SLIDES.length) % CAPSTONE_MODAL_SLIDES.length)}
+                onClick={() => setActiveSlide((current) => (current - 1 + slideCount) % slideCount)}
                 aria-label="Show previous project image"
               >
                 <ChevronLeft aria-hidden />
@@ -110,15 +141,15 @@ function ProjectDialog({ project, onClose }: { project: Project | null; onClose:
               <button
                 type="button"
                 className="project-carousel-control project-carousel-next"
-                onClick={() => setActiveSlide((current) => (current + 1) % CAPSTONE_MODAL_SLIDES.length)}
+                onClick={() => setActiveSlide((current) => (current + 1) % slideCount)}
                 aria-label="Show next project image"
               >
                 <ChevronRight aria-hidden />
               </button>
               <div className="project-carousel-indicators" aria-label="Choose project image">
-                {CAPSTONE_MODAL_SLIDES.map((slide, index) => (
+                {Array.from({ length: slideCount }, (_, index) => (
                   <button
-                    key={slide.number}
+                    key={gallery?.[index] ?? CAPSTONE_MODAL_SLIDES[index].number}
                     type="button"
                     className={cn(index === activeSlide && "is-active")}
                     onClick={() => setActiveSlide(index)}
@@ -164,10 +195,14 @@ function ProjectDialog({ project, onClose }: { project: Project | null; onClose:
               </dl>
             </aside>
             <div className="project-modal-narrative">
-              <p className="project-modal-summary">{longDescription || project.description}</p>
+              <div className="project-modal-summary">
+                {(Array.isArray(longDescription) ? longDescription : [longDescription || project.description]).map((paragraph) => (
+                  <p key={paragraph}>{paragraph}</p>
+                ))}
+              </div>
               {highlights?.length ? (
                 <div className="project-modal-contributions">
-                  <h3>What I contributed</h3>
+                  <h3>{highlightsLabel ?? "What I contributed"}</h3>
                   <ul>
                     {highlights.map((highlight) => <li key={highlight}><Sparkles className="size-4 shrink-0 text-primary" aria-hidden />{highlight}</li>)}
                   </ul>

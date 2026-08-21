@@ -57,6 +57,11 @@ export function ProjectDetailPage() {
     lessonsLearned &&
     lessonsLearned.length > 0 &&
     isUXProject(project);
+  const longDescription = project.longDescription;
+  const techLabel =
+    ("techLabel" in project ? project.techLabel : undefined) ?? "Skills & tools";
+  const highlightsLabel =
+    ("highlightsLabel" in project ? project.highlightsLabel : undefined) ?? "Highlights";
 
   return (
     <article className="mx-auto w-full min-w-0 max-w-4xl pb-12">
@@ -86,17 +91,21 @@ export function ProjectDetailPage() {
         {project.tech ? (
           <p>
             <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-              Skills &amp; tools
+              {techLabel}
             </span>
             <span className="mt-2 block text-foreground/90">{project.tech}</span>
           </p>
         ) : null}
-        {project.longDescription ? <p>{project.longDescription}</p> : null}
+        {Array.isArray(longDescription)
+          ? longDescription.map((paragraph) => <p key={paragraph}>{paragraph}</p>)
+          : longDescription
+            ? <p>{longDescription}</p>
+            : null}
 
         {project.highlights && project.highlights.length > 0 ? (
           <section>
             <h2 className="mb-4 text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-              Highlights
+              {highlightsLabel}
             </h2>
             <ul className="list-inside list-disc space-y-2">
               {project.highlights.map((h) => (

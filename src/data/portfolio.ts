@@ -211,18 +211,35 @@ export const portfolioData = {
       slug: "tafteria-web-application",
       name: "Tafteria Web Application",
       label: "Full-Stack Development",
-      tech: "Figma · HTML/Tailwind CSS · JavaScript · Node.js · Express.js · MongoDB",
-      description: "Led full-stack development of a web application that allows users in Taft, Manila to discover and review local establishments.",
-      longDescription: "Tafteria is a review-based web application designed for the Taft, Manila community to explore, rate, and share feedback about local establishments. As the Full-Stack Developer and Database Engineer, I led the development of both the front-end and back-end systems. I designed and implemented REST API endpoints using Node.js and Express.js, and structured a MongoDB database with flexible document schemas to support user-generated reviews and content. On the client side, I developed features for user registration, CRUD operations for reviews and users, and search functionality with filters for easier discoverability. Through this project, I strengthened my understanding of full-stack architecture, data modeling, and user-centered web design, while building a platform that connects the Taft community through authentic local insights.",
+      tech: "Node.js, Express.js, MongoDB, Mongoose, JavaScript, Handlebars, REST APIs, Leaflet, GeoJSON, OpenStreetMap, Mapillary, HTML, CSS, Tailwind CSS",
+      techLabel: "Technologies",
+      description: "Tafteria is a full-stack food discovery and review platform built for the Taft, Manila community. It enables students and residents to discover nearby establishments, explore interactive maps, submit ratings and reviews, upload photos, and share authentic local recommendations.",
+      longDescription: [
+        "Tafteria is a full-stack food discovery and review platform built for the Taft, Manila community. It enables students and residents to discover nearby establishments, explore interactive maps, submit ratings and reviews, upload photos, and share authentic local recommendations.",
+        "As the Full-Stack Developer and Database Administrator, I designed and implemented the application’s front end, server architecture, APIs, and database models. I built the platform using Node.js, Express.js, MongoDB, Mongoose, Handlebars, and JavaScript, with Leaflet and GeoJSON for interactive mapping. The application also integrates OpenStreetMap establishment data and Mapillary street-level imagery to provide location-aware discovery around DLSU and Taft."
+      ],
       role: "Full-Stack Developer, Database Administrator",
       timeline: "June – August 2024",
+      highlightsLabel: "Key contributions",
       highlights: [
-        "Led full-stack development of a local establishments review platform; implemented user registration, CRUD for reviews and users, and robust search functionality.",
-        "Built REST API endpoints (Node.js) and used MongoDB for flexible review/document schemas to support user-generated content.",
-        "Integrated client-side forms and validation, implemented search filters to improve discoverability of establishments."
+        "Developed session-based authentication, password hashing, user registration, login, profile management, and protected application routes.",
+        "Implemented the complete review lifecycle, including ratings, comments, likes, editing, deletion, photo uploads, sorting, and rating summaries.",
+        "Designed MongoDB and Mongoose schemas for users, establishments, reviews, comments, and moderated cover-photo submissions.",
+        "Built 26 Express.js routes, including four RESTful JSON API endpoints supporting establishment discovery, geospatial data, search, and application workflows.",
+        "Created responsive search and filtering tools for category, rating, and keyword-based establishment discovery.",
+        "Integrated Leaflet, GeoJSON, OpenStreetMap, and Mapillary to display establishment locations and street-level imagery.",
+        "Developed an owner-approved and community-moderated cover-photo workflow with attribution and submission tracking."
       ],
-      image: "/assets/images/tafteria-image.jpg",
-      heroImage: "/assets/images/tafteria-hero-image.jpg",
+      image: "/assets/images/tafteria-home.png",
+      heroImage: "/assets/images/tafteria-1.png",
+      gallery: [
+        "/assets/images/tafteria-1.png",
+        "/assets/images/tafteria-2.png",
+        "/assets/images/tafteria-3.png",
+        "/assets/images/tafteria-4.png",
+        "/assets/images/tafteria-5.png",
+        "/assets/images/tafteria-6.png"
+      ],
       ctaLabel: "View Source on GitHub",
       ctaUrl: "https://github.com/matyuhabyer/tafteria-web-application"
     },
