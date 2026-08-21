@@ -162,7 +162,7 @@ export const portfolioData = {
       name: "SHEIN Mobile App Redesign",
       label: "UX Case Study",
       description:
-        "Problem-first case study: qualitative research, streamlined IA, SH-AI-N search, and usability-tested hi-fi — including an honest partial outcome on impulsive buying.",
+        "A research-driven redesign of the SHEIN mobile app that streamlines navigation, improves product discovery through SH-AI-N conversational search, and validates key usability improvements through testing.",
       role: "UX Lead, UI/UX Researcher & Designer",
       timeline: "February – April 2025",
       contributions: [

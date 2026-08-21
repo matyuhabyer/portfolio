@@ -8,7 +8,6 @@ import {
   LetterboxedProjectHero,
   ProjectPosterHeader,
 } from "@/components/projects/project-film-detail";
-import { UxContributionSummary } from "@/components/projects/ux-contribution-summary";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 
@@ -72,11 +71,6 @@ export function CheckYourselfCaseStudy({
   showBackLink?: boolean;
   showHeader?: boolean;
 }) {
-  const contributions =
-    "contributions" in project && Array.isArray(project.contributions)
-      ? project.contributions
-      : [];
-
   return (
     <article className="mx-auto w-full min-w-0 max-w-4xl pb-16">
       {showBackLink ? <div className="mb-8">
@@ -123,15 +117,6 @@ export function CheckYourselfCaseStudy({
           </div>
         ))}
       </dl>
-
-      <div className="mt-8">
-        <UxContributionSummary
-          id="check-yourself"
-          contributions={contributions}
-          ctaHref={project.ctaUrl}
-          ctaLabel={project.ctaLabel ?? "View interactive prototype"}
-        />
-      </div>
 
       <div className="mt-6 space-y-12 text-sm leading-relaxed text-muted-foreground">
         <section aria-labelledby="cy-empathize" className="space-y-4">

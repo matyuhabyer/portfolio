@@ -22,9 +22,15 @@ export function ProjectDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const location = useLocation();
   const referrer = (location.state as { from?: ProjectDetailReferrer } | null)?.from;
-  const backLink =
-    referrer === "home"
-      ? { to: "/", label: "Back to Home" as const }
+  const isUxCaseStudy =
+    slug === SHEIN_CASE_STUDY_SLUG || slug === CHECKYOURSELF_CASE_STUDY_SLUG;
+  const backLink = isUxCaseStudy && slug
+    ? {
+        to: `/?project=${encodeURIComponent(slug)}#projects`,
+        label: "Back to Project" as const,
+      }
+    : referrer === "home"
+      ? { to: "/#projects", label: "Back to Projects" as const }
       : { to: "/projects", label: "Back to Projects" as const };
 
   const project = useMemo(

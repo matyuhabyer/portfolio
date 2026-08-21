@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   ArrowRight, Award, BriefcaseBusiness, ChevronDown, ChevronLeft, ChevronRight, ExternalLink, FileText,
   Mail, Orbit, Send, Sparkles,
@@ -8,8 +9,6 @@ import { ActivitySection } from "@/components/activity-section";
 import { CreativeGallerySection } from "@/components/creative-gallery-section";
 import { CelestialBackdrop } from "@/components/celestial-backdrop";
 import { FoxPet } from "@/components/fox-pet";
-import { SheinCaseStudy } from "@/components/projects/SheinCaseStudy";
-import { CheckYourselfCaseStudy } from "@/components/projects/CheckYourselfCaseStudy";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { portfolioData } from "@/data/portfolio";
@@ -70,6 +69,10 @@ function ProjectDialog({ project, onClose }: { project: Project | null; onClose:
   const projectNumber = String(projectIndex + 1).padStart(2, "0");
   const projectTotal = String(portfolioData.projects.length).padStart(2, "0");
   const highlights = "highlights" in project ? project.highlights : undefined;
+  const contributions =
+    "contributions" in project && Array.isArray(project.contributions)
+      ? project.contributions
+      : highlights;
   const longDescription = "longDescription" in project ? project.longDescription : undefined;
   const highlightsLabel = "highlightsLabel" in project ? project.highlightsLabel : undefined;
   const links = [
@@ -86,8 +89,7 @@ function ProjectDialog({ project, onClose }: { project: Project | null; onClose:
         overlayClassName="editorial-overlay"
         closeButtonClassName="editorial-dialog-close"
         className={cn(
-          "editorial-dialog project-dialog",
-          isFullUxCaseStudy && "project-dialog-ux"
+          "editorial-dialog project-dialog"
         )}
       >
         <div ref={modalStartRef} tabIndex={-1} role="group" aria-label={`${project.name} project preview`} className="project-modal-hero">
@@ -176,48 +178,49 @@ function ProjectDialog({ project, onClose }: { project: Project | null; onClose:
             <DialogDescription>{project.role}</DialogDescription>
           </div>
         </header>
-        {isFullUxCaseStudy ? (
-          <div className="case-study-modal-body px-4 pb-4 pt-7 sm:px-8 sm:pb-8 sm:pt-9 lg:px-12">
-            {isSheinCaseStudy ? (
-              <SheinCaseStudy project={project} backLink={{ to: "/#projects", label: "Back to Projects" }} onBack={onClose} showHeroImage={false} showBackLink={false} showHeader={false} />
-            ) : (
-              <CheckYourselfCaseStudy project={project} backLink={{ to: "/#projects", label: "Back to Projects" }} onBack={onClose} showHeroImage={false} showBackLink={false} showHeader={false} />
-            )}
-          </div>
-        ) : (
-          <div className="project-modal-content">
-            <aside className="project-modal-meta" aria-label="Project details">
-              <p className="section-eyebrow">Archive notes</p>
-              <dl>
-                <div><dt>Timeline</dt><dd>{project.timeline}</dd></div>
-                <div><dt>Discipline</dt><dd>{project.label}</dd></div>
-                {"tech" in project && project.tech ? <div><dt>Technology</dt><dd>{project.tech}</dd></div> : null}
-              </dl>
-            </aside>
-            <div className="project-modal-narrative">
-              <div className="project-modal-summary">
-                {(Array.isArray(longDescription) ? longDescription : [longDescription || project.description]).map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
+        <div className="project-modal-content">
+          <aside className="project-modal-meta" aria-label="Project details">
+            <p className="section-eyebrow">Archive notes</p>
+            <dl>
+              <div><dt>Timeline</dt><dd>{project.timeline}</dd></div>
+              <div><dt>Discipline</dt><dd>{project.label}</dd></div>
+              {"tech" in project && project.tech ? <div><dt>Technology</dt><dd>{project.tech}</dd></div> : null}
+            </dl>
+          </aside>
+          <div className="project-modal-narrative">
+            <div className="project-modal-summary">
+              {(Array.isArray(longDescription) ? longDescription : [longDescription || project.description]).map((paragraph) => (
+                <p key={paragraph}>{paragraph}</p>
+              ))}
+            </div>
+            {contributions?.length ? (
+              <div className="project-modal-contributions">
+                <h3>{highlightsLabel ?? "What I contributed"}</h3>
+                <ul>
+                  {contributions.map((contribution) => <li key={contribution}><Sparkles className="size-4 shrink-0 text-primary" aria-hidden />{contribution}</li>)}
+                </ul>
               </div>
-              {highlights?.length ? (
-                <div className="project-modal-contributions">
-                  <h3>{highlightsLabel ?? "What I contributed"}</h3>
-                  <ul>
-                    {highlights.map((highlight) => <li key={highlight}><Sparkles className="size-4 shrink-0 text-primary" aria-hidden />{highlight}</li>)}
-                  </ul>
-                </div>
-              ) : null}
-              <div className="project-modal-actions">
-                {links.map((link) => (
+            ) : null}
+            <div className="project-modal-actions">
+              {isFullUxCaseStudy ? (
+                <Link
+                  to={`/projects/${project.slug}`}
+                  state={{ from: "home" }}
+                  className={cn(buttonVariants({ size: "lg" }), "celestial-pill gap-2")}
+                >
+                  View Full Case Study
+                  <ArrowRight className="size-4" aria-hidden />
+                </Link>
+              ) : (
+                links.map((link) => (
                   <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className={cn(buttonVariants({ size: "lg" }), "celestial-pill gap-2")}>
                     {link.label}<ExternalLink className="size-4" aria-hidden />
                   </a>
-                ))}
-              </div>
+                ))
+              )}
             </div>
           </div>
-        )}
+        </div>
       </DialogContent>
     </Dialog>
   );
