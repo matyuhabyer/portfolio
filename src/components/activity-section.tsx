@@ -200,7 +200,7 @@ function GitHubActivity() {
 
 export function ActivitySection() {
   return (
-    <section id="activity" className="celestial-section activity-section scroll-mt-24" aria-labelledby="activity-title">
+    <section id="activity" className="celestial-section activity-section" aria-labelledby="activity-title">
       <div className="section-heading">
         <p className="section-eyebrow">Signals from the present</p>
         <h2 id="activity-title">What I’m up to</h2>

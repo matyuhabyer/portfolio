@@ -10,6 +10,7 @@ import {
   LetterboxedProjectHero,
   ProjectPosterHeader,
 } from "@/components/projects/project-film-detail";
+import { UxContributionSummary } from "@/components/projects/ux-contribution-summary";
 import { Separator } from "@/components/ui/separator";
 import { cn } from "@/lib/utils";
 
@@ -179,6 +180,11 @@ export function SheinCaseStudy({
   showBackLink?: boolean;
   showHeader?: boolean;
 }) {
+  const contributions =
+    "contributions" in project && Array.isArray(project.contributions)
+      ? project.contributions
+      : [];
+
   return (
     <article className="mx-auto w-full min-w-0 max-w-4xl pb-16">
       {showBackLink ? <div className="mb-8">
@@ -210,6 +216,13 @@ export function SheinCaseStudy({
           alt={`${project.name} mockup`}
         />
       ) : null}
+
+      <UxContributionSummary
+        id="shein"
+        contributions={contributions}
+        ctaHref={project.ctaPrototypeUrl}
+        ctaLabel={project.ctaPrototypeLabel ?? "View interactive prototype"}
+      />
 
       <OutcomeSummaryWidget />
 

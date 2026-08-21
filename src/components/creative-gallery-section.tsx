@@ -9,7 +9,7 @@ export function CreativeGallerySection() {
   const carouselItems = [...pubmats, ...pubmats];
 
   return (
-    <section id="gallery" className="celestial-section gallery-section scroll-mt-24" aria-labelledby="gallery-title">
+    <section id="gallery" className="celestial-section gallery-section" aria-labelledby="gallery-title">
       <div className="section-heading">
         <p className="section-eyebrow">Visual explorations</p>
         <h2 id="gallery-title">Creative gallery</h2>

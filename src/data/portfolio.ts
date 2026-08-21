@@ -165,6 +165,12 @@ export const portfolioData = {
         "Problem-first case study: qualitative research, streamlined IA, SH-AI-N search, and usability-tested hi-fi — including an honest partial outcome on impulsive buying.",
       role: "UX Lead, UI/UX Researcher & Designer",
       timeline: "February – April 2025",
+      contributions: [
+        "Led qualitative research through semi-structured interviews and thematic analysis to uncover core shopping pain points.",
+        "Synthesized findings into personas, user stories, design opportunities, and a streamlined information architecture.",
+        "Designed low- and high-fidelity prototypes featuring improved navigation, conversational search, sizing guidance, rewards, and checkout flows.",
+        "Planned and conducted think-aloud usability testing across 11 tasks, resolving four of the five identified pain points."
+      ],
       image: "/assets/images/shein-image.png",
       heroImage: "/assets/images/shein-hero-image.png",
       ctaPresentationLabel: "View Presentation",
@@ -180,6 +186,12 @@ export const portfolioData = {
         "A mobile platform for at-home STD testing and result tracking, designed to break down barriers to sexual health access in the Philippines.",
       role: "UX Lead, UI/UX Researcher & Designer",
       timeline: "February – April 2025",
+      contributions: [
+        "Led user research into the geographic, financial, privacy, stigma, and awareness barriers affecting sexual-health access.",
+        "Synthesized interview findings into a Point of View statement and How Might We questions that guided the product direction.",
+        "Designed the end-to-end mobile experience for at-home test-kit access, result tracking, health records, and private support.",
+        "Iterated from wireframes to a high-fidelity prototype across three usability-testing rounds, refining navigation, input clarity, and security cues."
+      ],
       image: "/assets/images/checkyourself-image.jpg",
       heroImage: "/assets/images/checkyourself-hero-image.jpg",
       ctaLabel: "View Interactive Prototype (Use iPhone SE as Device)",

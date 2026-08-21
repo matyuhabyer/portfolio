@@ -274,7 +274,7 @@ export function HomePage() {
       <CelestialBackdrop />
       <FoxPet />
       <div className="celestial-page">
-        <section id="home" className="hero-one-page scroll-mt-24" aria-labelledby="hero-title">
+        <section id="home" className="hero-one-page" aria-labelledby="hero-title">
           <span className="hero-cover-rule" aria-hidden />
           <div className="hero-copy">
             <p className="section-eyebrow"><Sparkles className="size-4" aria-hidden /> my place among the stars</p>
@@ -297,7 +297,7 @@ export function HomePage() {
           </figure>
         </section>
 
-        <section id="projects" className="celestial-section projects-section scroll-mt-24" aria-labelledby="projects-title">
+        <section id="projects" className="celestial-section projects-section" aria-labelledby="projects-title">
           <div className="section-heading">
             <p className="section-eyebrow">Selected worlds</p>
             <h2 id="projects-title">Projects with a purpose</h2>
@@ -330,7 +330,7 @@ export function HomePage() {
           {!showAllProjects ? <div className="section-action"><Button variant="outline" size="lg" className="celestial-pill" onClick={() => setShowAllProjects(true)}>View all {projects.length} projects</Button></div> : null}
         </section>
 
-        <section id="experience" className="celestial-section experience-section scroll-mt-24" aria-labelledby="experience-title">
+        <section id="experience" className="celestial-section experience-section" aria-labelledby="experience-title">
           <div className="section-heading">
             <p className="section-eyebrow">My journey</p>
             <h2 id="experience-title">Experience in orbit</h2>
@@ -354,7 +354,7 @@ export function HomePage() {
           </div>
         </section>
 
-        <section id="skills" className="celestial-section skills-section scroll-mt-24" aria-labelledby="skills-title">
+        <section id="skills" className="celestial-section skills-section" aria-labelledby="skills-title">
           <div className="section-heading">
             <p className="section-eyebrow">Working constellations</p>
             <h2 id="skills-title">Tools I build with</h2>
@@ -373,7 +373,7 @@ export function HomePage() {
           </div>
         </section>
 
-        <section id="certifications" className="celestial-section certifications-section scroll-mt-24" aria-labelledby="certifications-title">
+        <section id="certifications" className="celestial-section certifications-section" aria-labelledby="certifications-title">
           <div className="section-heading">
             <p className="section-eyebrow">Coordinates of growth</p>
             <h2 id="certifications-title">Certifications</h2>
@@ -397,7 +397,7 @@ export function HomePage() {
 
         <ActivitySection />
 
-        <section id="contact" className="celestial-section contact-section scroll-mt-24" aria-labelledby="contact-title">
+        <section id="contact" className="celestial-section contact-section" aria-labelledby="contact-title">
           <div className="contact-copy">
             <p className="section-eyebrow">One message away</p>
             <h2 id="contact-title">Let’s create something meaningful.</h2>
