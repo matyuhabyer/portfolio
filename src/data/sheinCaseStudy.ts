@@ -21,7 +21,7 @@ export const sheinCaseStudy = {
       {
         step: "02: Define",
         title: "Synthesize",
-        body: "4 RQs · 4 themes · 3 personas · 6 user stories",
+        body: "4 RQs · 4 themes · 4 personas · 6 user stories",
         cardClass:
           "border-emerald-500/25 bg-gradient-to-br from-emerald-200/95 to-emerald-100/80 text-emerald-950 dark:from-emerald-950/45 dark:to-emerald-900/35 dark:text-emerald-50",
       },

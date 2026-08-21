@@ -16,7 +16,7 @@ export const portfolioData = {
     name: "Matthew Benison Javier",
     titles: [
       "Information Technology",
-      "UI/UX Designer & Researcher",
+      "UI/UX Designer and Researcher",
       "Full-Stack Developer",
       "Database Administrator",
       "Quality Assurance Analyst",
@@ -137,7 +137,7 @@ export const portfolioData = {
   projects: [
     {
       slug: "luntiang-republika-iot-soil-monitoring-system",
-      name: "Luntiang Republika IoT Soil Monitoring System",
+      name: "Luntiang Republika IoT Soil Monitoring and Advisory System",
       featured: true,
       label: "Full-Stack Development",
       tech: "React · Vite · Node.js · Express.js · Firebase · Figma · YouTrack",
@@ -163,12 +163,12 @@ export const portfolioData = {
       label: "UX Case Study",
       description:
         "A research-driven redesign of the SHEIN mobile app that streamlines navigation, improves product discovery through SH-AI-N conversational search, and validates key usability improvements through testing.",
-      role: "UX Lead, UI/UX Researcher & Designer",
+      role: "UX Lead, UI/UX Designer and Researcher",
       timeline: "February – April 2025",
       contributions: [
-        "Led qualitative research through semi-structured interviews and thematic analysis to uncover core shopping pain points.",
-        "Synthesized findings into personas, user stories, design opportunities, and a streamlined information architecture.",
-        "Designed low- and high-fidelity prototypes featuring improved navigation, conversational search, sizing guidance, rewards, and checkout flows.",
+        "Led end-to-end UX research and redesign across three core user flows, using semi-structured interviews and thematic analysis to uncover five major usability issues.",
+        "Synthesized findings through thematic and task analysis into four personas, user stories, design opportunities, and a streamlined information architecture.",
+        "Iterated from low- to high-fidelity prototypes featuring improved navigation, conversational search, sizing guidance, rewards, and checkout flows.",
         "Planned and conducted think-aloud usability testing across 11 tasks, resolving four of the five identified pain points."
       ],
       image: "/assets/images/shein-image.png",
@@ -184,13 +184,13 @@ export const portfolioData = {
       label: "UX Case Study",
       description:
         "A mobile platform for at-home STD testing and result tracking, designed to break down barriers to sexual health access in the Philippines.",
-      role: "UX Lead, UI/UX Researcher & Designer",
+      role: "UX Lead, UI/UX Designer and Researcher",
       timeline: "February – April 2025",
       contributions: [
         "Led user research into the geographic, financial, privacy, stigma, and awareness barriers affecting sexual-health access.",
-        "Synthesized interview findings into a Point of View statement and How Might We questions that guided the product direction.",
-        "Designed the end-to-end mobile experience for at-home test-kit access, result tracking, health records, and private support.",
-        "Iterated from wireframes to a high-fidelity prototype across three usability-testing rounds, refining navigation, input clarity, and security cues."
+        "Synthesized interview findings into a Point of View statement and How Might We questions that guided three core user journeys.",
+        "Designed the end-to-end mobile experience for at-home test-kit ordering, consultation scheduling, secure messaging, result tracking, and health records.",
+        "Conducted three rounds of usability testing using feedback capture grids and completed three iterative design cycles, refining navigation, input clarity, task completion, and security cues."
       ],
       image: "/assets/images/checkyourself-image.jpg",
       heroImage: "/assets/images/checkyourself-hero-image.jpg",
@@ -207,12 +207,12 @@ export const portfolioData = {
       role: "Full-Stack Developer, Database Administrator",
       timeline: "November - December 2025",
       highlights: [
-        "Designed and implemented a normalized relational database schema with 15+ tables.",
+        "Designed and implemented a normalized 17-table MySQL database with foreign keys, indexes, and views.",
         "Developed 15 stored procedures for complex business operations including order creation, payment processing, loyalty point calculations, and sales reporting.",
         "Implemented 15 database triggers to enforce data integrity, automate calculations, and maintain audit trails.",
-        "Implemented full CRUD operations for menu, employee, and branch management, and order processing.",
-        "Built RESTful APIs using Java Servlets with JSON request/response handling.",
-        "Implemented Role-Based Access Control (RBAC) and Secure Authentication with password hashing."
+        "Implemented full CRUD operations for menu, employee, branch, order, payment, loyalty-program, and reporting workflows.",
+        "Built RESTful APIs using Java Servlets with JSON request and response handling and transactional commit and rollback.",
+        "Implemented role-based access control and secure authentication with password hashing."
       ],
       image: "/assets/images/cafedb-image.jpg",
       heroImage: "/assets/images/cafedb-image.jpg",
@@ -259,16 +259,15 @@ export const portfolioData = {
       slug: "cinema-database-application",
       name: "Simple Cinema Database Application",
       label: "Database Design & Development",
-      tech: "HTML/CSS · JavaScript · JSP · MySQL · Apache NetBeans",
+      tech: "Java · JSP · JDBC · MySQL · HTML/CSS · JavaScript · Apache NetBeans",
       description: "Developed a database application to manage key cinema operations, including employee records, movie schedules, showtimes, and concession inventory.",
       longDescription: "The Cinema Management System is a web-based database application project for the CCINFOM (Information Management) course in the College of Computer Studies at De La Salle University. It is developed to streamline the operations of a cinema, allowing employees to manage employees, available movies, movie screenings, showtimes, and available snacks. It is also developed for processing transactions for tickets and snacks for customers and generates reports on the cinema's overall sales (tickets and snacks) and movie gross sales (sales per movie). The system provides functionalities for both administrators and customers, ensuring smooth and efficient cinema operations.",
       role: "Full-Stack Developer, Database Administrator",
       timeline: "January – February 2024",
       highlights: [
-        "Built a web-based cinema management system with CRUD modules for employees, movies, screenings, showtimes, and concessions.",
-        "Implemented transaction handling and automated sales reports for daily reconciliation and management insights.",
-        "Designed normalized relational schema and optimized SQL queries to support scalability and efficient data retrieval.",
-        "Strengthened understanding of full-stack web development, database engineering and administration, and data-driven application design."
+        "Built a Java, JSP, JDBC, and MySQL cinema management system covering employees, movies, screenings, showtimes, concessions, and customer transactions.",
+        "Designed a normalized relational database with six core tables and foreign-key constraints to support operational reporting and inventory management.",
+        "Implemented ticket and concession purchase workflows that updated seat and inventory availability and generated automated daily and monthly sales reports using aggregated SQL queries."
       ],
       image: "/assets/images/cinemadb-image.jpg",
       heroImage: "/assets/images/cinemadb-hero-image.jpg",
@@ -285,10 +284,9 @@ export const portfolioData = {
       role: "Backend Developer – Security & Access Control",
       timeline: "June – August 2025",
       highlights: [
-        "Implemented a role-based access control (RBAC) system with User, Manager, and Admin permissions for secure content and user management.",
-        "Developed security features including password change functionality, audit logs, and application logs to ensure accountability.",
-        "Built Manager and Admin dashboards for moderation, user management, and analytics to support operational oversight.",
-        "Enhanced understanding of system security, backend administration, and scalable full-stack web development."
+        "Engineered a three-tier role-based access control system for users, managers, and administrators using five authorization middleware components.",
+        "Implemented bcrypt password hashing, password-management functionality, audit logging, and security-activity tracking.",
+        "Built management dashboards supporting user administration, content moderation, reporting, and platform analytics."
       ],
       image: "/assets/images/forumfriends-image.jpg",
       heroImage: "/assets/images/forumfriends-hero-image.jpg",
@@ -411,10 +409,10 @@ export const portfolioData = {
       role: "Systems Development Intern",
       logo: "/assets/logos/raksoct.jpg",
       highlights: [
-        "Served as one of the project leads for the end-to-end design and development of a company-wide CRM platform, coordinating requirements across multiple functional teams.",
-        "Managed a 4-person frontend team while contributing directly to frontend development, delegating tasks, enforcing deadlines, and aligning deliverables with business priorities.",
+        "Served as one of the project leads for the end-to-end design and development of a company-wide CRM platform, translating cross-functional requirements into technical and design deliverables.",
+        "Managed a 4-person UI/UX and frontend team while contributing directly to frontend development, task delegation, deadline management, and stakeholder alignment.",
         "Produced high-fidelity Figma prototypes that consolidated requirements and accelerated stakeholder design reviews.",
-        "Introduced Scrum workflows in YouTrack, improving sprint visibility, task ownership, and deadline tracking."
+        "Introduced Agile and Scrum workflows in YouTrack, improving task ownership, sprint visibility, progress monitoring, and deadline tracking."
       ]
     }
   ],
