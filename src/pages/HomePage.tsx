@@ -1,5 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import {
   ArrowRight, Award, BriefcaseBusiness, ChevronDown, ChevronLeft, ChevronRight, ExternalLink, FileText,
   Mail, Orbit, Send, Sparkles,
@@ -9,6 +8,8 @@ import { ActivitySection } from "@/components/activity-section";
 import { CreativeGallerySection } from "@/components/creative-gallery-section";
 import { CelestialBackdrop } from "@/components/celestial-backdrop";
 import { FoxPet } from "@/components/fox-pet";
+import { SheinCaseStudy } from "@/components/projects/SheinCaseStudy";
+import { CheckYourselfCaseStudy } from "@/components/projects/CheckYourselfCaseStudy";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@/components/ui/dialog";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { portfolioData } from "@/data/portfolio";
@@ -34,27 +35,41 @@ function projectYear(project: Project) {
 function ProjectDialog({ project, onClose }: { project: Project | null; onClose: () => void }) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const modalStartRef = useRef<HTMLDivElement>(null);
+  const caseStudyStartRef = useRef<HTMLDivElement>(null);
   const [activeSlide, setActiveSlide] = useState(0);
+  const [showFullCaseStudy, setShowFullCaseStudy] = useState(false);
 
   useEffect(() => {
+    setActiveSlide(0);
+    setShowFullCaseStudy(false);
+  }, [project?.slug]);
+
+  useLayoutEffect(() => {
     if (!project) return;
 
-    setActiveSlide(0);
+    const resetDialogPosition = () => {
+      const startElement = showFullCaseStudy
+        ? caseStudyStartRef.current
+        : modalStartRef.current;
+      startElement?.focus({ preventScroll: true });
+      dialogRef.current?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+    };
 
     let secondFrame = 0;
     const firstFrame = window.requestAnimationFrame(() => {
-      modalStartRef.current?.focus({ preventScroll: true });
-      dialogRef.current?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      resetDialogPosition();
       secondFrame = window.requestAnimationFrame(() => {
-        dialogRef.current?.scrollTo({ top: 0, left: 0, behavior: "auto" });
+        resetDialogPosition();
       });
     });
+    const settleTimer = window.setTimeout(resetDialogPosition, 250);
 
     return () => {
       window.cancelAnimationFrame(firstFrame);
       window.cancelAnimationFrame(secondFrame);
+      window.clearTimeout(settleTimer);
     };
-  }, [project?.slug]);
+  }, [project?.slug, showFullCaseStudy]);
 
   if (!project) return null;
   const isSheinCaseStudy = project.slug === SHEIN_CASE_STUDY_SLUG;
@@ -81,9 +96,49 @@ function ProjectDialog({ project, onClose }: { project: Project | null; onClose:
     "ctaPrototypeUrl" in project && project.ctaPrototypeUrl ? { label: project.ctaPrototypeLabel ?? "View prototype", href: project.ctaPrototypeUrl } : null,
   ].filter(Boolean) as { label: string; href: string }[];
 
+  if (showFullCaseStudy && isFullUxCaseStudy) {
+    return (
+      <Dialog open onOpenChange={(open) => !open && onClose()}>
+        <DialogContent
+          key="full-case-study"
+          ref={dialogRef}
+          initialFocus={caseStudyStartRef}
+          overlayClassName="editorial-overlay"
+          closeButtonClassName="editorial-dialog-close"
+          className="editorial-dialog project-dialog project-dialog-ux"
+        >
+          <DialogTitle className="sr-only">{project.name} full case study</DialogTitle>
+          <DialogDescription className="sr-only">
+            Full case study for {project.name}
+          </DialogDescription>
+          <div
+            ref={caseStudyStartRef}
+            tabIndex={-1}
+            className="case-study-modal-body px-4 pb-4 pt-7 sm:px-8 sm:pb-8 sm:pt-9 lg:px-12"
+          >
+            {isSheinCaseStudy ? (
+              <SheinCaseStudy
+                project={project}
+                backLink={{ to: "/#projects", label: "Back to Project" }}
+                onBack={() => setShowFullCaseStudy(false)}
+              />
+            ) : (
+              <CheckYourselfCaseStudy
+                project={project}
+                backLink={{ to: "/#projects", label: "Back to Project" }}
+                onBack={() => setShowFullCaseStudy(false)}
+              />
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
+    );
+  }
+
   return (
     <Dialog open onOpenChange={(open) => !open && onClose()}>
       <DialogContent
+        key="project-summary"
         ref={dialogRef}
         initialFocus={modalStartRef}
         overlayClassName="editorial-overlay"
@@ -203,14 +258,14 @@ function ProjectDialog({ project, onClose }: { project: Project | null; onClose:
             ) : null}
             <div className="project-modal-actions">
               {isFullUxCaseStudy ? (
-                <Link
-                  to={`/projects/${project.slug}`}
-                  state={{ from: "home" }}
+                <button
+                  type="button"
+                  onClick={() => setShowFullCaseStudy(true)}
                   className={cn(buttonVariants({ size: "lg" }), "celestial-pill gap-2")}
                 >
                   View Full Case Study
                   <ArrowRight className="size-4" aria-hidden />
-                </Link>
+                </button>
               ) : (
                 links.map((link) => (
                   <a key={link.href} href={link.href} target="_blank" rel="noopener noreferrer" className={cn(buttonVariants({ size: "lg" }), "celestial-pill gap-2")}>

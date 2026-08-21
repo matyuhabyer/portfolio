@@ -1063,6 +1063,7 @@ button, a, input, textarea, summary { touch-action: manipulation; }
   max-width: min(96vw, 90rem);
   max-height: 94dvh;
   overflow-y: auto;
+  overflow-anchor: none;
   padding: 0;
   border: 1px solid rgb(247 217 120 / .24);
   border-radius: .45rem;
