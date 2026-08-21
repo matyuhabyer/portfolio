@@ -96,26 +96,29 @@ function ProjectDialog({ project, onClose }: { project: Project | null; onClose:
     "ctaPrototypeUrl" in project && project.ctaPrototypeUrl ? { label: project.ctaPrototypeLabel ?? "View prototype", href: project.ctaPrototypeUrl } : null,
   ].filter(Boolean) as { label: string; href: string }[];
 
-  if (showFullCaseStudy && isFullUxCaseStudy) {
-    return (
-      <Dialog open onOpenChange={(open) => !open && onClose()}>
-        <DialogContent
-          key="full-case-study"
-          ref={dialogRef}
-          initialFocus={caseStudyStartRef}
-          overlayClassName="editorial-overlay"
-          closeButtonClassName="editorial-dialog-close"
-          className="editorial-dialog project-dialog project-dialog-ux"
-        >
-          <DialogTitle className="sr-only">{project.name} full case study</DialogTitle>
-          <DialogDescription className="sr-only">
-            Full case study for {project.name}
-          </DialogDescription>
+  return (
+    <Dialog open onOpenChange={(open) => !open && onClose()}>
+      <DialogContent
+        ref={dialogRef}
+        initialFocus={showFullCaseStudy ? caseStudyStartRef : modalStartRef}
+        overlayClassName="editorial-overlay"
+        closeButtonClassName="editorial-dialog-close"
+        className={cn(
+          "editorial-dialog project-dialog",
+          showFullCaseStudy && isFullUxCaseStudy && "project-dialog-ux"
+        )}
+      >
+        {showFullCaseStudy && isFullUxCaseStudy ? (
           <div
+            key="full-case-study"
             ref={caseStudyStartRef}
             tabIndex={-1}
-            className="case-study-modal-body px-4 pb-4 pt-7 sm:px-8 sm:pb-8 sm:pt-9 lg:px-12"
+            className="project-dialog-view case-study-modal-body px-4 pb-4 pt-7 sm:px-8 sm:pb-8 sm:pt-9 lg:px-12"
           >
+            <DialogTitle className="sr-only">{project.name} full case study</DialogTitle>
+            <DialogDescription className="sr-only">
+              Full case study for {project.name}
+            </DialogDescription>
             {isSheinCaseStudy ? (
               <SheinCaseStudy
                 project={project}
@@ -130,23 +133,8 @@ function ProjectDialog({ project, onClose }: { project: Project | null; onClose:
               />
             )}
           </div>
-        </DialogContent>
-      </Dialog>
-    );
-  }
-
-  return (
-    <Dialog open onOpenChange={(open) => !open && onClose()}>
-      <DialogContent
-        key="project-summary"
-        ref={dialogRef}
-        initialFocus={modalStartRef}
-        overlayClassName="editorial-overlay"
-        closeButtonClassName="editorial-dialog-close"
-        className={cn(
-          "editorial-dialog project-dialog"
-        )}
-      >
+        ) : (
+          <div key="project-summary" className="project-dialog-view">
         <div ref={modalStartRef} tabIndex={-1} role="group" aria-label={`${project.name} project preview`} className="project-modal-hero">
           {hasImageCarousel ? (
             <div
@@ -276,6 +264,8 @@ function ProjectDialog({ project, onClose }: { project: Project | null; onClose:
             </div>
           </div>
         </div>
+          </div>
+        )}
       </DialogContent>
     </Dialog>
   );

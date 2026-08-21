@@ -1096,6 +1096,11 @@ button, a, input, textarea, summary { touch-action: manipulation; }
 }
 
 .project-dialog { width: min(96vw, 90rem); max-width: min(96vw, 90rem); }
+.project-dialog-view { animation: project-dialog-view-in 280ms cubic-bezier(.22, 1, .36, 1); }
+@keyframes project-dialog-view-in {
+  from { opacity: 0; transform: translateY(.65rem) scale(.997); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
 .project-modal-hero { height: clamp(18rem, 39vw, 34rem); border-radius: 0; }
 .project-modal-hero > span {
   background:
