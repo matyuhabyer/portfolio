@@ -330,7 +330,7 @@ export function HomePage() {
             <p className="hero-lede">I design and build useful digital products—turning research, systems, and thoughtful details into experiences that feel effortless.</p>
             <div className="hero-actions">
               <a href="#projects" className={cn(buttonVariants({ size: "lg" }), "celestial-pill min-w-48 justify-center font-bold")}>Explore my work</a>
-              <a href={profile.resume} target="_blank" rel="noopener noreferrer" className={cn(buttonVariants({ variant: "outline", size: "lg" }), "celestial-pill min-w-48 justify-center gap-2 font-bold")}><FileText className="size-4" aria-hidden /> Resume</a>
+              <a href={profile.resume} target="_blank" rel="noopener noreferrer" className={cn(buttonVariants({ variant: "outline", size: "lg" }), "celestial-pill min-w-48 justify-center gap-2 font-bold")}><FileText className="size-4" aria-hidden /> View CV</a>
             </div>
           </div>
           <figure className="hero-portrait-planet">

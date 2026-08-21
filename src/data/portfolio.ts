@@ -386,7 +386,7 @@ export const portfolioData = {
     university: "De La Salle University - Manila",
     course: "Bachelor of Science in Information Technology",
     dates: "September 2022 – Present",
-    cgpa: "3.334+ / 4.00",
+    cgpa: "3.360+",
     highlights: [
       "Honorable Mention Standing (CGPA of 3.2 and above)",
       "DOST-SEI Merit Scholar"
