@@ -145,7 +145,7 @@ export const portfolioData = {
         "An IoT-enabled soil monitoring and advisory platform for data-driven Thai basil cultivation at Luntiang Republika Ecofarm.",
       longDescription:
         "Engineered an IoT-enabled platform that transforms NPK, pH, and moisture readings into actionable alerts, recommendations, and historical insights, with role-based access for farm operators, managers, and administrators.",
-      role: "Full-Stack Developer & UI/UX Designer",
+      role: "Full-Stack Developer, UI/UX Designer",
       timeline: "2025 – 2026",
       highlights: [
         "Developed a React frontend integrated with Firebase Authentication and Cloud Firestore, including protected routes and dashboards for sensor monitoring, alerts, recommendations, and historical trends.",
@@ -154,8 +154,17 @@ export const portfolioData = {
         "Implemented security features including authentication, authorization, RBAC, protected routes, and audit logging.",
         "Coordinated Agile and Kanban delivery through YouTrack across a four-person capstone team, while producing complete and precise technical and project documentation."
       ],
-      image: "/assets/images/luntiang-iot-soil-monitoring.svg",
-      heroImage: "/assets/images/luntiang-iot-soil-monitoring.svg"
+      image: "/assets/images/iot-hero.png",
+      heroImage: "/assets/images/iot-1.png",
+      gallery: [
+        "/assets/images/iot-1.png",
+        "/assets/images/iot-2.png",
+        "/assets/images/iot-3.png",
+        "/assets/images/iot-4.png",
+        "/assets/images/iot-5.png",
+        "/assets/images/iot-6.png",
+        "/assets/images/iot-7.png"
+      ]
     },
     {
       slug: "shein-mobile-app-redesign",
@@ -163,7 +172,7 @@ export const portfolioData = {
       label: "UX Case Study",
       description:
         "A research-driven redesign of the SHEIN mobile app that streamlines navigation, improves product discovery through SH-AI-N conversational search, and validates key usability improvements through testing.",
-      role: "UX Lead, UI/UX Designer and Researcher",
+      role: "UX Lead, UI/UX Designer, UX Researcher",
       timeline: "February – April 2025",
       contributions: [
         "Led end-to-end UX research and redesign across three core user flows, using semi-structured interviews and thematic analysis to uncover five major usability issues.",
@@ -184,7 +193,7 @@ export const portfolioData = {
       label: "UX Case Study",
       description:
         "A mobile platform for at-home STD testing and result tracking, designed to break down barriers to sexual health access in the Philippines.",
-      role: "UX Lead, UI/UX Designer and Researcher",
+      role: "UX Lead, UI/UX Designer, UX Researcher",
       timeline: "February – April 2025",
       contributions: [
         "Led user research into the geographic, financial, privacy, stigma, and awareness barriers affecting sexual-health access.",
@@ -281,7 +290,7 @@ export const portfolioData = {
       tech: "HTML/CSS · JavaScript · Node.js · Express.js · MongoDB",
       description: "Developed role-based access control features for a forum web application, enabling secure user authentication, content moderation, and administrative dashboards for managing users and discussions.",
       longDescription: "Forum Friends is a full-stack forum web application designed to foster community interaction while maintaining security and accountability. As the Backend Developer, I implemented a role-based access control system (User, Manager, Admin) to manage permissions across content and user management modules. The project also included security-focused features such as password change functionality, audit logs, and application logs to improve traceability. Manager and Admin dashboards were built to enable content moderation, user management, and reporting tools, ensuring the platform upholds community standards and operational oversight.",
-      role: "Backend Developer – Security & Access Control",
+      role: "Full-Stack Developer",
       timeline: "June – August 2025",
       highlights: [
         "Engineered a three-tier role-based access control system for users, managers, and administrators using five authorization middleware components.",
