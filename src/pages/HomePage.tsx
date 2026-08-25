@@ -284,7 +284,7 @@ export function HomePage() {
   }, [projects]);
 
   useEffect(() => {
-    document.title = "Matthew Benison Javier — Product Designer & Developer";
+    document.title = "Matthew Benison Javier";
     syncProjectFromUrl();
     window.addEventListener("popstate", syncProjectFromUrl);
     return () => window.removeEventListener("popstate", syncProjectFromUrl);
