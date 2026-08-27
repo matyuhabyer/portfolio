@@ -26,7 +26,46 @@ const CONSTELLATIONS: Record<string, { stars: StarPoint[]; links: StarLink[] }> 
     ],
     links: [[0, 1], [1, 2], [2, 3]],
   },
+  lyra: {
+    stars: [
+      { x: 14, y: 24, size: 4 },
+      { x: 42, y: 8, size: 9 },
+      { x: 67, y: 39, size: 5 },
+      { x: 48, y: 72, size: 7 },
+      { x: 22, y: 61, size: 3 },
+    ],
+    links: [[0, 1], [1, 2], [2, 3], [3, 4], [4, 0], [0, 2]],
+  },
+  cygnus: {
+    stars: [
+      { x: 7, y: 51, size: 4 },
+      { x: 34, y: 48, size: 7 },
+      { x: 58, y: 45, size: 10 },
+      { x: 91, y: 38, size: 5 },
+      { x: 53, y: 10, size: 4 },
+      { x: 64, y: 87, size: 8 },
+    ],
+    links: [[0, 1], [1, 2], [2, 3], [2, 4], [2, 5]],
+  },
 };
+
+// A seeded layout keeps the sky organic while preventing stars from moving on re-renders.
+function createSeededRandom(seed: number) {
+  let value = seed;
+  return () => {
+    value = (value * 1664525 + 1013904223) % 4294967296;
+    return value / 4294967296;
+  };
+}
+
+const random = createSeededRandom(25081998);
+const SKY_STARS = Array.from({ length: 64 }, () => ({
+  x: random() * 100,
+  y: random() * 100,
+  size: 1.25 + random() * 3.25,
+  delay: random() * -6,
+  duration: 3.25 + random() * 4.5,
+}));
 
 function Constellation({ name, className }: { name: keyof typeof CONSTELLATIONS; className: string }) {
   const constellation = CONSTELLATIONS[name];
@@ -60,6 +99,7 @@ function Constellation({ name, className }: { name: keyof typeof CONSTELLATIONS;
             width: `${star.size ?? 6}px`,
             height: `${star.size ?? 6}px`,
             animationDelay: `${index * -0.7}s`,
+            animationDuration: `${3.4 + ((index + name.length) % 5) * 0.65}s`,
           }}
         />
       ))}
@@ -71,7 +111,20 @@ export function CelestialBackdrop() {
   return (
     <div className="celestial-2d" aria-hidden>
       <div className="sky-stars">
-        {Array.from({ length: 42 }, (_, index) => <span key={index} className={`sky-star sky-star-${(index % 12) + 1}`} />)}
+        {SKY_STARS.map((star, index) => (
+          <span
+            key={index}
+            className="sky-star"
+            style={{
+              left: `${star.x}%`,
+              top: `${star.y}%`,
+              width: `${star.size}px`,
+              height: `${star.size}px`,
+              animationDelay: `${star.delay}s`,
+              animationDuration: `${star.duration}s`,
+            }}
+          />
+        ))}
       </div>
       <div className="sky-shooting-stars">
         <span className="sky-shooting-star sky-shooting-star-one" />
@@ -86,6 +139,8 @@ export function CelestialBackdrop() {
       <Constellation name="cassiopeia" className="constellation-cassiopeia" />
       <Constellation name="orion" className="constellation-orion" />
       <Constellation name="aries" className="constellation-aries" />
+      <Constellation name="lyra" className="constellation-lyra" />
+      <Constellation name="cygnus" className="constellation-cygnus" />
 
       <div className="rose-illustration">
         <div className="rose-glow" />

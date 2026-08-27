@@ -325,7 +325,6 @@ export function HomePage() {
         <section id="home" className="hero-one-page" aria-labelledby="hero-title">
           <span className="hero-cover-rule" aria-hidden />
           <div className="hero-copy">
-            <p className="section-eyebrow"><Sparkles className="size-4" aria-hidden /> my place among the stars</p>
             <h1 id="hero-title">Matthew<br /><span>Benison Javier</span></h1>
             <p className="hero-lede">I design and build useful digital products—turning research, systems, and thoughtful details into experiences that feel effortless.</p>
             <div className="hero-actions">
